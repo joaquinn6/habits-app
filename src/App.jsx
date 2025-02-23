@@ -3,7 +3,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import AuthLayout from "./layouts/no-auth/NoAuth";
 import DashboardLayout from "./layouts/dashboard/Dashboard";
 //import PrivateRoute from "./components/PrivateRoute";
-import Login from "./pages/Login";
+import Login from "./pages/login/Login";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SwitchTheme from "./components/SwitchTheme";

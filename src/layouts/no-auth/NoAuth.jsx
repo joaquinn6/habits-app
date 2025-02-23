@@ -10,7 +10,7 @@ const AuthLayout = () => {
       <Header className="layout-header">
         <Navbar />
       </Header>
-      <Content>
+      <Content className="layout-content">
         <Outlet />
       </Content>
       <Footer>
