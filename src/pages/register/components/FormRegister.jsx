@@ -1,8 +1,49 @@
-import { Button, Form, Input, Flex, DatePicker } from "antd";
+import { useEffect, useCallback } from "react";
+import { Button, Form, Input, Flex, DatePicker, notification } from "antd";
+import { useNavigate } from "react-router-dom";
+
+import userStore from "../../../store/user.store";
+
 const FormLogin = () => {
+  const { create, loading, error, createUser } = userStore();
+  const navigate = useNavigate();
+  const [api, contextHolder] = notification.useNotification();
+
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    createUser({
+      email: values.email,
+      first_name: values.first_name,
+      last_name: values.last_name,
+      birth_date: values.birth_date.toISOString(),
+      password: values.password,
+    });
   };
+
+  const openNotificationWithIcon = useCallback(
+    (type, title, description) => {
+      api[type]({
+        message: title,
+        description: description,
+      });
+    },
+    [api]
+  );
+
+  useEffect(() => {
+    if (!loading && error) {
+      openNotificationWithIcon("error", "Error", error);
+      console.log(error);
+    }
+    if (!loading && create) {
+      openNotificationWithIcon(
+        "success",
+        "Correcto",
+        "Usuario creado correctamente"
+      );
+      navigate("/login");
+    }
+  }, [loading, error, create, navigate, openNotificationWithIcon]);
+
   return (
     <Form
       name="register"
@@ -11,8 +52,10 @@ const FormLogin = () => {
       clearOnDestroy={true}
       initialValues={{}}
       style={{ width: "100%" }}
+      disabled={loading}
       onFinish={onFinish}
     >
+      {contextHolder}
       <Form.Item
         label="Nombres"
         name="first_name"
