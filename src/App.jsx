@@ -4,6 +4,7 @@ import AuthLayout from "./layouts/no-auth/NoAuth";
 import DashboardLayout from "./layouts/dashboard/Dashboard";
 //import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SwitchTheme from "./components/SwitchTheme";
@@ -15,6 +16,7 @@ const App = () => {
           {/* Rutas de autenticación */}
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Route>
 
           {/* Rutas protegidas */}

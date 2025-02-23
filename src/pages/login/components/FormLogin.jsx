@@ -24,6 +24,7 @@ const FormLogin = () => {
             required: true,
             message: "¡Email es requerido!",
           },
+          { type: "email", message: "Ingrese un correo válido" },
         ]}
       >
         <Input prefix={<UserOutlined />} placeholder="Email" />
