@@ -3,6 +3,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import AuthLayout from "./layouts/no-auth/NoAuth";
 import DashboardLayout from "./layouts/dashboard/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Home from "./pages/Home";
@@ -16,9 +17,11 @@ const App = () => {
         <Router>
           <Routes>
             {/* Rutas de autenticación */}
-            <Route element={<AuthLayout />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+            <Route element={<PublicRoute />}>
+              <Route element={<AuthLayout />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+              </Route>
             </Route>
 
             {/* Rutas protegidas */}
@@ -28,11 +31,6 @@ const App = () => {
                 <Route path="/about" element={<About />} />
               </Route>
             </Route>
-
-            {/* <Route element={<DashboardLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-            </Route> */}
           </Routes>
         </Router>
         <SwitchTheme />
