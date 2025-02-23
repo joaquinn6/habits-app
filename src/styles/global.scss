@@ -1,0 +1,35 @@
+// Definir variables de tema
+$light-bg: #ffffff;
+$light-text: #333;
+$dark-bg: #141414;
+$dark-text: #f5f5f5;
+
+// Aplicar estilos según el tema
+body[data-theme="light"] {
+  background-color: $light-bg;
+  color: $light-text;
+}
+
+body[data-theme="dark"] {
+  background-color: $dark-bg;
+  color: $dark-text;
+}
+
+// Estilos para los botones personalizados
+.button {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &.light {
+    background: $light-bg;
+    color: $light-text;
+    border: 1px solid $light-text;
+  }
+
+  &.dark {
+    background: $dark-bg;
+    color: $dark-text;
+    border: 1px solid $dark-text;
+  }
+}

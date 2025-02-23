@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
 import AuthLayout from "./layouts/no-auth/NoAuth";
 import DashboardLayout from "./layouts/dashboard/Dashboard";
-import PrivateRoute from "./components/PrivateRoute";
+//import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import About from "./pages/About";
 
 const App = () => {
   return (
+    <ThemeProvider>
     <Router>
       <Routes>
         {/* Rutas de autenticación */}
@@ -29,7 +31,8 @@ const App = () => {
           </Route>
         
       </Routes>
-    </Router>
+      </Router>
+      </ThemeProvider>
   );
 };
 
