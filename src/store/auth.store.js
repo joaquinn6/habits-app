@@ -5,10 +5,10 @@ const userStore = create((set) => ({
   logged: null,
   loading: false,
   error: null,
-  login: async (body) => {
+  login: async (body, save) => {
     set({ logged: null, loading: true, error: null });
     try {
-      const data = await authService.loginRequest(body);
+      const data = await authService.loginRequest(body, save);
       set({ logged: data, loading: false });
       setTimeout(() => set({ logged: null }), 2000);
     } catch (err) {

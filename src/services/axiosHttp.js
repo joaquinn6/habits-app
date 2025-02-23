@@ -3,7 +3,8 @@ import axios from "axios";
 
 function createAxios(withHeaders = false) {
   // return authorization header with jwt token
-  const user = JSON.parse(localStorage.getItem("user"));
+  let user = JSON.parse(localStorage.getItem("user"));
+  if (!user) user = JSON.parse(sessionStorage.getItem("user"));
   const headers = {};
   if (user && user.token) {
     headers.Authorization = user.token;
@@ -25,6 +26,7 @@ function createAxios(withHeaders = false) {
       if (error.response) {
         if ([401].includes(error.response.status)) {
           localStorage.removeItem("user");
+          sessionStorage.removeItem("user");
           location.reload(true);
         } else if ([403].includes(error.response.status)) {
           location.hash = "/no-auth";

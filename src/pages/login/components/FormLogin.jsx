@@ -10,7 +10,7 @@ const FormLogin = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    login(values);
+    login(values, values.remember);
   };
   const onClickRegister = () => {
     navigate("/register");

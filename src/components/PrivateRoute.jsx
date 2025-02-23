@@ -1,7 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
-  const isAuth = localStorage.getItem("user") ? true : false;
+  const isAuth =
+    localStorage.getItem("user") || sessionStorage.getItem("user")
+      ? true
+      : false;
   return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
 
