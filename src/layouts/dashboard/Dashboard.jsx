@@ -4,7 +4,7 @@ import Sidebar from "./components/Sidebar";
 
 const DashboardLayout = () => {
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div className="layout-container">
       <Sidebar />
       <div style={{ flex: 1 }}>
         <Navbar />

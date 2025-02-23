@@ -1,12 +1,22 @@
 import { Outlet } from "react-router-dom";
+import { Layout } from "antd";
+import Navbar from "./components/Navbar";
+import FooterPropio from "../../components/Footer";
+const { Header, Footer, Content } = Layout;
 
 const AuthLayout = () => {
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Bienvenido</h2>
-      <p>Por favor, inicia sesión</p>
-      <Outlet />
-    </div>
+    <Layout className="layout-container">
+      <Header className="layout-header">
+        <Navbar />
+      </Header>
+      <Content>
+        <Outlet />
+      </Content>
+      <Footer>
+        <FooterPropio />
+      </Footer>
+    </Layout>
   );
 };
 

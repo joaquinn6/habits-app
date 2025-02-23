@@ -15,7 +15,18 @@ body[data-theme="dark"] {
   color: $dark-text;
 }
 
-// Estilos para los botones personalizados
+// Aplicar estilos según el tema
+header[data-theme="light"] {
+  background-color: $light-bg;
+  color: $light-text;
+}
+
+header[data-theme="dark"] {
+  background-color: $dark-bg;
+  color: $dark-text;
+}
+
+/* // Estilos para los botones personalizados
 .button {
   padding: 10px;
   border-radius: 5px;
@@ -32,4 +43,4 @@ body[data-theme="dark"] {
     color: $dark-text;
     border: 1px solid $dark-text;
   }
-}
+} */

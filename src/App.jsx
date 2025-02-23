@@ -6,19 +6,19 @@ import DashboardLayout from "./layouts/dashboard/Dashboard";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import About from "./pages/About";
-
+import SwitchTheme from "./components/SwitchTheme";
 const App = () => {
   return (
     <ThemeProvider>
-    <Router>
-      <Routes>
-        {/* Rutas de autenticación */}
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-        </Route>
+      <Router>
+        <Routes>
+          {/* Rutas de autenticación */}
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
 
-        {/* Rutas protegidas */}
-        {/*<Route element={<PrivateRoute />}>
+          {/* Rutas protegidas */}
+          {/*<Route element={<PrivateRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -29,10 +29,10 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
           </Route>
-        
-      </Routes>
+        </Routes>
       </Router>
-      </ThemeProvider>
+      <SwitchTheme />
+    </ThemeProvider>
   );
 };
 
