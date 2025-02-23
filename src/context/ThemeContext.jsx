@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 import { ConfigProvider, theme } from "antd";
 
 const ThemeContext = createContext();
@@ -29,6 +30,10 @@ export const ThemeProvider = ({ children }) => {
       </ConfigProvider>
     </ThemeContext.Provider>
   );
+};
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useTheme = () => useContext(ThemeContext);
