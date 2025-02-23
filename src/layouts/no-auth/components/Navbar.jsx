@@ -1,9 +1,9 @@
 import { Menu } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const items = [
     {
       key: "/home-page",
@@ -33,6 +33,7 @@ const Navbar = () => {
       <Menu
         mode="horizontal"
         defaultSelectedKeys={["/home-page"]}
+        selectedKeys={[location.pathname]}
         items={items}
         onClick={onClick}
         style={{
