@@ -1,5 +1,10 @@
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
+import {
+  CalendarOutlined,
+  UserOutlined,
+  HomeOutlined,
+} from "@ant-design/icons";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -8,14 +13,17 @@ const Navbar = () => {
     {
       key: "/",
       label: `Mis hábitos`,
+      icon: <HomeOutlined />,
     },
     {
-      key: "/calender",
+      key: "/calendar",
       label: `Calendario`,
+      icon: <CalendarOutlined />,
     },
     {
       key: "/profile",
       label: `Perfil`,
+      icon: <UserOutlined />,
     },
   ];
 
