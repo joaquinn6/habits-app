@@ -25,6 +25,7 @@ export const ThemeProvider = ({ children }) => {
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
       <ConfigProvider
         locale={esES}
+        componentSize="large"
         theme={{
           algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
         }}
