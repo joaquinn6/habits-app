@@ -1,18 +1,22 @@
 import { Outlet } from "react-router-dom";
+import { Layout } from "antd";
 import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import FooterPropio from "../../components/Footer";
+const { Header, Footer, Content } = Layout;
 
 const DashboardLayout = () => {
   return (
-    <div className="layout-container">
-      <Sidebar />
-      <div style={{ flex: 1 }}>
+    <Layout className="layout-container">
+      <Header className="layout-header">
         <Navbar />
-        <div style={{ padding: "20px" }}>
-          <Outlet />
-        </div>
-      </div>
-    </div>
+      </Header>
+      <Content className="layout-content">
+        <Outlet />
+      </Content>
+      <Footer>
+        <FooterPropio />
+      </Footer>
+    </Layout>
   );
 };
 

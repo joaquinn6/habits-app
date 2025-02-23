@@ -1,17 +1,47 @@
-import { useTheme } from "../../../context/ThemeContext";
-import { Button } from "antd";
-import { MoonOutlined, SunOutlined } from "@ant-design/icons";
+import { Menu } from "antd";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const items = [
+    {
+      key: "/",
+      label: `Mis hábitos`,
+    },
+    {
+      key: "/calender",
+      label: `Calendario`,
+    },
+    {
+      key: "/profile",
+      label: `Perfil`,
+    },
+  ];
 
+  const onClick = (e) => {
+    navigate(e.key);
+  };
   return (
-    <nav style={{ background: "#333", color: "#fff", padding: "10px", display: "flex", justifyContent: "space-between" }}>
-      <h2>Mi Aplicación</h2>
-      <Button onClick={toggleTheme} type="primary" icon={isDarkMode ? <SunOutlined /> : <MoonOutlined />}>
-        {isDarkMode ? "Modo Claro" : "Modo Oscuro"}
-      </Button>
-    </nav>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <div className="demo-logo" />
+      <Menu
+        mode="horizontal"
+        defaultSelectedKeys={["/"]}
+        selectedKeys={[location.pathname]}
+        items={items}
+        onClick={onClick}
+        style={{
+          flex: 1,
+          minWidth: 0,
+        }}
+      />
+    </div>
   );
 };
 
