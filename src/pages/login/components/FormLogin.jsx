@@ -20,7 +20,7 @@ const FormLogin = () => {
       openNotification("error", "Error", error);
     }
     if (!loading && logged) {
-      navigate("/home");
+      navigate("/");
     }
   }, [loading, error, logged, navigate, openNotification]);
   return (
