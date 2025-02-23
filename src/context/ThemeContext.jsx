@@ -1,9 +1,11 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ConfigProvider, theme } from "antd";
-
+import esES from "antd/locale/es_ES"; // Configuración en español
+import dayjs from "dayjs";
+import "dayjs/locale/es";
 const ThemeContext = createContext();
-
+dayjs.locale("es");
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
@@ -22,6 +24,7 @@ export const ThemeProvider = ({ children }) => {
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
       <ConfigProvider
+        locale={esES}
         theme={{
           algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
         }}

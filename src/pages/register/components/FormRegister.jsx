@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useNotificationContext } from "../../../context/NotificationContext";
 import userStore from "../../../store/user.store";
 
-const FormLogin = () => {
+const FormRegister = () => {
   const { create, loading, error, createUser } = userStore();
   const { openNotification } = useNotificationContext();
   const navigate = useNavigate();
@@ -72,6 +72,8 @@ const FormLogin = () => {
       >
         <DatePicker
           style={{ width: "100%" }}
+          format="DD-MM-YYYY"
+          allowClear={false}
           placeholder="Fecha de nacimiento"
         />
       </Form.Item>
@@ -138,4 +140,4 @@ const FormLogin = () => {
     </Form>
   );
 };
-export default FormLogin;
+export default FormRegister;
