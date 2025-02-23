@@ -1,9 +1,28 @@
+import { useEffect } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
+import authStore from "../../../store/auth.store";
+import { useNotificationContext } from "../../../context/NotificationContext";
 const FormLogin = () => {
+  const { logged, loading, error, login } = authStore();
+  const { openNotification } = useNotificationContext();
+  const navigate = useNavigate();
+
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    login(values);
   };
+  const onClickRegister = () => {
+    navigate("/register");
+  };
+  useEffect(() => {
+    if (!loading && error) {
+      openNotification("error", "Error", error);
+    }
+    if (!loading && logged) {
+      navigate("/home");
+    }
+  }, [loading, error, logged, navigate, openNotification]);
   return (
     <Form
       name="login"
@@ -58,7 +77,14 @@ const FormLogin = () => {
           Aceptar
         </Button>
         <Flex justify="center" align="center">
-          <a href="">Regístrate ahora</a>
+          <Button
+            onClick={onClickRegister}
+            color="primary"
+            variant="link"
+            shape="round"
+          >
+            Regístrate ahora
+          </Button>
         </Flex>
       </Form.Item>
     </Form>

@@ -6,8 +6,8 @@ import userStore from "../../../store/user.store";
 
 const FormLogin = () => {
   const { create, loading, error, createUser } = userStore();
-  const navigate = useNavigate();
   const { openNotification } = useNotificationContext();
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
     createUser({
