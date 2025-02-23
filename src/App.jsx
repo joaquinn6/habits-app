@@ -8,32 +8,35 @@ import Register from "./pages/register/Register";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SwitchTheme from "./components/SwitchTheme";
+import { NotificationProvider } from "./context/NotificationContext";
 const App = () => {
   return (
     <ThemeProvider>
-      <Router>
-        <Routes>
-          {/* Rutas de autenticación */}
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
+      <NotificationProvider>
+        <Router>
+          <Routes>
+            {/* Rutas de autenticación */}
+            <Route element={<AuthLayout />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
 
-          {/* Rutas protegidas */}
-          {/*<Route element={<PrivateRoute />}>
+            {/* Rutas protegidas */}
+            {/*<Route element={<PrivateRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
           </Route>
         </Route>
         */}
-          <Route element={<DashboardLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-          </Route>
-        </Routes>
-      </Router>
-      <SwitchTheme />
+            <Route element={<DashboardLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+            </Route>
+          </Routes>
+        </Router>
+        <SwitchTheme />
+      </NotificationProvider>
     </ThemeProvider>
   );
 };

@@ -10,10 +10,10 @@ const userStore = create((set) => ({
     try {
       const data = await userService.createUser(body);
       set({ create: data, loading: false });
+      setTimeout(() => set({ create: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-    } finally {
-      set({ create: null, loading: false, error: null });
+      setTimeout(() => set({ error: null }), 2000);
     }
   },
 }));

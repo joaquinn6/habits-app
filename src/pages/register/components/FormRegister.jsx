@@ -1,13 +1,13 @@
-import { useEffect, useCallback } from "react";
-import { Button, Form, Input, Flex, DatePicker, notification } from "antd";
+import { useEffect } from "react";
+import { Button, Form, Input, Flex, DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
-
+import { useNotificationContext } from "../../../context/NotificationContext";
 import userStore from "../../../store/user.store";
 
 const FormLogin = () => {
   const { create, loading, error, createUser } = userStore();
   const navigate = useNavigate();
-  const [api, contextHolder] = notification.useNotification();
+  const { openNotification } = useNotificationContext();
 
   const onFinish = (values) => {
     createUser({
@@ -19,30 +19,19 @@ const FormLogin = () => {
     });
   };
 
-  const openNotificationWithIcon = useCallback(
-    (type, title, description) => {
-      api[type]({
-        message: title,
-        description: description,
-      });
-    },
-    [api]
-  );
+  const onClickLogin = () => {
+    navigate("/login");
+  };
 
   useEffect(() => {
     if (!loading && error) {
-      openNotificationWithIcon("error", "Error", error);
-      console.log(error);
+      openNotification("error", "Error", error);
     }
     if (!loading && create) {
-      openNotificationWithIcon(
-        "success",
-        "Correcto",
-        "Usuario creado correctamente"
-      );
+      openNotification("success", "Correcto", "Usuario creado correctamente");
       navigate("/login");
     }
-  }, [loading, error, create, navigate, openNotificationWithIcon]);
+  }, [loading, error, create, navigate, openNotification]);
 
   return (
     <Form
@@ -55,7 +44,6 @@ const FormLogin = () => {
       disabled={loading}
       onFinish={onFinish}
     >
-      {contextHolder}
       <Form.Item
         label="Nombres"
         name="first_name"
@@ -137,7 +125,14 @@ const FormLogin = () => {
           Aceptar
         </Button>
         <Flex justify="center" align="center">
-          <a href="">Iniciar sesión</a>
+          <Button
+            onClick={onClickLogin}
+            color="primary"
+            variant="link"
+            shape="round"
+          >
+            Iniciar sesión
+          </Button>
         </Flex>
       </Form.Item>
     </Form>
