@@ -44,7 +44,7 @@ async function changePassword(body) {
   let user = JSON.parse(
     localStorage.getItem("user") || sessionStorage.getItem("user")
   );
-  const urlPath = `/users/${user._id}/password`;
+  const urlPath = `/users/${user.id}/password`;
   try {
     const response = await axios.post(urlPath, body);
     return Promise.resolve(response.data);

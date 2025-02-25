@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ManOutlined, WomanOutlined } from "@ant-design/icons";
 import {
   Form,
@@ -14,6 +14,8 @@ import { useNotificationContext } from "../../../context/NotificationContext";
 import userStore from "../../../store/user.store";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import ModalChangePassword from "./ModalChangePassword";
+
 dayjs.extend(utc);
 const { Option } = Select;
 const countries = [
@@ -56,6 +58,7 @@ const genders = [
   },
 ];
 const FormPersonal = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { update, loading, error, entity, updateUser } = userStore();
   const { openNotification } = useNotificationContext();
   const [form] = Form.useForm();
@@ -258,7 +261,11 @@ const FormPersonal = () => {
 
       <Row justify="end" gutter={16}>
         <Col>
-          <Button color="primary" variant="outlined">
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={() => setIsModalOpen(true)}
+          >
             Cambiar contraseña
           </Button>
         </Col>
@@ -270,6 +277,10 @@ const FormPersonal = () => {
           </Form.Item>
         </Col>
       </Row>
+      <ModalChangePassword
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </Form>
   );
 };

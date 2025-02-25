@@ -7,7 +7,7 @@ const userStore = create((set) => ({
   loading: false,
   error: null,
   entity: null,
-  changePassword: null,
+  password: null,
   createUser: async (body) => {
     set({ create: null, loading: true, error: null });
     try {
@@ -42,11 +42,11 @@ const userStore = create((set) => ({
     }
   },
   putPassword: async (body) => {
-    set({ changePassword: null, loading: true, error: null });
+    set({ password: null, loading: true, error: null });
     try {
       const data = await userService.changePassword(body);
-      set({ changePassword: data, loading: false });
-      setTimeout(() => set({ changePassword: null }), 2000);
+      set({ password: data, loading: false });
+      setTimeout(() => set({ password: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
       setTimeout(() => set({ error: null }), 2000);
