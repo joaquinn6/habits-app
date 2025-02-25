@@ -4,7 +4,7 @@ import FormPersonal from "./components/FormPersonal";
 import userStore from "../../store/user.store";
 
 const Profile = () => {
-  const { getUser, loading } = userStore();
+  const { getUser } = userStore();
 
   useEffect(() => {
     getUser();
@@ -19,7 +19,7 @@ const Profile = () => {
         lg={{ flex: "60%" }}
         xl={{ flex: "60%" }}
       >
-        <Card title="Mi perfil" variant="borderless" loading={loading}>
+        <Card title="Mi perfil" variant="borderless">
           <FormPersonal />
         </Card>
       </Col>
