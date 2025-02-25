@@ -1,15 +1,77 @@
 import { useEffect } from "react";
-import { Form, Input, DatePicker, Row, Col } from "antd";
+import { ManOutlined, WomanOutlined } from "@ant-design/icons";
+import {
+  Form,
+  Input,
+  DatePicker,
+  Row,
+  Col,
+  Select,
+  Avatar,
+  Button,
+} from "antd";
 import { useNotificationContext } from "../../../context/NotificationContext";
 import userStore from "../../../store/user.store";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
-
+const { Option } = Select;
+const countries = [
+  { code: "AR", name: "Argentina", flag: "https://flagcdn.com/w40/ar.png" },
+  { code: "BO", name: "Bolivia", flag: "https://flagcdn.com/w40/bo.png" },
+  { code: "CL", name: "Chile", flag: "https://flagcdn.com/w40/cl.png" },
+  { code: "CO", name: "Colombia", flag: "https://flagcdn.com/w40/co.png" },
+  { code: "CR", name: "Costa Rica", flag: "https://flagcdn.com/w40/cr.png" },
+  { code: "CU", name: "Cuba", flag: "https://flagcdn.com/w40/cu.png" },
+  {
+    code: "DO",
+    name: "República Dominicana",
+    flag: "https://flagcdn.com/w40/do.png",
+  },
+  { code: "EC", name: "Ecuador", flag: "https://flagcdn.com/w40/ec.png" },
+  { code: "ES", name: "España", flag: "https://flagcdn.com/w40/es.png" },
+  { code: "SV", name: "El Salvador", flag: "https://flagcdn.com/w40/sv.png" },
+  { code: "ES", name: "España", flag: "https://flagcdn.com/w40/es.png" },
+  { code: "GT", name: "Guatemala", flag: "https://flagcdn.com/w40/gt.png" },
+  { code: "HN", name: "Honduras", flag: "https://flagcdn.com/w40/hn.png" },
+  { code: "MX", name: "México", flag: "https://flagcdn.com/w40/mx.png" },
+  { code: "NI", name: "Nicaragua", flag: "https://flagcdn.com/w40/ni.png" },
+  { code: "PA", name: "Panamá", flag: "https://flagcdn.com/w40/pa.png" },
+  { code: "PY", name: "Paraguay", flag: "https://flagcdn.com/w40/py.png" },
+  { code: "PE", name: "Perú", flag: "https://flagcdn.com/w40/pe.png" },
+  { code: "PR", name: "Puerto Rico", flag: "https://flagcdn.com/w40/pr.png" },
+  { code: "UY", name: "Uruguay", flag: "https://flagcdn.com/w40/uy.png" },
+  { code: "VE", name: "Venezuela", flag: "https://flagcdn.com/w40/ve.png" },
+];
+const genders = [
+  {
+    code: "FEMALE",
+    name: "Femenino",
+    icon: <WomanOutlined style={{ marginRight: 8 }} />,
+  },
+  {
+    code: "MALE",
+    name: "Masculino",
+    icon: <ManOutlined style={{ marginRight: 8 }} />,
+  },
+];
 const FormPersonal = () => {
   const { update, loading, error, entity, updateUser } = userStore();
   const { openNotification } = useNotificationContext();
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (!loading && error) {
+      openNotification("error", "Error", error);
+    }
+    if (!loading && update) {
+      openNotification(
+        "success",
+        "Correcto",
+        "Usuario actualizado correctamente"
+      );
+    }
+  }, [loading, error, update, openNotification]);
 
   useEffect(() => {
     if (entity) {
@@ -32,6 +94,7 @@ const FormPersonal = () => {
       birth_date: values.birth_date.toISOString(),
       country: values.country,
       gender: values.gender,
+      password: "",
     });
   };
 
@@ -58,23 +121,13 @@ const FormPersonal = () => {
       disabled={loading}
       onFinish={onFinish}
     >
-      <Row>
+      <Row gutter={16}>
         <Col
-          xs={{
-            flex: "100%",
-          }}
-          sm={{
-            flex: "100%",
-          }}
-          md={{
-            flex: "50%",
-          }}
-          lg={{
-            flex: "50%",
-          }}
-          xl={{
-            flex: "50%",
-          }}
+          xs={{ flex: "100%" }}
+          sm={{ flex: "100%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: "50%" }}
+          xl={{ flex: "50%" }}
         >
           <Form.Item
             label="Nombres"
@@ -88,9 +141,48 @@ const FormPersonal = () => {
           >
             <Input placeholder="Nombres" />
           </Form.Item>
+        </Col>
+        <Col
+          xs={{ flex: "100%" }}
+          sm={{ flex: "100%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: "50%" }}
+          xl={{ flex: "50%" }}
+        >
           <Form.Item label="Apellidos" name="last_name">
             <Input placeholder="Apellidos" />
           </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col
+          xs={{ flex: "100%" }}
+          sm={{ flex: "100%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: "50%" }}
+          xl={{ flex: "50%" }}
+        >
+          <Form.Item
+            label="Correo electrónico"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "¡Email es requerido!",
+              },
+              { type: "email", message: "Ingrese un correo válido" },
+            ]}
+          >
+            <Input placeholder="Email" />
+          </Form.Item>
+        </Col>
+        <Col
+          xs={{ flex: "100%" }}
+          sm={{ flex: "100%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: "50%" }}
+          xl={{ flex: "50%" }}
+        >
           <Form.Item
             label="Fecha de nacimiento"
             name="birth_date"
@@ -111,20 +203,73 @@ const FormPersonal = () => {
           </Form.Item>
         </Col>
       </Row>
+      <Row gutter={16}>
+        <Col
+          xs={{ flex: "100%" }}
+          sm={{ flex: "100%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: "50%" }}
+          xl={{ flex: "50%" }}
+        >
+          <Form.Item label="País" name="country" rules={[]}>
+            <Select
+              showSearch
+              placeholder="Selecciona un país"
+              optionFilterProp="children"
+              style={{ width: "100%" }}
+            >
+              {countries.map((country) => (
+                <Option key={country.code} value={country.code}>
+                  <Avatar
+                    src={country.flag}
+                    size={20}
+                    style={{ marginRight: 8 }}
+                  />
+                  {country.name}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col
+          xs={{ flex: "100%" }}
+          sm={{ flex: "100%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: "50%" }}
+          xl={{ flex: "50%" }}
+        >
+          <Form.Item label="Genero" name="gender" rules={[]}>
+            <Select
+              showSearch
+              placeholder="Genero"
+              optionFilterProp="children"
+              style={{ width: "100%" }}
+            >
+              {genders.map((gender) => (
+                <Option key={gender.code} value={gender.code}>
+                  {gender.icon}
+                  {gender.name}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item
-        label="Correo electrónico"
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: "¡Email es requerido!",
-          },
-          { type: "email", message: "Ingrese un correo válido" },
-        ]}
-      >
-        <Input placeholder="Email" />
-      </Form.Item>
+      <Row justify="end" gutter={16}>
+        <Col>
+          <Button color="primary" variant="outlined">
+            Cambiar contraseña
+          </Button>
+        </Col>
+        <Col>
+          <Form.Item>
+            <Button color="primary" variant="solid" htmlType="submit">
+              Guardar
+            </Button>
+          </Form.Item>
+        </Col>
+      </Row>
     </Form>
   );
 };
