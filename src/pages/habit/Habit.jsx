@@ -1,9 +1,9 @@
-import { useEffect, useParams } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Col, Row, Card } from "antd";
-import FormPersonal from "./components/FormPersonal";
+import FormHabit from "./components/FormHabit";
 import habitStore from "../../stores/habit.store";
-
-const Profile = () => {
+const Habit = () => {
   const { getHabit } = habitStore();
   const { id } = useParams();
 
@@ -26,10 +26,10 @@ const Profile = () => {
           title={id ? "Editar habito" : "Nuevo habito"}
           variant="borderless"
         >
-          <FormPersonal />
+          <FormHabit />
         </Card>
       </Col>
     </Row>
   );
 };
-export default Profile;
+export default Habit;

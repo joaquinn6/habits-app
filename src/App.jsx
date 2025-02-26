@@ -6,12 +6,13 @@ import SwitchTheme from "./components/SwitchTheme";
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import About from "./pages/About";
 import Login from "./pages/login/Login";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
+import Habit from "./pages/habit/Habit";
 import { NotificationProvider } from "./context/NotificationContext";
 const App = () => {
   return (
@@ -25,6 +26,8 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/habit" element={<Habit />} />
+                <Route path="/habit/:id" element={<Habit />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Route>

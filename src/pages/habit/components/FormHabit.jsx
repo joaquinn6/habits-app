@@ -1,4 +1,5 @@
-import { useEffect, useState, useParams } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   Form,
   Input,
@@ -7,16 +8,18 @@ import {
   Col,
   Button,
   Select,
-  Option,
+  Switch,
 } from "antd";
 import { CloseCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import { useNotificationContext } from "../../../context/NotificationContext";
 import habitStore from "../../../stores/habit.store";
+import Goals from "./Goals";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import ModalChangePassword from "./ModalChangePassword";
 
 dayjs.extend(utc);
+const { Option } = Select;
+
 const types = [
   {
     key: "GOOD",
@@ -29,13 +32,16 @@ const types = [
     icon: <CloseCircleOutlined style={{ marginRight: 8 }} />,
   },
 ];
+
 const FormPersonal = () => {
   const { id } = useParams();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { create, update, loading, error, entity, updateHabit, createHabit } =
     habitStore();
   const { openNotification } = useNotificationContext();
   const [form] = Form.useForm();
+  const [goals, setGoals] = useState("");
+  const withGoals = Form.useWatch("with_goals", form);
+  const typeHabit = Form.useWatch("type", form);
 
   useEffect(() => {
     if (update) {
@@ -115,7 +121,6 @@ const FormPersonal = () => {
       layout="vertical"
       form={form}
       style={{ width: "100%" }}
-      defaultValue={{ color: "1677ff" }}
       disabled={loading}
       onFinish={onFinish}
     >
@@ -168,7 +173,7 @@ const FormPersonal = () => {
               style={{ width: "100%" }}
             >
               {types.map((type) => (
-                <Option key={type.code} value={type.code}>
+                <Option key={type.key} value={type.key}>
                   {type.icon}
                   {type.name}
                 </Option>
@@ -184,7 +189,7 @@ const FormPersonal = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item label="Color" name="color">
-            <ColorPicker />;
+            <ColorPicker />
           </Form.Item>
         </Col>
       </Row>
@@ -195,26 +200,27 @@ const FormPersonal = () => {
           md={{ flex: "50%" }}
           lg={{ flex: "50%" }}
           xl={{ flex: "50%" }}
-        ></Col>
-        <Col
-          xs={{ flex: "100%" }}
-          sm={{ flex: "100%" }}
-          md={{ flex: "50%" }}
-          lg={{ flex: "50%" }}
-          xl={{ flex: "50%" }}
-        ></Col>
+        >
+          <Form.Item label="Con objetivos" name="with_goals">
+            <Switch
+              checkedChildren="Si"
+              unCheckedChildren="No"
+              checked={withGoals}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row>
+        {withGoals ? (
+          <Form.Item label="Objetivo" name="with_goals">
+            <Goals goals={goals} onChange={setGoals} typeHabit={typeHabit} />
+          </Form.Item>
+        ) : (
+          ""
+        )}
       </Row>
 
       <Row justify="end" gutter={16}>
-        <Col>
-          <Button
-            color="primary"
-            variant="outlined"
-            onClick={() => setIsModalOpen(true)}
-          >
-            Cambiar contraseña
-          </Button>
-        </Col>
         <Col>
           <Form.Item>
             <Button color="primary" variant="solid" htmlType="submit">
@@ -223,10 +229,6 @@ const FormPersonal = () => {
           </Form.Item>
         </Col>
       </Row>
-      <ModalChangePassword
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </Form>
   );
 };
