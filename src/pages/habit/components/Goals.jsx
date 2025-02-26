@@ -21,57 +21,35 @@ const typesGoals = [
   },
 ];
 
-const Goals = ({ goals, onChange, typeHabit }) => {
+const Goals = ({ goals, onSubmit, typeHabit }) => {
   const [typeGoal, setTypeGoal] = useState(""); // Tipo seleccionado
   const [goalValue, setGoalValue] = useState(0); // Valor ingresado
   const [goalValues, setGoalValues] = useState(goals); // Valores calculados
-
   // Función para calcular los valores
   const calculateGoals = useCallback(
-    (type, value, habitType) => {
+    (type, value) => {
+      const rounding = typeHabit === "GOOD" ? Math.ceil : Math.floor;
       let newGoals = { per_week: 0, per_month: 0, per_year: 0 };
-
       switch (type) {
         case "WEEK":
           newGoals = {
-            per_week:
-              habitType == "GOOD" ? Math.ceil(value) : Math.floor(value),
-            per_month:
-              habitType == "GOOD"
-                ? Math.ceil(value * 4.4)
-                : Math.floor(value * 4.4),
-            per_year:
-              habitType == "GOOD"
-                ? Math.ceil(value * 52)
-                : Math.floor(value * 52),
+            per_week: rounding(value),
+            per_month: rounding(value * 4.4),
+            per_year: rounding(value * 52),
           };
           break;
         case "MONTH":
           newGoals = {
-            per_week:
-              habitType == "GOOD"
-                ? Math.ceil(value / 4.4)
-                : Math.floor(value / 4.4),
-            per_month:
-              habitType == "GOOD" ? Math.ceil(value) : Math.floor(value),
-            per_year:
-              habitType == "GOOD"
-                ? Math.ceil(value * 12)
-                : Math.floor(value * 12),
+            per_week: rounding(value / 4.4),
+            per_month: rounding(value),
+            per_year: rounding(value * 12),
           };
           break;
         case "YEAR":
           newGoals = {
-            per_week:
-              habitType == "GOOD"
-                ? Math.ceil(value / 52)
-                : Math.floor(value / 52),
-            per_month:
-              habitType == "GOOD"
-                ? Math.ceil(value / 12)
-                : Math.floor(value / 12),
-            per_year:
-              habitType == "GOOD" ? Math.ceil(value) : Math.floor(value),
+            per_week: rounding(value / 52),
+            per_month: rounding(value / 12),
+            per_year: rounding(value),
           };
           break;
         default:
@@ -79,14 +57,22 @@ const Goals = ({ goals, onChange, typeHabit }) => {
       }
 
       setGoalValues(newGoals);
-      onChange(newGoals);
     },
-    [onChange]
+    [typeHabit]
   );
 
   useEffect(() => {
-    if (typeGoal) calculateGoals(typeGoal, goalValue, typeHabit);
+    if (typeGoal) {
+      calculateGoals(typeGoal, goalValue);
+      onSubmit(goalValues);
+    }
   }, [typeGoal, goalValue, calculateGoals, typeHabit]);
+
+  useEffect(() => {
+    if (goalValues) {
+      onSubmit(goalValues);
+    }
+  }, [goalValues]);
 
   return (
     <div>
@@ -97,6 +83,7 @@ const Goals = ({ goals, onChange, typeHabit }) => {
             placeholder="Tipo"
             optionFilterProp="children"
             style={{ width: "100%" }}
+            value={typeGoal || undefined}
             onChange={(value) => setTypeGoal(value)}
           >
             {typesGoals.map((type) => (
@@ -108,16 +95,16 @@ const Goals = ({ goals, onChange, typeHabit }) => {
         </Col>
 
         <Col xs={24} md={12}>
-          {typeGoal && (
+          {typeGoal ? (
             <InputNumber
               type="number"
+              min={0}
               style={{ width: "100%" }}
-              placeholder={`Repeticiones por ${
-                typesGoals.find((t) => t.key === typeGoal)?.name
-              }`}
               onChange={(value) => setGoalValue(value)}
               value={goalValue}
             />
+          ) : (
+            ""
           )}
         </Col>
       </Row>
@@ -141,7 +128,7 @@ const Goals = ({ goals, onChange, typeHabit }) => {
 
 Goals.propTypes = {
   goals: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   typeHabit: PropTypes.string.isRequired,
 };
 

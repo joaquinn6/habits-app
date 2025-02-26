@@ -33,7 +33,7 @@ const types = [
   },
 ];
 
-const FormPersonal = () => {
+const FormHabit = () => {
   const { id } = useParams();
   const { create, update, loading, error, entity, updateHabit, createHabit } =
     habitStore();
@@ -79,26 +79,7 @@ const FormPersonal = () => {
   }, [entity, form]);
 
   const onFinish = (values) => {
-    if (id)
-      updateHabit(id, {
-        email: values.email,
-        first_name: values.first_name,
-        last_name: values.last_name,
-        birth_date: values.birth_date.toISOString(),
-        country: values.country,
-        gender: values.gender,
-        password: "",
-      });
-    else
-      createHabit({
-        email: values.email,
-        first_name: values.first_name,
-        last_name: values.last_name,
-        birth_date: values.birth_date.toISOString(),
-        country: values.country,
-        gender: values.gender,
-        password: "",
-      });
+    console.log(values, goals);
   };
 
   useEffect(() => {
@@ -213,7 +194,7 @@ const FormPersonal = () => {
       <Row>
         {withGoals ? (
           <Form.Item label="Objetivo" name="with_goals">
-            <Goals goals={goals} onChange={setGoals} typeHabit={typeHabit} />
+            <Goals goals={goals} onSubmit={setGoals} typeHabit={typeHabit} />
           </Form.Item>
         ) : (
           ""
@@ -232,4 +213,4 @@ const FormPersonal = () => {
     </Form>
   );
 };
-export default FormPersonal;
+export default FormHabit;
