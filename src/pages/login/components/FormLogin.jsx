@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
-import authStore from "../../../store/auth.store";
+import authStore from "../../../stores/auth.store";
 import { useNotificationContext } from "../../../context/NotificationContext";
 const FormLogin = () => {
-  const { logged, loading, error, login } = authStore();
+  const { logged, error, login } = authStore();
   const { openNotification } = useNotificationContext();
   const navigate = useNavigate();
 
@@ -16,13 +16,17 @@ const FormLogin = () => {
     navigate("/register");
   };
   useEffect(() => {
-    if (!loading && error) {
-      openNotification("error", "Error", error);
-    }
-    if (!loading && logged) {
+    if (logged) {
       navigate("/");
     }
-  }, [loading, error, logged, navigate, openNotification]);
+  }, [logged, navigate, openNotification]);
+
+  useEffect(() => {
+    if (error) {
+      openNotification("error", "Error", error);
+    }
+  }, [error, navigate, openNotification]);
+
   return (
     <Form
       name="login"

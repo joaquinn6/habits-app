@@ -11,7 +11,7 @@ import {
   Button,
 } from "antd";
 import { useNotificationContext } from "../../../context/NotificationContext";
-import userStore from "../../../store/user.store";
+import userStore from "../../../stores/user.store";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import ModalChangePassword from "./ModalChangePassword";
@@ -64,17 +64,20 @@ const FormPersonal = () => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (!loading && error) {
-      openNotification("error", "Error", error);
-    }
-    if (!loading && update) {
+    if (update) {
       openNotification(
         "success",
         "Correcto",
         "Usuario actualizado correctamente"
       );
     }
-  }, [loading, error, update, openNotification]);
+  }, [update, openNotification]);
+
+  useEffect(() => {
+    if (error) {
+      openNotification("error", "Error", error);
+    }
+  }, [error, openNotification]);
 
   useEffect(() => {
     if (entity) {
@@ -100,19 +103,6 @@ const FormPersonal = () => {
       password: "",
     });
   };
-
-  useEffect(() => {
-    if (!loading && error) {
-      openNotification("error", "Error", error);
-    }
-    if (!loading && update) {
-      openNotification(
-        "success",
-        "Correcto",
-        "Usuario actualizado correctamente"
-      );
-    }
-  }, [loading, error, update, openNotification]);
 
   return (
     <Form

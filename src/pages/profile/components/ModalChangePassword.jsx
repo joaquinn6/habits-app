@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Modal, Form, Input, Button } from "antd";
-import userStore from "../../../store/user.store";
+import userStore from "../../../stores/user.store";
 import PropTypes from "prop-types";
 import { useNotificationContext } from "../../../context/NotificationContext";
 
@@ -10,10 +10,7 @@ const ModalChangePassword = ({ isOpen, onClose }) => {
   const { openNotification } = useNotificationContext();
 
   useEffect(() => {
-    if (!loading && error) {
-      openNotification("error", "Error", error);
-    }
-    if (!loading && password) {
+    if (password) {
       openNotification(
         "success",
         "Correcto",
@@ -21,7 +18,13 @@ const ModalChangePassword = ({ isOpen, onClose }) => {
       );
       onClose();
     }
-  }, [loading, error, password, openNotification, onClose]);
+  }, [password, openNotification, onClose]);
+
+  useEffect(() => {
+    if (error) {
+      openNotification("error", "Error", error);
+    }
+  }, [error, openNotification]);
 
   const onFinish = () => {
     const values = form.getFieldsValue();

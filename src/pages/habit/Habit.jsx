@@ -1,14 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useParams } from "react";
 import { Col, Row, Card } from "antd";
 import FormPersonal from "./components/FormPersonal";
-import userStore from "../../stores/user.store";
+import habitStore from "../../stores/habit.store";
 
 const Profile = () => {
-  const { getUser } = userStore();
+  const { getHabit } = habitStore();
+  const { id } = useParams();
 
   useEffect(() => {
-    getUser();
-  }, []);
+    if (id) {
+      getHabit(id);
+    }
+  }, [id, getHabit]);
 
   return (
     <Row justify="center">
@@ -19,7 +22,10 @@ const Profile = () => {
         lg={{ flex: "60%" }}
         xl={{ flex: "60%" }}
       >
-        <Card title="Mi perfil" variant="borderless">
+        <Card
+          title={id ? "Editar habito" : "Nuevo habito"}
+          variant="borderless"
+        >
           <FormPersonal />
         </Card>
       </Col>

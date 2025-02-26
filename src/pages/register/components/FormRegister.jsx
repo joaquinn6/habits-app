@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Button, Form, Input, Flex, DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useNotificationContext } from "../../../context/NotificationContext";
-import userStore from "../../../store/user.store";
+import userStore from "../../../stores/user.store";
 
 const FormRegister = () => {
   const { create, loading, error, createUser } = userStore();
@@ -24,14 +24,17 @@ const FormRegister = () => {
   };
 
   useEffect(() => {
-    if (!loading && error) {
-      openNotification("error", "Error", error);
-    }
-    if (!loading && create) {
+    if (create) {
       openNotification("success", "Correcto", "Usuario creado correctamente");
       navigate("/login");
     }
-  }, [loading, error, create, navigate, openNotification]);
+  }, [create, navigate, openNotification]);
+
+  useEffect(() => {
+    if (error) {
+      openNotification("error", "Error", error);
+    }
+  }, [error, navigate, openNotification]);
 
   return (
     <Form
