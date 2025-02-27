@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Col, Row, Card } from "antd";
 import FormHabit from "./components/FormHabit";
-import habitStore from "../../stores/habit.store";
+import habitStore from "@/stores/habit.store";
 const Habit = () => {
   const { getHabit } = habitStore();
   const { id } = useParams();

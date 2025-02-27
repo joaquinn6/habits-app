@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import {
@@ -12,8 +11,8 @@ import {
   Switch,
 } from "antd";
 import { CloseCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
-import { useNotificationContext } from "../../../context/NotificationContext";
-import habitStore from "../../../stores/habit.store";
+import { useNotificationContext } from "@/context/NotificationContext";
+import habitStore from "@/stores/habit.store";
 import Goals from "./Goals";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";

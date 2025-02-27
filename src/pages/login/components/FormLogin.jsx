@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
-import authStore from "../../../stores/auth.store";
-import { useNotificationContext } from "../../../context/NotificationContext";
+import authStore from "@/stores/auth.store";
+import { useNotificationContext } from "@/context/NotificationContext";
 const FormLogin = () => {
   const { logged, error, login } = authStore();
   const { openNotification } = useNotificationContext();

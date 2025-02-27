@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 import Navbar from "./components/Navbar";
-import FooterPropio from "../../components/Footer";
+import FooterPropio from "@/components/Footer";
 const { Header, Footer, Content } = Layout;
 
 const DashboardLayout = () => {

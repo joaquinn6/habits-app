@@ -1,4 +1,4 @@
-import { API_URL } from "../globalVars.js";
+import { API_URL } from "@/globalVars.js";
 import axios from "axios";
 
 function createAxios(withHeaders = false) {

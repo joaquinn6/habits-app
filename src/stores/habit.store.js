@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { habitService } from "../services";
+import { habitService } from "@/services";
 
 const habitStore = create((set) => ({
   create: null,

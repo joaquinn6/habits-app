@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { Button, Form, Input, Flex, DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useNotificationContext } from "../../../context/NotificationContext";
-import userStore from "../../../stores/user.store";
+import { useNotificationContext } from "@/context/NotificationContext";
+import userStore from "@/stores/user.store";
 
 const FormRegister = () => {
   const { create, loading, error, createUser } = userStore();

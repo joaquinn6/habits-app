@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { userService } from "../services";
+import { userService } from "@/services";
 
 const userStore = create((set) => ({
   create: null,

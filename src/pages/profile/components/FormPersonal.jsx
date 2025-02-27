@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { ManOutlined, WomanOutlined } from "@ant-design/icons";
 import {
   Form,
@@ -10,8 +9,8 @@ import {
   Avatar,
   Button,
 } from "antd";
-import { useNotificationContext } from "../../../context/NotificationContext";
-import userStore from "../../../stores/user.store";
+import { useNotificationContext } from "@/context/NotificationContext";
+import userStore from "@/stores/user.store";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import ModalChangePassword from "./ModalChangePassword";

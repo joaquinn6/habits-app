@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { Modal, Form, Input, Button } from "antd";
-import userStore from "../../../stores/user.store";
+import userStore from "@/stores/user.store";
 import PropTypes from "prop-types";
-import { useNotificationContext } from "../../../context/NotificationContext";
+import { useNotificationContext } from "@/context/NotificationContext";
 
 const ModalChangePassword = ({ isOpen, onClose }) => {
   const [form] = Form.useForm();

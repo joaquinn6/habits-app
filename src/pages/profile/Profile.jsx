@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { Col, Row, Card } from "antd";
 import FormPersonal from "./components/FormPersonal";
-import userStore from "../../stores/user.store";
+import userStore from "@/stores/user.store";
 
 const Profile = () => {
   const { getUser } = userStore();
