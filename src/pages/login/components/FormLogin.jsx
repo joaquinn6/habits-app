@@ -1,4 +1,4 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@icons";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import authStore from "@/stores/auth.store";

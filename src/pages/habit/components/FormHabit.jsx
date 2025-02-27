@@ -10,7 +10,7 @@ import {
   Select,
   Switch,
 } from "antd";
-import { CloseCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, CheckCircleOutlined } from "@icons";
 import { useNotificationContext } from "@/context/NotificationContext";
 import habitStore from "@/stores/habit.store";
 import Goals from "./Goals";

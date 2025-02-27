@@ -22,7 +22,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      "@icons": "antd/es/icons",
+      "@icons": "@ant-design/icons",
     },
   },
 });

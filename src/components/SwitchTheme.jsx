@@ -1,6 +1,6 @@
 import { useTheme } from "@/context/ThemeContext";
 import { FloatButton } from "antd";
-import { MoonOutlined, SunOutlined } from "@ant-design/icons";
+import { MoonOutlined, SunOutlined } from "@icons";
 
 const SwitchTheme = () => {
   const { isDarkMode, toggleTheme } = useTheme();

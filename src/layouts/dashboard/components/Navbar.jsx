@@ -1,10 +1,6 @@
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  CalendarOutlined,
-  UserOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
+import { CalendarOutlined, UserOutlined, HomeOutlined } from "@icons";
 
 const Navbar = () => {
   const navigate = useNavigate();

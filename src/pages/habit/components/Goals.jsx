@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Row, Col, Select, InputNumber, Descriptions } from "antd";
 import PropTypes from "prop-types";
-import { CalendarOutlined } from "@ant-design/icons";
+import { CalendarOutlined } from "@icons";
 
 const typesGoals = [
   {

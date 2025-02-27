@@ -1,4 +1,4 @@
-import { ManOutlined, WomanOutlined } from "@ant-design/icons";
+import { ManOutlined, WomanOutlined } from "@icons";
 import {
   Form,
   Input,

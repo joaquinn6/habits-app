@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { GithubOutlined } from "@ant-design/icons";
+import { GithubOutlined } from "@icons";
 
 const Footer = () => {
   const onClick = () => {
