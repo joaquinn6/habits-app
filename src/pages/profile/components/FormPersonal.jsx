@@ -30,7 +30,6 @@ const countries = [
     flag: "https://flagcdn.com/w40/do.png",
   },
   { code: "EC", name: "Ecuador", flag: "https://flagcdn.com/w40/ec.png" },
-  { code: "ES", name: "España", flag: "https://flagcdn.com/w40/es.png" },
   { code: "SV", name: "El Salvador", flag: "https://flagcdn.com/w40/sv.png" },
   { code: "ES", name: "España", flag: "https://flagcdn.com/w40/es.png" },
   { code: "GT", name: "Guatemala", flag: "https://flagcdn.com/w40/gt.png" },

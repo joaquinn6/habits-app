@@ -4,6 +4,7 @@ import { ConfigProvider, theme } from "antd";
 import esES from "antd/locale/es_ES"; // Configuración en español
 import dayjs from "dayjs";
 import "dayjs/locale/es";
+
 const ThemeContext = createContext();
 dayjs.locale("es");
 export const ThemeProvider = ({ children }) => {
@@ -28,6 +29,12 @@ export const ThemeProvider = ({ children }) => {
         componentSize="large"
         theme={{
           algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+          token: {
+            colorPrimary: isDarkMode ? "#ff9800" : "#ff6f61", // Color primario dinámico
+            borderRadius: 8,
+            colorBgBase: isDarkMode ? "#1c1c1c" : "#f5f5f5", // Fondo oscuro o claro
+            colorText: isDarkMode ? "#ffffff" : "#333",
+          },
         }}
       >
         {children}
