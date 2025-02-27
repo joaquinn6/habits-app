@@ -2,7 +2,7 @@ import createAxios from "./axiosHttp";
 
 async function getHabit(id) {
   const axios = createAxios();
-  const urlPath = `habit/${id}`;
+  const urlPath = `habits/${id}`;
   try {
     const response = await axios.get(urlPath);
     return Promise.resolve(response.data);

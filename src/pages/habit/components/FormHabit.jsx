@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import {
   Form,
   Input,
@@ -42,6 +43,7 @@ const FormHabit = () => {
   const [goals, setGoals] = useState("");
   const withGoals = Form.useWatch("with_goals", form);
   const typeHabit = Form.useWatch("type", form);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (update) {
@@ -50,12 +52,14 @@ const FormHabit = () => {
         "Correcto",
         "Habito actualizado correctamente"
       );
+      navigate("/");
     }
   }, [update, openNotification]);
 
   useEffect(() => {
     if (create) {
       openNotification("success", "Correcto", "Habito creado correctamente");
+      navigate("/");
     }
   }, [create, openNotification]);
 
@@ -68,32 +72,33 @@ const FormHabit = () => {
   useEffect(() => {
     if (entity) {
       form.setFieldsValue({
-        first_name: entity.first_name,
-        last_name: entity.last_name,
-        email: entity.email,
-        birth_date: dayjs.utc(entity.birth_date).local(),
-        country: entity.country,
-        gender: entity.gender,
+        name: entity.name,
+        type: entity.type,
+        description: entity.description || "",
+        with_goals: entity.with_goals,
+        color: entity.color || "",
       });
+      setGoals(entity.goals || { per_week: 0, per_year: 0, per_month: 0 });
     }
   }, [entity, form]);
 
   const onFinish = (values) => {
-    console.log(values, goals);
+    const getColor = (val) => {
+      if (!val) return "";
+      if (typeof val === "string") return val;
+      return val.toHexString();
+    };
+    const entity = {
+      name: values.name,
+      type: values.type,
+      description: values.description || "",
+      with_goals: values.with_goals,
+      goals: values.goals || null,
+      color: getColor(values.color),
+    };
+    if (id) updateHabit(id, entity);
+    else createHabit(entity);
   };
-
-  useEffect(() => {
-    if (!loading && error) {
-      openNotification("error", "Error", error);
-    }
-    if (!loading && update) {
-      openNotification(
-        "success",
-        "Correcto",
-        "Habito actualizado correctamente"
-      );
-    }
-  }, [loading, error, update, openNotification]);
 
   return (
     <Form
@@ -104,6 +109,7 @@ const FormHabit = () => {
       style={{ width: "100%" }}
       disabled={loading}
       onFinish={onFinish}
+      defaultValue={{ name: "", description: "", type: "" }}
     >
       <Row gutter={16}>
         <Col
@@ -146,7 +152,16 @@ const FormHabit = () => {
           lg={{ flex: "50%" }}
           xl={{ flex: "50%" }}
         >
-          <Form.Item label="Tipo" name="type" rules={[]}>
+          <Form.Item
+            label="Tipo"
+            name="type"
+            rules={[
+              {
+                required: true,
+                message: "Nombre es requerido",
+              },
+            ]}
+          >
             <Select
               showSearch
               placeholder="Tipo"
@@ -193,8 +208,31 @@ const FormHabit = () => {
       </Row>
       <Row>
         {withGoals ? (
-          <Form.Item label="Objetivo" name="with_goals">
-            <Goals goals={goals} onSubmit={setGoals} typeHabit={typeHabit} />
+          <Form.Item
+            label="Objetivo"
+            required
+            name="goals"
+            rules={[
+              {
+                validator: () => {
+                  if (!goals || Object.values(goals).every((v) => v === 0)) {
+                    return Promise.reject(
+                      new Error("Objetivos son requeridos")
+                    );
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
+          >
+            <Goals
+              goals={goals}
+              onSubmit={(newGoals) => {
+                setGoals(newGoals);
+                form.setFieldsValue({ goals: newGoals });
+              }}
+              typeHabit={typeHabit}
+            />
           </Form.Item>
         ) : (
           ""
