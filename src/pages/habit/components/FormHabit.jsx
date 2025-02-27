@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-
+import { runes } from "runes2";
 import {
   Form,
   Input,
@@ -34,7 +34,9 @@ const types = [
 ];
 
 const FormHabit = () => {
+  const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
   const { id } = useParams();
+  const [iconValue, setIconValue] = useState("");
   const { create, update, loading, error, entity, updateHabit, createHabit } =
     habitStore();
   const { openNotification } = useNotificationContext();
@@ -44,6 +46,11 @@ const FormHabit = () => {
   const typeHabit = Form.useWatch("type", form);
   const navigate = useNavigate();
 
+  const handleChangeIcon = (e) => {
+    const inputValue = e.target.value;
+    const filteredValue = inputValue.match(emojiRegex)?.join("") || "";
+    setIconValue(filteredValue);
+  };
   useEffect(() => {
     if (update) {
       openNotification(
@@ -76,6 +83,7 @@ const FormHabit = () => {
         description: entity.description || "",
         with_goals: entity.with_goals,
         color: entity.color || "",
+        icon: entity.icon || "",
       });
       setGoals(
         entity.goals || {
@@ -100,6 +108,7 @@ const FormHabit = () => {
       type: values.type,
       description: values.description || "",
       with_goals: values.with_goals,
+      icon: values.icon,
       goals: values.goals || null,
       color: getColor(values.color),
     };
@@ -165,7 +174,7 @@ const FormHabit = () => {
             rules={[
               {
                 required: true,
-                message: "Nombre es requerido",
+                message: "Tipo es requerido",
               },
             ]}
           >
@@ -184,12 +193,36 @@ const FormHabit = () => {
             </Select>
           </Form.Item>
         </Col>
+
         <Col
           xs={{ flex: "100%" }}
           sm={{ flex: "100%" }}
-          md={{ flex: "50%" }}
-          lg={{ flex: "50%" }}
-          xl={{ flex: "50%" }}
+          md={{ flex: "25%" }}
+          lg={{ flex: "25%" }}
+          xl={{ flex: "25%" }}
+        >
+          <Form.Item label="Icono" name="icon">
+            <Input
+              value={iconValue}
+              onChange={handleChangeIcon}
+              count={{
+                show: true,
+                max: 1,
+                strategy: (txt) => runes(txt).length,
+                exceedFormatter: (txt, { max }) =>
+                  runes(txt).slice(0, max).join(""),
+              }}
+              placeholder="Icono"
+              allowClear
+            />
+          </Form.Item>
+        </Col>
+        <Col
+          xs={{ flex: "50%" }}
+          sm={{ flex: "50%" }}
+          md={{ flex: "25%" }}
+          lg={{ flex: "25%" }}
+          xl={{ flex: "25%" }}
         >
           <Form.Item label="Color" name="color">
             <ColorPicker />

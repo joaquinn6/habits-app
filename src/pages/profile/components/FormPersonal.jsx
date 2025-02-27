@@ -164,7 +164,7 @@ const FormPersonal = () => {
               { type: "email", message: "Ingrese un correo válido" },
             ]}
           >
-            <Input placeholder="Email" />
+            <Input placeholder="Email" disabled />
           </Form.Item>
         </Col>
         <Col
