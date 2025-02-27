@@ -22,20 +22,28 @@ const typesGoals = [
 ];
 
 const Goals = ({ goals, onSubmit, typeHabit }) => {
-  const [typeGoal, setTypeGoal] = useState(""); // Tipo seleccionado
-  const [goalValue, setGoalValue] = useState(0); // Valor ingresado
+  const [typeGoal, setTypeGoal] = useState(goals.measure); // Tipo seleccionado
+  const [goalValue, setGoalValue] = useState(goals.times); // Valor ingresado
   const [goalValues, setGoalValues] = useState(goals); // Valores calculados
   // Función para calcular los valores
   const calculateGoals = useCallback(
     (type, value) => {
       const rounding = typeHabit === "GOOD" ? Math.ceil : Math.floor;
-      let newGoals = { per_week: 0, per_month: 0, per_year: 0 };
+      let newGoals = {
+        per_week: 0,
+        per_month: 0,
+        per_year: 0,
+        measure: "",
+        times: 0,
+      };
       switch (type) {
         case "WEEK":
           newGoals = {
             per_week: rounding(value),
             per_month: rounding(value * 4.4),
             per_year: rounding(value * 52),
+            measure: "WEEK",
+            times: value,
           };
           break;
         case "MONTH":
@@ -43,6 +51,8 @@ const Goals = ({ goals, onSubmit, typeHabit }) => {
             per_week: rounding(value / 4.4),
             per_month: rounding(value),
             per_year: rounding(value * 12),
+            measure: "MONTH",
+            times: value,
           };
           break;
         case "YEAR":
@@ -50,6 +60,8 @@ const Goals = ({ goals, onSubmit, typeHabit }) => {
             per_week: rounding(value / 52),
             per_month: rounding(value / 12),
             per_year: rounding(value),
+            measure: "YEAR",
+            times: value,
           };
           break;
         default:

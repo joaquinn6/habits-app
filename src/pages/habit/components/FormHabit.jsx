@@ -78,7 +78,15 @@ const FormHabit = () => {
         with_goals: entity.with_goals,
         color: entity.color || "",
       });
-      setGoals(entity.goals || { per_week: 0, per_year: 0, per_month: 0 });
+      setGoals(
+        entity.goals || {
+          per_week: 0,
+          per_year: 0,
+          per_month: 0,
+          measure: "",
+          times: 0,
+        }
+      );
     }
   }, [entity, form]);
 
