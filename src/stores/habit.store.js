@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { habitService } from "@/services";
 
 const habitStore = create((set) => ({
+  list: null,
   create: null,
   update: null,
   loading: false,
@@ -35,6 +36,17 @@ const habitStore = create((set) => ({
       const data = await habitService.getHabit(id);
       set({ entity: data, loading: false });
       setTimeout(() => set({ entity: null }), 2000);
+    } catch (err) {
+      set({ error: err, loading: false });
+      setTimeout(() => set({ error: null }), 2000);
+    }
+  },
+  getHabits: async () => {
+    set({ list: null, loading: true, error: null });
+    try {
+      const data = await habitService.getHabits();
+      set({ list: data, loading: false });
+      setTimeout(() => set({ list: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
       setTimeout(() => set({ error: null }), 2000);

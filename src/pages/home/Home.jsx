@@ -1,11 +1,17 @@
 import { Col, Row, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import habitStore from "@/stores/habit.store";
 
 const Profile = () => {
+  const { getHabits } = habitStore();
   const navigate = useNavigate();
   const onNewHabit = () => {
     navigate("/habit");
   };
+
+  useEffect(() => {
+    getHabits();
+  }, []);
 
   return (
     <Row justify="center">
