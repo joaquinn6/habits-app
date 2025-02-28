@@ -2,8 +2,8 @@ import { Col, Row, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import habitStore from "@/stores/habit.store";
 
-const Profile = () => {
-  const { getHabits } = habitStore();
+const Home = () => {
+  const { getHabits, list } = habitStore();
   const navigate = useNavigate();
   const onNewHabit = () => {
     navigate("/habit");
@@ -12,6 +12,12 @@ const Profile = () => {
   useEffect(() => {
     getHabits();
   }, []);
+
+  useEffect(() => {
+    if (list) {
+      console.log(list);
+    }
+  }, [list]);
 
   return (
     <Row justify="center">
@@ -29,4 +35,4 @@ const Profile = () => {
     </Row>
   );
 };
-export default Profile;
+export default Home;
