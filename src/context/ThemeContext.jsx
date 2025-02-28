@@ -32,7 +32,7 @@ export const ThemeProvider = ({ children }) => {
           token: {
             colorPrimary: isDarkMode ? "#ff9800" : "#ff6f61", // Color primario dinámico
             borderRadius: 8,
-            colorBgBase: isDarkMode ? "#1c1c1c" : "#f5f5f5", // Fondo oscuro o claro
+            colorBgBase: isDarkMode ? "#1c1c1c" : "#FFFEFEFF", // Fondo oscuro o claro
             colorText: isDarkMode ? "#ffffff" : "#333",
           },
         }}
