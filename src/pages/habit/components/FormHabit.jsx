@@ -51,6 +51,11 @@ const FormHabit = () => {
     const filteredValue = inputValue.match(emojiRegex)?.join("") || "";
     setIconValue(filteredValue);
   };
+  const handleKeyDownEmojiInput = (e) => {
+    if (!e.key.match(emojiRegex)) {
+      e.preventDefault(); // Bloquea caracteres no permitidos
+    }
+  };
   useEffect(() => {
     if (update) {
       openNotification(
@@ -83,7 +88,7 @@ const FormHabit = () => {
         description: entity.description || "",
         with_goals: entity.with_goals,
         color: entity.color || "",
-        icon: entity.icon || "",
+        emoji: entity.emoji || "",
       });
       setGoals(
         entity.goals || {
@@ -108,7 +113,7 @@ const FormHabit = () => {
       type: values.type,
       description: values.description || "",
       with_goals: values.with_goals,
-      icon: values.icon,
+      emoji: values.emoji,
       goals: values.goals || null,
       color: getColor(values.color),
     };
@@ -201,10 +206,11 @@ const FormHabit = () => {
           lg={{ flex: "25%" }}
           xl={{ flex: "25%" }}
         >
-          <Form.Item label="Icono" name="icon">
+          <Form.Item label="Emoji" name="emoji">
             <Input
               value={iconValue}
               onChange={handleChangeIcon}
+              onKeyDown={handleKeyDownEmojiInput}
               count={{
                 show: true,
                 max: 1,
@@ -212,7 +218,7 @@ const FormHabit = () => {
                 exceedFormatter: (txt, { max }) =>
                   runes(txt).slice(0, max).join(""),
               }}
-              placeholder="Icono"
+              placeholder="Emoji"
               allowClear
             />
           </Form.Item>
