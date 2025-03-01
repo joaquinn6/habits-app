@@ -86,7 +86,7 @@ const FormHabit = () => {
         name: entity.name,
         type: entity.type,
         description: entity.description || "",
-        with_goals: entity.with_goals,
+        with_goals: entity.with_goals || false,
         color: entity.color || "",
         emoji: entity.emoji || "",
       });
@@ -112,7 +112,7 @@ const FormHabit = () => {
       name: values.name,
       type: values.type,
       description: values.description || "",
-      with_goals: values.with_goals,
+      with_goals: values.with_goals || false,
       emoji: values.emoji,
       goals: values.goals || null,
       color: getColor(values.color),
