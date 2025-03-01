@@ -6,7 +6,7 @@
 }
 
 .layout-header {
-  position: fixed; /* Fija el Header */
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -15,7 +15,7 @@
 
 .layout-content {
   flex: 1;
-  margin-top: 64px; /* Ajusta según la altura del Header */
-  overflow-y: auto; /* Permite scroll solo en el cuerpo */
-  padding: 20px; /* Espaciado opcional */
+  margin-top: 64px;
+  overflow-y: auto;
+  padding: 20px;
 }

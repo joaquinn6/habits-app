@@ -5,6 +5,7 @@ const habitStore = create((set) => ({
   list: null,
   create: null,
   update: null,
+  deleted: null,
   loading: false,
   error: null,
   entity: null,
@@ -47,6 +48,17 @@ const habitStore = create((set) => ({
       const data = await habitService.getHabits();
       set({ list: data, loading: false });
       setTimeout(() => set({ list: null }), 2000);
+    } catch (err) {
+      set({ error: err, loading: false });
+      setTimeout(() => set({ error: null }), 2000);
+    }
+  },
+  deleteHabit: async (id) => {
+    set({ deleted: null, loading: true, error: null });
+    try {
+      const data = await habitService.deleteHabit(id);
+      set({ deleted: data, loading: false });
+      setTimeout(() => set({ deleted: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
       setTimeout(() => set({ error: null }), 2000);

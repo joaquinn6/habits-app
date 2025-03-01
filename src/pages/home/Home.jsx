@@ -48,7 +48,7 @@ const Home = () => {
             dataSource={habits}
             renderItem={(item) => (
               <List.Item>
-                <CardHabit habit={item} />
+                <CardHabit habit={item} onChange={getHabits} />
               </List.Item>
             )}
           />

@@ -2,7 +2,10 @@ import { Card, Popconfirm, Badge } from "antd";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { CalendarOutlined, EditOutlined, DeleteOutlined } from "@icons";
-const CardHabit = ({ habit }) => {
+import habitStore from "@/stores/habit.store";
+
+const CardHabit = ({ habit, onChange }) => {
+  const { deleted, deleteHabit } = habitStore();
   const [localValue, setLocalValue] = useState([]);
   const navigate = useNavigate();
 
@@ -12,8 +15,17 @@ const CardHabit = ({ habit }) => {
     }
   }, [habit]);
 
+  useEffect(() => {
+    if (deleted) {
+      onChange();
+    }
+  }, [deleted]);
+
   const onEditHabit = () => {
     navigate(`/habit/${localValue._id}`);
+  };
+  const onDeleteHabit = () => {
+    deleteHabit(localValue._id);
   };
 
   return (
@@ -44,6 +56,7 @@ const CardHabit = ({ habit }) => {
             description="Al eliminar se vaciara todo el calendario con este habito"
             okText="Si"
             cancelText="No"
+            onConfirm={onDeleteHabit}
           >
             <DeleteOutlined />
           </Popconfirm>,
@@ -59,5 +72,6 @@ const CardHabit = ({ habit }) => {
 };
 CardHabit.propTypes = {
   habit: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 export default CardHabit;
