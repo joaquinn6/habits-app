@@ -14,6 +14,7 @@ import userStore from "@/stores/user.store";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import ModalChangePassword from "./ModalChangePassword";
+import { useNavigate } from "react-router-dom";
 
 dayjs.extend(utc);
 const { Option } = Select;
@@ -60,6 +61,7 @@ const FormPersonal = () => {
   const { update, loading, error, entity, updateUser } = userStore();
   const { openNotification } = useNotificationContext();
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (update) {
@@ -100,6 +102,11 @@ const FormPersonal = () => {
       gender: values.gender,
       password: "",
     });
+  };
+  const logout = () => {
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+    navigate("/login");
   };
 
   return (
@@ -248,6 +255,11 @@ const FormPersonal = () => {
       </Row>
 
       <Row justify="end" gutter={16}>
+        <Col>
+          <Button color="danger" variant="solid" onClick={logout}>
+            Cerrar sesión
+          </Button>
+        </Col>
         <Col>
           <Button
             color="primary"
