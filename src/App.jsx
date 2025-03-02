@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import Habit from "./pages/habit/Habit";
+import Calendar from "./pages/calendar/Calendar";
 import { NotificationProvider } from "./context/NotificationContext";
 const App = () => {
   return (
@@ -28,6 +29,8 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/habit" element={<Habit />} />
                 <Route path="/habit/:id" element={<Habit />} />
+                <Route path="/habit/:id/calendar" element={<Calendar />} />
+                <Route path="/calendar" element={<Calendar />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Route>

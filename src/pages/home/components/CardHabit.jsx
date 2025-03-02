@@ -24,6 +24,10 @@ const CardHabit = ({ habit, onChange }) => {
   const onEditHabit = () => {
     navigate(`/habit/${localValue._id}`);
   };
+
+  const onHabitCalendar = () => {
+    navigate(`/habit/${localValue._id}/calendar`);
+  };
   const onDeleteHabit = () => {
     deleteHabit(localValue._id);
   };
@@ -48,7 +52,7 @@ const CardHabit = ({ habit, onChange }) => {
       <Card
         variant="borderless"
         actions={[
-          <CalendarOutlined key="calendar" />,
+          <CalendarOutlined key="calendar" onClick={onHabitCalendar} />,
           <EditOutlined key="edit" onClick={onEditHabit} />,
           <Popconfirm
             placement="top"

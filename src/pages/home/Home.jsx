@@ -1,4 +1,4 @@
-import { Col, Row, Button, List, Card } from "antd";
+import { Col, Row, Button, List } from "antd";
 import { useNavigate } from "react-router-dom";
 import habitStore from "@/stores/habit.store";
 import CardHabit from "./components/CardHabit";
