@@ -14,10 +14,7 @@ import { CloseCircleOutlined, CheckCircleOutlined } from "@icons";
 import { useNotificationContext } from "@/context/NotificationContext";
 import habitStore from "@/stores/habit.store";
 import Goals from "./Goals";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 
-dayjs.extend(utc);
 const { Option } = Select;
 
 const types = [
