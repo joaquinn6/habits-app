@@ -1,6 +1,6 @@
 import createAxios from "./axiosHttp";
 
-async function getMarksByHabit(idHabit) {
+async function getMarksByUser(idHabit) {
   const axios = createAxios();
   const urlPath = `habits/${idHabit}/marks`;
   try {
@@ -11,9 +11,9 @@ async function getMarksByHabit(idHabit) {
   }
 }
 
-async function getMarks() {
+async function getMarksByHabit(id) {
   const axios = createAxios();
-  const urlPath = `marks`;
+  const urlPath = `habits/${id}/marks`;
   try {
     const response = await axios.get(urlPath);
     return Promise.resolve(response.data);
@@ -57,7 +57,7 @@ async function deleteMark(id) {
 
 export const markService = {
   createMark,
-  getMarks,
+  getMarksByUser,
   updateMark,
   deleteMark,
   getMarksByHabit,
