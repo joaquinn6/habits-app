@@ -30,10 +30,10 @@ const markStore = create((set) => ({
       setTimeout(() => set({ error: null }), 2000);
     }
   },
-  getMarksByHabit: async (id) => {
+  getMarksByHabit: async (id, query) => {
     set({ list: null, loading: true, error: null });
     try {
-      const data = await markService.getMarksByHabit(id);
+      const data = await markService.getMarksByHabit(id, query);
       set({ list: data, loading: false });
       setTimeout(() => set({ list: null }), 2000);
     } catch (err) {

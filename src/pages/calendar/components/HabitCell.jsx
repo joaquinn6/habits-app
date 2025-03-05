@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 
 const HabitCell = ({ mark, emoji }) => {
-  return (
-    <div>
-      {emoji} x {mark.times}
-    </div>
-  );
+  return <div>{emoji.repeat(mark.times)}</div>;
 };
 
 HabitCell.propTypes = {

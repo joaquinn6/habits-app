@@ -11,9 +11,11 @@ async function getMarksByUser(idHabit) {
   }
 }
 
-async function getMarksByHabit(id) {
+async function getMarksByHabit(id, query) {
   const axios = createAxios();
-  const urlPath = `habits/${id}/marks`;
+  let urlPath = `habits/${id}/marks`;
+  const params = new URLSearchParams(query);
+  urlPath += `?${params.toString()}`;
   try {
     const response = await axios.get(urlPath);
     return Promise.resolve(response.data);
