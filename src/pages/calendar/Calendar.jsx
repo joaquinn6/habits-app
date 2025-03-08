@@ -3,13 +3,15 @@ import { Col, Row, Card, Calendar as CalendarAntd } from "antd";
 import markStore from "@/stores/mark.store";
 import habitStore from "@/stores/habit.store";
 import HabitCell from "./components/HabitCell";
+import HabitsCell from "./components/HabitsCell";
 import HabitCellYear from "./components/HabitCellYear";
+import HabitsCellYear from "./components/HabitsCellYear";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import ModalMarkDetail from "./components/ModalMarkDetail";
 
 dayjs.extend(utc);
-//TODO: preparar las cells por año
+//TODO: get conjunto de eventos
 const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
     markStore();
@@ -31,7 +33,7 @@ const Calendar = () => {
   const getMarks = () => {
     if (id) {
       if (id) getMarksByHabit(id, query);
-      //else getMarksByUser();
+      else getMarksByUser();
     }
   };
 
@@ -91,7 +93,7 @@ const Calendar = () => {
 
   const dateCellRender = (value) => {
     const markDate = getMarkByDate(value);
-    return (
+    return habit._id ? (
       <HabitCell
         habit={habit}
         mark={markDate}
@@ -99,11 +101,17 @@ const Calendar = () => {
         onChange={getMarks}
         openModal={modalOpen}
       />
+    ) : (
+      <HabitsCell mark={markDate} />
     );
   };
   const monthCellRender = (value) => {
     const markDate = getMarkByMonth(value);
-    return <HabitCellYear habit={habit} mark={markDate} />;
+    return habit._id ? (
+      <HabitCellYear habit={habit} mark={markDate} />
+    ) : (
+      <HabitsCellYear mark={markDate} />
+    );
   };
 
   const cellRender = (current, info) => {

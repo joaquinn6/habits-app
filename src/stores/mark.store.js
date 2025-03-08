@@ -41,6 +41,17 @@ const markStore = create((set) => ({
       setTimeout(() => set({ error: null }), 2000);
     }
   },
+  getMarksByUser: async (query) => {
+    set({ list: null, loading: true, error: null });
+    try {
+      const data = await markService.getMarksByUser(query);
+      set({ list: data, loading: false });
+      setTimeout(() => set({ list: null }), 2000);
+    } catch (err) {
+      set({ error: err, loading: false });
+      setTimeout(() => set({ error: null }), 2000);
+    }
+  },
   deleteMark: async (id) => {
     set({ deleted: null, loading: true, error: null });
     try {

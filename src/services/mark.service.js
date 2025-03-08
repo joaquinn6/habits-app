@@ -1,8 +1,10 @@
 import createAxios from "./axiosHttp";
 
-async function getMarksByUser(idHabit) {
+async function getMarksByUser(query) {
   const axios = createAxios();
-  const urlPath = `habits/${idHabit}/marks`;
+  let urlPath = `/marks`;
+  const params = new URLSearchParams(query);
+  urlPath += `?${params.toString()}`;
   try {
     const response = await axios.get(urlPath);
     return Promise.resolve(response.data);
