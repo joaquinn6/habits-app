@@ -137,7 +137,16 @@ const FormPersonal = () => {
               },
             ]}
           >
-            <Input placeholder="Nombres" />
+            <Input
+              placeholder="Nombres"
+              count={{
+                show: false,
+                max: 80,
+                strategy: (txt) => runes(txt).length,
+                exceedFormatter: (txt, { max }) =>
+                  runes(txt).slice(0, max).join(""),
+              }}
+            />
           </Form.Item>
         </Col>
         <Col
@@ -148,7 +157,16 @@ const FormPersonal = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item label="Apellidos" name="last_name">
-            <Input placeholder="Apellidos" />
+            <Input
+              placeholder="Apellidos"
+              count={{
+                show: false,
+                max: 80,
+                strategy: (txt) => runes(txt).length,
+                exceedFormatter: (txt, { max }) =>
+                  runes(txt).slice(0, max).join(""),
+              }}
+            />
           </Form.Item>
         </Col>
       </Row>
