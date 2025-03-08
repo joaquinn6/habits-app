@@ -40,7 +40,12 @@ const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
   };
 
   return (
-    <Tooltip title={mark._id ? tooltip : ""} color={habit.color}>
+    <Tooltip
+      Tooltip
+      key={date}
+      title={mark._id ? tooltip : ""}
+      color={habit.color}
+    >
       <div
         onClick={onClick}
         onContextMenu={(e) => {

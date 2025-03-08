@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Space, Tooltip } from "antd";
 
-const HabitsCellYear = ({ mark = {} }) => {
+const HabitsCellYear = ({ date, mark = {} }) => {
   const tooltip = () => {
     return mark.marks?.map((item) => (
       <>
@@ -16,7 +16,7 @@ const HabitsCellYear = ({ mark = {} }) => {
     }`;
   };
   return (
-    <Tooltip title={mark?.marks?.length > 0 ? tooltip : ""}>
+    <Tooltip title={mark?.marks?.length > 0 ? tooltip : ""} key={date}>
       <div style={{ height: "100%", width: "100%" }}>
         {mark.marks?.map((item) => {
           return (
@@ -32,6 +32,7 @@ const HabitsCellYear = ({ mark = {} }) => {
 };
 
 HabitsCellYear.propTypes = {
+  date: PropTypes.any.isRequired,
   mark: PropTypes.object,
 };
 

@@ -7,6 +7,7 @@ const HabitCellYear = ({ habit, mark = {} }) => {
       title={
         mark.times ? `${mark.times} ${mark.times > 1 ? "veces" : "vez"}` : ""
       }
+      key={date}
       color={habit.color}
     >
       <div style={{ height: "100%", width: "100%" }}>

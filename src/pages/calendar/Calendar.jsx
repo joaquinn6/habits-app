@@ -107,17 +107,18 @@ const Calendar = () => {
         date={value}
         onChange={getMarks}
         openModal={modalOpen}
+        key={value}
       />
     ) : (
-      <HabitsCell mark={markDate} />
+      <HabitsCell mark={markDate} date={value} key={value} />
     );
   };
   const monthCellRender = (value) => {
     const markDate = getMarkByMonth(value);
     return id ? (
-      <HabitCellYear habit={habit} mark={markDate} />
+      <HabitCellYear habit={habit} mark={markDate} key={value} />
     ) : (
-      <HabitsCellYear mark={markDate} />
+      <HabitsCellYear mark={markDate} date={value} key={value} />
     );
   };
 

@@ -36,7 +36,7 @@ const HomePage = () => {
       <Row gutter={[16, 16]} justify="center" align="stretch">
         <Col xs={24} md={12} style={{ display: "flex" }}>
           <Card
-            cover={<img alt="example" src="/public/Calendar.jpeg" />}
+            cover={<img alt="example" src="/public/Calendar.jpg" />}
             style={{ flex: 1, display: "flex", flexDirection: "column" }}
           >
             <Typography>
@@ -69,7 +69,7 @@ const HomePage = () => {
                 a quienes deseen mejorar su día a día a través del
                 autoconocimiento y la constancia. Te invito a probarla: si solo
                 quieres explorarla, puedes usar el usuario de prueba
-                <Text style={{ fontSize: "20px" }} type="success">
+                <Text style={{ fontSize: "20px" }} type="warning" strong>
                   (test@test.com : 123qwe)
                 </Text>
                 para conocer sus funciones. Y si te gusta ¡Regístrate y comienza
