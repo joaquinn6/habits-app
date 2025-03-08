@@ -1,20 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
+import { NotificationProvider } from "./context/NotificationContext";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthLayout from "./layouts/no-auth/NoAuth";
-import DashboardLayout from "./layouts/dashboard/Dashboard";
 import SwitchTheme from "./components/SwitchTheme";
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import DashboardLayout from "./layouts/dashboard/Dashboard";
 
-import Home from "./pages/home/Home";
 import About from "./pages/About";
+import Home from "./pages/home/Home";
+import HomePage from "./pages/HomePage";
 import Login from "./pages/login/Login";
 import NotFound from "./pages/NotFound";
+import Habit from "./pages/habit/Habit";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
-import Habit from "./pages/habit/Habit";
 import Calendar from "./pages/calendar/Calendar";
-import { NotificationProvider } from "./context/NotificationContext";
 const App = () => {
   return (
     <ThemeProvider>
@@ -38,6 +39,7 @@ const App = () => {
             {/* Rutas de autenticación */}
             <Route element={<PublicRoute />}>
               <Route element={<AuthLayout />}>
+                <Route path="/home-page" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
               </Route>
