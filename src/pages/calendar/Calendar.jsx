@@ -5,11 +5,14 @@ import habitStore from "@/stores/habit.store";
 import HabitCell from "./components/HabitCell";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import ModalMarkDetail from "./components/ModalMarkDetail";
+
 dayjs.extend(utc);
 //TODO: preparar las cells por año
 //TODO: limpiar/restar
 const Calendar = () => {
-  const { getMarksByHabit, getMarksByUser, list, create, update } = markStore();
+  const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
+    markStore();
   const { entity, getHabit } = habitStore();
   const [habit, setHabit] = useState({});
   const [marks, setMarks] = useState([]);
@@ -19,7 +22,12 @@ const Calendar = () => {
     year: dayjs().year(),
   });
   const { id } = useParams();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [dataModal, seDataModal] = useState({
+    date: null,
+    mark: {},
+    habit: {},
+  });
   const getMarks = () => {
     if (id) {
       if (id) getMarksByHabit(id, query);
@@ -56,8 +64,13 @@ const Calendar = () => {
   }, [list]);
 
   useEffect(() => {
-    if (create || update) getMarks();
-  }, [create, update]);
+    if (create || update || deleted) getMarks();
+  }, [create, update, deleted]);
+
+  const modalOpen = (date, mark) => {
+    seDataModal({ date, mark, habit });
+    setIsModalOpen(true);
+  };
 
   const getMarkByDate = (date) => {
     return marks.find((item) => {
@@ -78,6 +91,7 @@ const Calendar = () => {
         mark={markDate}
         date={value}
         onChange={getMarks}
+        openModal={modalOpen}
       />
     );
   };
@@ -117,6 +131,15 @@ const Calendar = () => {
           />
         </Card>
       </Col>
+      {isModalOpen ? (
+        <ModalMarkDetail
+          habit={dataModal.habit}
+          mark={dataModal.mark}
+          date={dataModal.date}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      ) : null}
     </Row>
   );
 };
