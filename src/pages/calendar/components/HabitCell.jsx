@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import markStore from "@/stores/mark.store";
+import { Tooltip } from "antd";
 
 const HabitCell = ({ date, habit, mark = {} }) => {
   const { createMark, updateMark } = markStore();
@@ -15,10 +16,16 @@ const HabitCell = ({ date, habit, mark = {} }) => {
   };
 
   return (
-    <div onClick={onClick} style={{ height: "100%", width: "100%" }}>
-      {habit.emoji?.repeat(mark.times) ||
-        (habit.type == "GOOD" ? "🟢" : "🔴").repeat(mark.times)}
-    </div>
+    <Tooltip
+      title={
+        mark._id ? `${mark.times} ${mark.times > 1 ? "veces" : "vez"}` : ""
+      }
+    >
+      <div onClick={onClick} style={{ height: "100%", width: "100%" }}>
+        {habit.emoji?.repeat(mark.times) ||
+          (habit.type == "GOOD" ? "🟢" : "🔴").repeat(mark.times)}
+      </div>
+    </Tooltip>
   );
 };
 

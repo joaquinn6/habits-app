@@ -7,9 +7,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 //TODO: preparar las cells por año
-//TODO: tooltip de la cantidad de veces por si se excede
-//TODO: sumar, limpiar/restar
-//TODO: limpiar el código
+//TODO: limpiar/restar
 const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update } = markStore();
   const { entity, getHabit } = habitStore();
