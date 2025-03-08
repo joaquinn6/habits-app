@@ -30,7 +30,7 @@ export const ThemeProvider = ({ children }) => {
         theme={{
           algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
           token: {
-            colorPrimary: isDarkMode ? "#ff9800" : "#ff6f61", // Color primario dinámico
+            colorPrimary: isDarkMode ? "#ff9800" : "#676BBEFF", // Color primario dinámico
             borderRadius: 8,
             colorBgBase: isDarkMode ? "#1c1c1c" : "#FFFEFEFF", // Fondo oscuro o claro
             colorText: isDarkMode ? "#ffffff" : "#333",

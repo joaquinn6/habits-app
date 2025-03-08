@@ -2,6 +2,7 @@ import { Button, Form, Input, Flex, DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useNotificationContext } from "@/context/NotificationContext";
 import userStore from "@/stores/user.store";
+import { runes } from "runes2";
 
 const FormRegister = () => {
   const { create, loading, error, createUser } = userStore();
@@ -56,10 +57,28 @@ const FormRegister = () => {
           },
         ]}
       >
-        <Input placeholder="Nombres" />
+        <Input
+          placeholder="Nombres"
+          count={{
+            show: false,
+            max: 40,
+            strategy: (txt) => runes(txt).length,
+            exceedFormatter: (txt, { max }) =>
+              runes(txt).slice(0, max).join(""),
+          }}
+        />
       </Form.Item>
       <Form.Item label="Apellidos" name="last_name">
-        <Input placeholder="Apellidos" />
+        <Input
+          placeholder="Apellidos"
+          count={{
+            show: false,
+            max: 40,
+            strategy: (txt) => runes(txt).length,
+            exceedFormatter: (txt, { max }) =>
+              runes(txt).slice(0, max).join(""),
+          }}
+        />
       </Form.Item>
       <Form.Item
         label="Fecha de nacimiento"
@@ -90,7 +109,16 @@ const FormRegister = () => {
           { type: "email", message: "Ingrese un correo válido" },
         ]}
       >
-        <Input placeholder="Email" />
+        <Input
+          placeholder="Email"
+          count={{
+            show: false,
+            max: 80,
+            strategy: (txt) => runes(txt).length,
+            exceedFormatter: (txt, { max }) =>
+              runes(txt).slice(0, max).join(""),
+          }}
+        />
       </Form.Item>
       <Form.Item
         label="Contraseña"
@@ -101,6 +129,12 @@ const FormRegister = () => {
             message: "¡Contraseña es requerida!",
           },
         ]}
+        count={{
+          show: false,
+          max: 30,
+          strategy: (txt) => runes(txt).length,
+          exceedFormatter: (txt, { max }) => runes(txt).slice(0, max).join(""),
+        }}
       >
         <Input type="password" placeholder="Contraseña" />
       </Form.Item>

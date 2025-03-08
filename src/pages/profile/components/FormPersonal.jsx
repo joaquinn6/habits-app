@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import ModalChangePassword from "./ModalChangePassword";
 import { useNavigate } from "react-router-dom";
+import { runes } from "runes2";
 
 dayjs.extend(utc);
 const { Option } = Select;
@@ -141,7 +142,7 @@ const FormPersonal = () => {
               placeholder="Nombres"
               count={{
                 show: false,
-                max: 80,
+                max: 40,
                 strategy: (txt) => runes(txt).length,
                 exceedFormatter: (txt, { max }) =>
                   runes(txt).slice(0, max).join(""),
@@ -161,7 +162,7 @@ const FormPersonal = () => {
               placeholder="Apellidos"
               count={{
                 show: false,
-                max: 80,
+                max: 40,
                 strategy: (txt) => runes(txt).length,
                 exceedFormatter: (txt, { max }) =>
                   runes(txt).slice(0, max).join(""),
