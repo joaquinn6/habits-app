@@ -147,7 +147,16 @@ const FormHabit = () => {
               },
             ]}
           >
-            <Input placeholder="Nombre" />
+            <Input
+              placeholder="Nombre"
+              count={{
+                show: true,
+                max: 20,
+                strategy: (txt) => runes(txt).length,
+                exceedFormatter: (txt, { max }) =>
+                  runes(txt).slice(0, max).join(""),
+              }}
+            />
           </Form.Item>
         </Col>
         <Col
@@ -158,7 +167,16 @@ const FormHabit = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item label="Descripción" name="description">
-            <Input placeholder="Descripción" />
+            <Input
+              placeholder="Descripción"
+              count={{
+                show: true,
+                max: 40,
+                strategy: (txt) => runes(txt).length,
+                exceedFormatter: (txt, { max }) =>
+                  runes(txt).slice(0, max).join(""),
+              }}
+            />
           </Form.Item>
         </Col>
       </Row>
