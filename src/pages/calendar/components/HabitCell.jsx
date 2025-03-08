@@ -29,13 +29,18 @@ const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
     clearTimeout(holdTimer.current);
   };
 
+  const tooltip = () => {
+    return (
+      <>
+        {mark.times} {mark.times > 1 ? "veces" : "vez"}
+        <br />
+        {mark.note ?? ""}
+      </>
+    );
+  };
+
   return (
-    <Tooltip
-      title={
-        mark._id ? `${mark.times} ${mark.times > 1 ? "veces" : "vez"}` : ""
-      }
-      color={habit.color}
-    >
+    <Tooltip title={mark._id ? tooltip : ""} color={habit.color}>
       <div
         onClick={onClick}
         onContextMenu={(e) => {
