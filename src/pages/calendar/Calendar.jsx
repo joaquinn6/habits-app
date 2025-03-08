@@ -18,6 +18,7 @@ import utc from "dayjs/plugin/utc";
 //TODO: investigar como va el cluster (Marlon)
 //TODO: deployar vercel o netlify
 //TODO: delete account
+//TODO: que hacer con las metas ?
 dayjs.extend(utc);
 const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =

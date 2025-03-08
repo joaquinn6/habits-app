@@ -14,7 +14,7 @@ const Footer = () => {
         shape="round"
         icon={<GithubOutlined />}
       >
-        Created by joaquin_n6
+        Creado por joaquin_n6
       </Button>
       <Button
         onClick={() => onClick("https://www.linkedin.com/in/joaquin-n6/")}
@@ -23,7 +23,7 @@ const Footer = () => {
         shape="round"
         icon={<LinkedinOutlined />}
       >
-        Contact me
+        Contactame
       </Button>
     </div>
   );
