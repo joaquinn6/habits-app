@@ -49,7 +49,11 @@ const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
         }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        style={{ height: "100%", width: "100%" }}
+        style={{
+          height: "100%",
+          width: "100%",
+          borderRight: mark.note ? `double  3px ${habit.color}` : "None",
+        }}
       >
         {habit.emoji?.repeat(mark.times) ||
           (habit.type == "GOOD" ? "🟢" : "🔴").repeat(mark.times)}
