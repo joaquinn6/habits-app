@@ -10,6 +10,15 @@ import dayjs from "dayjs";
 import ModalMarkDetail from "./components/ModalMarkDetail";
 import utc from "dayjs/plugin/utc";
 
+//TODO: tour al ser la primera vez (supuestamente hay hooks para saber si es la primera vez)
+//TODO: Home page
+//TODO: birthday event
+//TODO: nota en el tooltip
+//TODO: diferenciar cuando una fecha tiene nota
+//TODO: preparar el usuario de prueba
+//TODO: creación/login con cuenta de google/facebook
+//TODO: investigar como va el cluster (Marlon)
+//TODO: deployar vercel o netlify
 dayjs.extend(utc);
 const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
