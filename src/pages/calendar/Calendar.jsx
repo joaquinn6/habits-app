@@ -9,7 +9,6 @@ import ModalMarkDetail from "./components/ModalMarkDetail";
 
 dayjs.extend(utc);
 //TODO: preparar las cells por año
-//TODO: limpiar/restar
 const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
     markStore();

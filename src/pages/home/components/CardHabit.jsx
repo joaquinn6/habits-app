@@ -68,7 +68,16 @@ const CardHabit = ({ habit, onChange }) => {
       >
         <Card.Meta
           title={localValue.name}
-          description={localValue.description || "Sin descripción"}
+          description={
+            localValue.description ? (
+              <p>{localValue.description}</p>
+            ) : (
+              <p>
+                {" "}
+                <i>Sin descripción</i>{" "}
+              </p>
+            )
+          }
         ></Card.Meta>
       </Card>
     </Badge.Ribbon>
