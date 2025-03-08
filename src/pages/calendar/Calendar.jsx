@@ -31,10 +31,8 @@ const Calendar = () => {
     habit: {},
   });
   const getMarks = () => {
-    if (id) {
-      if (id) getMarksByHabit(id, query);
-      else getMarksByUser();
-    }
+    if (id) getMarksByHabit(id, query);
+    else getMarksByUser(query);
   };
 
   useEffect(() => {
@@ -93,16 +91,8 @@ const Calendar = () => {
 
   const dateCellRender = (value) => {
     const markDate = getMarkByDate(value);
-    return (
-      <HabitCell
-        habit={habit}
-        mark={markDate}
-        date={value}
-        onChange={getMarks}
-        openModal={modalOpen}
-      />
-    );
-    /* return habit._id ? (
+
+    return id ? (
       <HabitCell
         habit={habit}
         mark={markDate}
@@ -112,16 +102,15 @@ const Calendar = () => {
       />
     ) : (
       <HabitsCell mark={markDate} />
-    ); */
+    );
   };
   const monthCellRender = (value) => {
     const markDate = getMarkByMonth(value);
-    return <HabitCellYear habit={habit} mark={markDate} />;
-    /* return habit._id ? (
+    return id ? (
       <HabitCellYear habit={habit} mark={markDate} />
     ) : (
       <HabitsCellYear mark={markDate} />
-    ); */
+    );
   };
 
   const cellRender = (current, info) => {

@@ -34,6 +34,7 @@ const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
       title={
         mark._id ? `${mark.times} ${mark.times > 1 ? "veces" : "vez"}` : ""
       }
+      color={habit.color}
     >
       <div
         onClick={onClick}
