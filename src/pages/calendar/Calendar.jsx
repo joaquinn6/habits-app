@@ -11,7 +11,6 @@ import ModalMarkDetail from "./components/ModalMarkDetail";
 import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
-//TODO: get conjunto de eventos
 const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
     markStore();
