@@ -1,13 +1,16 @@
 import PropTypes from "prop-types";
 import markStore from "@/stores/mark.store";
 import { Tooltip } from "antd";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
-const HabitCell = ({ date, habit, mark = {}, openModal }) => {
+dayjs.extend(utc);
+const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
   const { createMark, updateMark } = markStore();
   const holdTimer = useRef(null);
   const onClick = () => {
     const entity = {
-      date: date.toISOString(),
+      date: date.utc().startOf("day").toISOString(),
     };
     if (!mark._id) createMark(habit._id, entity);
     else {

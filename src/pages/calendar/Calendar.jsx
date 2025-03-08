@@ -7,8 +7,8 @@ import HabitsCell from "./components/HabitsCell";
 import HabitCellYear from "./components/HabitCellYear";
 import HabitsCellYear from "./components/HabitsCellYear";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import ModalMarkDetail from "./components/ModalMarkDetail";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 //TODO: get conjunto de eventos
@@ -76,7 +76,7 @@ const Calendar = () => {
 
   const getMarkByDate = (date) => {
     return marks.find((item) => {
-      const dateMark = dayjs.utc(item.date).local();
+      const dateMark = dayjs(item.date);
       return (
         date.isSame(dateMark, "day") &&
         date.isSame(dateMark, "month") &&
@@ -93,7 +93,16 @@ const Calendar = () => {
 
   const dateCellRender = (value) => {
     const markDate = getMarkByDate(value);
-    return habit._id ? (
+    return (
+      <HabitCell
+        habit={habit}
+        mark={markDate}
+        date={value}
+        onChange={getMarks}
+        openModal={modalOpen}
+      />
+    );
+    /* return habit._id ? (
       <HabitCell
         habit={habit}
         mark={markDate}
@@ -103,15 +112,16 @@ const Calendar = () => {
       />
     ) : (
       <HabitsCell mark={markDate} />
-    );
+    ); */
   };
   const monthCellRender = (value) => {
     const markDate = getMarkByMonth(value);
-    return habit._id ? (
+    return <HabitCellYear habit={habit} mark={markDate} />;
+    /* return habit._id ? (
       <HabitCellYear habit={habit} mark={markDate} />
     ) : (
       <HabitsCellYear mark={markDate} />
-    );
+    ); */
   };
 
   const cellRender = (current, info) => {

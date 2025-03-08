@@ -98,7 +98,7 @@ const FormPersonal = () => {
       email: values.email,
       first_name: values.first_name,
       last_name: values.last_name,
-      birth_date: values.birth_date.toISOString(),
+      birth_date: values.birth_date.utc().startOf("day").toISOString(),
       country: values.country,
       gender: values.gender,
       password: "",

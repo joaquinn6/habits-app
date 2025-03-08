@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useNotificationContext } from "@/context/NotificationContext";
 import userStore from "@/stores/user.store";
 import { runes } from "runes2";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
+dayjs.extend(utc);
 const FormRegister = () => {
   const { create, loading, error, createUser } = userStore();
   const { openNotification } = useNotificationContext();
@@ -14,7 +17,7 @@ const FormRegister = () => {
       email: values.email,
       first_name: values.first_name,
       last_name: values.last_name,
-      birth_date: values.birth_date.toISOString(),
+      birth_date: values.birth_date.utc().startOf("day").toISOString(),
       password: values.password,
     });
   };

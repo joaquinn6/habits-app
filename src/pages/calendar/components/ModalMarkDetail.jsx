@@ -3,7 +3,10 @@ import { MinusOutlined, PlusOutlined } from "@icons";
 import markStore from "@/stores/mark.store";
 import PropTypes from "prop-types";
 import { runes } from "runes2";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
+dayjs.extend(utc);
 const ModalMarkDetail = ({ isOpen, onClose, mark, habit, date }) => {
   const [form] = Form.useForm();
   const { updateMark, createMark, deleteMark } = markStore();
@@ -19,7 +22,7 @@ const ModalMarkDetail = ({ isOpen, onClose, mark, habit, date }) => {
     const values = form.getFieldsValue();
     if (!mark._id && values.times > 0)
       createMark(habit._id, {
-        date: date.toISOString(),
+        date: date.utc().startOf("day").toISOString(),
         times: values.times,
         note: values.note,
       });
@@ -30,7 +33,7 @@ const ModalMarkDetail = ({ isOpen, onClose, mark, habit, date }) => {
       updateMark(mark._id, {
         times: values.times,
         note: values.note,
-        date: date.toISOString(),
+        date: date.utc().startOf("day").toISOString(),
       });
 
     onClose();

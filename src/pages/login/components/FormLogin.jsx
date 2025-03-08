@@ -60,11 +60,7 @@ const FormLogin = () => {
           },
         ]}
       >
-        <Input
-          prefix={<LockOutlined />}
-          type="password"
-          placeholder="Contraseña"
-        />
+        <Input.Password prefix={<LockOutlined />} placeholder="Contraseña" />
       </Form.Item>
       <Form.Item>
         <Flex justify="space-between" align="center">
