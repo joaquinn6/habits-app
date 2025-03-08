@@ -7,30 +7,20 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 //TODO: preparar las cells por año
-//TODO: cambiar el on select, porque se selecciona una por defecto
 //TODO: tooltip de la cantidad de veces por si se excede
 //TODO: sumar, limpiar/restar
-//TODO: limpiar el codigo
+//TODO: limpiar el código
 const Calendar = () => {
-  const { create, createMark, getMarksByHabit, getMarksByUser, list } =
-    markStore();
+  const { getMarksByHabit, getMarksByUser, list, create, update } = markStore();
   const { entity, getHabit } = habitStore();
   const [habit, setHabit] = useState({});
   const [marks, setMarks] = useState([]);
-  const [markEmoji, setMarkEmoji] = useState("🔴");
   const [query, setQuery] = useState({
     type: "MONTH",
     month: dayjs().month() + 1,
     year: dayjs().year(),
   });
   const { id } = useParams();
-  const selectDay = (value) => {
-    if (!id) return;
-    const entity = {
-      date: value.toISOString(),
-    };
-    createMark(id, entity);
-  };
 
   const getMarks = () => {
     if (id) {
@@ -38,10 +28,6 @@ const Calendar = () => {
       //else getMarksByUser();
     }
   };
-
-  useEffect(() => {
-    if (create) getMarks();
-  }, [create]);
 
   useEffect(() => {
     getMarks();
@@ -62,8 +48,6 @@ const Calendar = () => {
   useEffect(() => {
     if (entity) {
       setHabit(entity);
-      if (entity.emoji) setMarkEmoji(entity.emoji);
-      else setMarkEmoji(entity.type == "GOOD" ? "🟢" : "🔴");
     }
   }, [entity]);
 
@@ -72,6 +56,10 @@ const Calendar = () => {
       setMarks(list);
     }
   }, [list]);
+
+  useEffect(() => {
+    if (create || update) getMarks();
+  }, [create, update]);
 
   const getMarkByDate = (date) => {
     return marks.find((item) => {
@@ -86,8 +74,14 @@ const Calendar = () => {
 
   const dateCellRender = (value) => {
     const markDate = getMarkByDate(value);
-    if (!markDate) return null;
-    return <HabitCell emoji={markEmoji} mark={markDate} />;
+    return (
+      <HabitCell
+        habit={habit}
+        mark={markDate}
+        date={value}
+        onChange={getMarks}
+      />
+    );
   };
 
   const cellRender = (current, info) => {
@@ -97,7 +91,6 @@ const Calendar = () => {
   };
 
   const onPanelChange = (date, type) => {
-    console.log(type);
     if (type == "month") {
       setQuery({ type: "MONTH", year: date.year(), month: date.month() + 1 });
     }
@@ -122,7 +115,6 @@ const Calendar = () => {
           <CalendarAntd
             fullscreen
             cellRender={cellRender}
-            onSelect={selectDay}
             onPanelChange={onPanelChange}
           />
         </Card>
