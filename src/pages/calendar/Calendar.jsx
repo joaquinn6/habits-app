@@ -47,6 +47,7 @@ const Calendar = () => {
       getHabit(id);
     } else {
       setHabit(null);
+      getMarks();
     }
   }, [id, getHabit]);
 
