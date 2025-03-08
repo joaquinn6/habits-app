@@ -3,6 +3,7 @@ import { Col, Row, Card, Calendar as CalendarAntd } from "antd";
 import markStore from "@/stores/mark.store";
 import habitStore from "@/stores/habit.store";
 import HabitCell from "./components/HabitCell";
+import HabitCellYear from "./components/HabitCellYear";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import ModalMarkDetail from "./components/ModalMarkDetail";
@@ -82,6 +83,12 @@ const Calendar = () => {
     });
   };
 
+  const getMarkByMonth = (date) => {
+    return marks.find((item) => {
+      return date.year() === item.year && date.$M === item.month - 1;
+    });
+  };
+
   const dateCellRender = (value) => {
     const markDate = getMarkByDate(value);
     return (
@@ -94,10 +101,14 @@ const Calendar = () => {
       />
     );
   };
+  const monthCellRender = (value) => {
+    const markDate = getMarkByMonth(value);
+    return <HabitCellYear habit={habit} mark={markDate} />;
+  };
 
   const cellRender = (current, info) => {
     if (info.type === "date") return dateCellRender(current);
-    //if (info.type === "month") return monthCellRender(current);
+    if (info.type === "month") return monthCellRender(current);
     return info.originNode;
   };
 
