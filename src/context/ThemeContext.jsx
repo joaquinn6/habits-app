@@ -4,9 +4,13 @@ import { ConfigProvider, theme } from "antd";
 import esES from "antd/locale/es_ES"; // Configuración en español
 import dayjs from "dayjs";
 import "dayjs/locale/es";
+import updateLocale from "dayjs/plugin/updateLocale";
+dayjs.extend(updateLocale);
 
 const ThemeContext = createContext();
-dayjs.locale("es");
+dayjs.updateLocale("es", {
+  weekStart: 0, // 0 = Domingo, 1 = Lunes (Por defecto)
+});
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"

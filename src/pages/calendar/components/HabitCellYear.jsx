@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Tooltip } from "antd";
 
-const HabitCellYear = ({ habit, mark = {} }) => {
+const HabitCellYear = ({ habit, mark = {}, date }) => {
   return (
     <Tooltip
       title={

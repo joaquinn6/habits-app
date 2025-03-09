@@ -44,7 +44,7 @@ const Home = () => {
           xl={{ flex: "60%" }}
         >
           <List
-            grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl: 2 }}
+            grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 2 }}
             dataSource={habits}
             renderItem={(item) => (
               <List.Item>

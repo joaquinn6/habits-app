@@ -67,6 +67,7 @@ const FormPersonal = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [modal, contextHolder] = Modal.useModal();
+  const [isTestUser, setIsTestUser] = useState(true);
   useEffect(() => {
     if (update) {
       openNotification(
@@ -88,11 +89,12 @@ const FormPersonal = () => {
       form.setFieldsValue({
         first_name: entity.first_name,
         last_name: entity.last_name,
-        email: entity.email,
+        email: entity?.email,
         birth_date: dayjs.utc(entity.birth_date).local(),
         country: entity.country,
         gender: entity.gender,
       });
+      setIsTestUser(entity.email == "test@test.com");
     }
   }, [entity, form]);
 
@@ -138,7 +140,7 @@ const FormPersonal = () => {
       layout="vertical"
       form={form}
       style={{ width: "100%" }}
-      disabled={loading}
+      disabled={loading || isTestUser}
       onFinish={onFinish}
     >
       {contextHolder}
@@ -305,6 +307,7 @@ const FormPersonal = () => {
               const confirmed = await modal.confirm(config);
               if (confirmed) onDeleteAccount();
             }}
+            disabled={isTestUser}
           >
             Eliminar cuenta
           </Button>
@@ -317,6 +320,7 @@ const FormPersonal = () => {
             variant="outlined"
             style={{ marginTop: 10, width: "100%" }}
             onClick={() => setIsModalOpen(true)}
+            disabled={isTestUser}
           >
             Cambiar contraseña
           </Button>

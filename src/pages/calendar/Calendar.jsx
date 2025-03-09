@@ -13,7 +13,6 @@ import utc from "dayjs/plugin/utc";
 //!FUTURE: creación/login con cuenta de google/facebook
 //TODO: tour al ser la primera vez (supuestamente hay hooks para saber si es la primera vez)
 //TODO: birthday event: notificación a entrar en el home-page
-//TODO: preparar el usuario de prueba
 //TODO: deployar vercel o netlify
 //TODO: que hacer con las metas ?
 dayjs.extend(utc);
