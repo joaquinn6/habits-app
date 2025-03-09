@@ -36,7 +36,7 @@ const HomePage = () => {
       <Row gutter={[16, 16]} justify="center" align="stretch">
         <Col xs={24} md={12} style={{ display: "flex" }}>
           <Card
-            cover={<img alt="example" src="/public/canvas.jpg" />}
+            cover={<img alt="example" src="/canvas.jpg" />}
             style={{ flex: 1, display: "flex", flexDirection: "column" }}
           >
             <Typography>
@@ -56,7 +56,7 @@ const HomePage = () => {
         </Col>
         <Col xs={24} md={12} style={{ display: "flex" }}>
           <Card
-            cover={<img alt="example" src="/public/frameworks.png" />}
+            cover={<img alt="example" src="/frameworks.png" />}
             style={{ flex: 1, display: "flex", flexDirection: "column" }}
           >
             <Typography>
