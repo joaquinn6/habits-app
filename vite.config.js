@@ -24,8 +24,8 @@ export default defineConfig({
       short_name: "MisHábitos",
       start_url: "/",
       display: "standalone",
-      background_color: "transparent",
-      theme_color: "transparent",
+      background_color: "#353535FF",
+      theme_color: "#676BBEFF",
       description: "Una aplicación para registrar tus hábitos.",
       icons: [
         {
