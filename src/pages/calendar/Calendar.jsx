@@ -10,11 +10,10 @@ import dayjs from "dayjs";
 import ModalMarkDetail from "./components/ModalMarkDetail";
 import utc from "dayjs/plugin/utc";
 
+//!FUTURE: creación/login con cuenta de google/facebook
 //TODO: tour al ser la primera vez (supuestamente hay hooks para saber si es la primera vez)
-//TODO: birthday event
+//TODO: birthday event: notificación a entrar en el home-page
 //TODO: preparar el usuario de prueba
-//TODO: creación/login con cuenta de google/facebook
-//TODO: investigar como va el cluster (Marlon)
 //TODO: deployar vercel o netlify
 //TODO: delete account
 //TODO: que hacer con las metas ?

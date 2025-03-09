@@ -8,6 +8,7 @@ import {
   Select,
   Avatar,
   Button,
+  Space,
 } from "antd";
 import { useNotificationContext } from "@/context/NotificationContext";
 import userStore from "@/stores/user.store";
@@ -275,14 +276,22 @@ const FormPersonal = () => {
 
       <Row justify="end" gutter={16}>
         <Col>
-          <Button color="danger" variant="solid" onClick={logout}>
+          <Button
+            color="danger"
+            variant="solid"
+            style={{ marginTop: 10 }}
+            onClick={logout}
+          >
             Cerrar sesión
           </Button>
         </Col>
+        <Space size="middle" />
+
         <Col>
           <Button
             color="primary"
             variant="outlined"
+            style={{ marginTop: 10 }}
             onClick={() => setIsModalOpen(true)}
           >
             Cambiar contraseña
@@ -290,7 +299,12 @@ const FormPersonal = () => {
         </Col>
         <Col>
           <Form.Item>
-            <Button color="primary" variant="solid" htmlType="submit">
+            <Button
+              color="primary"
+              variant="solid"
+              style={{ marginTop: 10 }}
+              htmlType="submit"
+            >
               Guardar
             </Button>
           </Form.Item>
