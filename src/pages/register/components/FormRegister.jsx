@@ -139,7 +139,7 @@ const FormRegister = () => {
           exceedFormatter: (txt, { max }) => runes(txt).slice(0, max).join(""),
         }}
       >
-        <Input type="password" placeholder="Contraseña" />
+        <Input.Password placeholder="Contraseña" />
       </Form.Item>
       <Form.Item
         label="Confirmar contraseña"
@@ -159,7 +159,7 @@ const FormRegister = () => {
           }),
         ]}
       >
-        <Input type="password" placeholder="Confirmar contraseña" />
+        <Input.Password placeholder="Confirmar contraseña" />
       </Form.Item>
       <Form.Item>
         <Button block type="primary" htmlType="submit">
