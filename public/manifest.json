@@ -1,0 +1,21 @@
+{
+  "name": "Mis hábitos",
+  "short_name": "MisHábitos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "transparent",
+  "theme_color": "transparent",
+  "description": "Una aplicación para registrar tus hábitos.",
+  "icons": [
+    {
+      "src": "/calendar192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/calendar512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

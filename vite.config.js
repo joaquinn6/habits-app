@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { fileURLToPath } from "url";
 import AutoImport from "unplugin-auto-import/vite";
+import { VitePWA } from "vite-plugin-pwa";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://vite.dev/config/
@@ -17,6 +18,27 @@ export default defineConfig({
         filepath: "./.eslintrc-auto-import.json",
         globalsPropValue: true,
       },
+    }),
+    VitePWA({
+      name: "Mis hábitos",
+      short_name: "MisHábitos",
+      start_url: "/",
+      display: "standalone",
+      background_color: "transparent",
+      theme_color: "transparent",
+      description: "Una aplicación para registrar tus hábitos.",
+      icons: [
+        {
+          src: "/calendar192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "/calendar512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
     }),
   ],
   base: "/",
