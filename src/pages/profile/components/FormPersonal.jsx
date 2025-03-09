@@ -275,11 +275,11 @@ const FormPersonal = () => {
       </Row>
 
       <Row justify="end" gutter={16}>
-        <Col>
+        <Col xs={{ flex: "100%" }} sm={{ flex: "20%" }}>
           <Button
             color="danger"
             variant="solid"
-            style={{ marginTop: 10 }}
+            style={{ marginTop: 10, width: "100%" }}
             onClick={logout}
           >
             Cerrar sesión
@@ -287,22 +287,22 @@ const FormPersonal = () => {
         </Col>
         <Space size="middle" />
 
-        <Col>
+        <Col xs={{ flex: "100%" }} sm={{ flex: "20%" }}>
           <Button
             color="primary"
             variant="outlined"
-            style={{ marginTop: 10 }}
+            style={{ marginTop: 10, width: "100%" }}
             onClick={() => setIsModalOpen(true)}
           >
             Cambiar contraseña
           </Button>
         </Col>
-        <Col>
+        <Col xs={{ flex: "100%" }} sm={{ flex: "20%" }}>
           <Form.Item>
             <Button
               color="primary"
               variant="solid"
-              style={{ marginTop: 10 }}
+              style={{ marginTop: 10, width: "100%" }}
               htmlType="submit"
             >
               Guardar
