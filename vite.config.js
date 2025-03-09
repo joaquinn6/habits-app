@@ -55,4 +55,7 @@ export default defineConfig({
   server: {
     historyApiFallback: true, // Evita el 404 en desarrollo
   },
+  optimizeDeps: {
+    include: ["antd"], // Asegúrate de que Ant Design esté siendo optimizado
+  },
 });
