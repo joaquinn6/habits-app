@@ -19,10 +19,14 @@ export default defineConfig({
       },
     }),
   ],
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
       "@icons": "@ant-design/icons",
     },
+  },
+  server: {
+    historyApiFallback: true, // Evita el 404 en desarrollo
   },
 });
