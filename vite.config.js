@@ -20,12 +20,17 @@ export default defineConfig({
       },
     }),
     VitePWA({
+      registerType: "autoUpdate",
+      inject: {
+        // Esto inserta el manifiesto y el Service Worker en el HTML
+        injectManifest: true, // Esto toma el manifiesto del archivo y lo inyecta automáticamente
+      },
       name: "Mis hábitos",
       short_name: "MisHábitos",
       start_url: "/",
-      display: "standalone",
-      background_color: "#353535FF",
       theme_color: "#676BBEFF",
+      background_color: "#353535FF",
+      display: "standalone",
       description: "Una aplicación para registrar tus hábitos.",
       icons: [
         {
