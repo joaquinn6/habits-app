@@ -36,7 +36,7 @@ const HomePage = () => {
       <Row gutter={[16, 16]} justify="center" align="stretch">
         <Col xs={24} md={12} style={{ display: "flex" }}>
           <Card
-            cover={<img alt="example" src="/public/Calendar.jpg" />}
+            cover={<img alt="example" src="/public/canvas.jpg" />}
             style={{ flex: 1, display: "flex", flexDirection: "column" }}
           >
             <Typography>
