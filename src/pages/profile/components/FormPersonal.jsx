@@ -9,6 +9,7 @@ import {
   Avatar,
   Button,
   Space,
+  Modal,
 } from "antd";
 import { useNotificationContext } from "@/context/NotificationContext";
 import userStore from "@/stores/user.store";
@@ -60,11 +61,12 @@ const genders = [
 ];
 const FormPersonal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { update, loading, error, entity, updateUser } = userStore();
+  const { update, loading, error, entity, updateUser, deleteUser, deleted } =
+    userStore();
   const { openNotification } = useNotificationContext();
   const [form] = Form.useForm();
   const navigate = useNavigate();
-
+  const [modal, contextHolder] = Modal.useModal();
   useEffect(() => {
     if (update) {
       openNotification(
@@ -94,6 +96,19 @@ const FormPersonal = () => {
     }
   }, [entity, form]);
 
+  useEffect(() => {
+    if (deleted) {
+      localStorage.removeItem("user");
+      sessionStorage.removeItem("user");
+      openNotification(
+        "success",
+        "Correcto",
+        "Usuario eliminado correctamente"
+      );
+      navigate("/");
+    }
+  }, [deleted]);
+
   const onFinish = (values) => {
     updateUser({
       email: values.email,
@@ -105,10 +120,15 @@ const FormPersonal = () => {
       password: "",
     });
   };
-  const logout = () => {
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("user");
-    navigate("/login");
+
+  const onDeleteAccount = () => {
+    deleteUser();
+  };
+
+  const config = {
+    title: "¿Estas seguro de eliminar tu cuenta?",
+    content:
+      " Al eliminar tu cuenta se perderán tus hábitos y las marcas de cada habito. No hay forma de revertir",
   };
 
   return (
@@ -121,6 +141,7 @@ const FormPersonal = () => {
       disabled={loading}
       onFinish={onFinish}
     >
+      {contextHolder}
       <Row gutter={16}>
         <Col
           xs={{ flex: "100%" }}
@@ -280,9 +301,12 @@ const FormPersonal = () => {
             color="danger"
             variant="solid"
             style={{ marginTop: 10, width: "100%" }}
-            onClick={logout}
+            onClick={async () => {
+              const confirmed = await modal.confirm(config);
+              if (confirmed) onDeleteAccount();
+            }}
           >
-            Cerrar sesión
+            Eliminar cuenta
           </Button>
         </Col>
         <Space size="middle" />

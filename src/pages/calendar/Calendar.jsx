@@ -15,7 +15,6 @@ import utc from "dayjs/plugin/utc";
 //TODO: birthday event: notificación a entrar en el home-page
 //TODO: preparar el usuario de prueba
 //TODO: deployar vercel o netlify
-//TODO: delete account
 //TODO: que hacer con las metas ?
 dayjs.extend(utc);
 const Calendar = () => {

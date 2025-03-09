@@ -8,12 +8,24 @@ const userStore = create((set) => ({
   error: null,
   entity: null,
   password: null,
+  deleted: null,
   createUser: async (body) => {
     set({ create: null, loading: true, error: null });
     try {
       const data = await userService.createUser(body);
       set({ create: data, loading: false });
       setTimeout(() => set({ create: null }), 2000);
+    } catch (err) {
+      set({ error: err, loading: false });
+      setTimeout(() => set({ error: null }), 2000);
+    }
+  },
+  deleteUser: async () => {
+    set({ deleted: null, loading: true, error: null });
+    try {
+      const data = await userService.deleteUser();
+      set({ deleted: data, loading: false });
+      setTimeout(() => set({ deleted: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
       setTimeout(() => set({ error: null }), 2000);

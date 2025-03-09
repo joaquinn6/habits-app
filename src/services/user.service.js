@@ -53,9 +53,9 @@ async function changePassword(body) {
   }
 }
 
-async function deleteUser(id) {
+async function deleteUser() {
   const axios = createAxios();
-  const urlPath = `users/${id}`;
+  const urlPath = `users`;
   try {
     const response = await axios.delete(urlPath);
     return Promise.resolve(response.data);
