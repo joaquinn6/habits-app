@@ -16,7 +16,7 @@ const FormLogin = () => {
   };
   useEffect(() => {
     if (logged) {
-      navigate("/");
+      navigate("/home-page");
     }
   }, [logged, navigate, openNotification]);
 

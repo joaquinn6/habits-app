@@ -7,7 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   const items = [
     {
-      key: "/",
+      key: "/home-page",
       label: `Mis hábitos`,
       icon: <HomeOutlined />,
     },
@@ -36,7 +36,7 @@ const Navbar = () => {
       <div className="demo-logo" />
       <Menu
         mode="horizontal"
-        defaultSelectedKeys={["/"]}
+        defaultSelectedKeys={["/home-page"]}
         selectedKeys={[location.pathname]}
         items={items}
         onClick={onClick}

@@ -25,7 +25,7 @@ const App = () => {
             {/* Rutas protegidas */}
             <Route element={<PrivateRoute />}>
               <Route element={<DashboardLayout />}>
-                <Route path="/" element={<Home />} />
+                <Route path="/home-page" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/habit" element={<Habit />} />
@@ -39,7 +39,7 @@ const App = () => {
             {/* Rutas de autenticación */}
             <Route element={<PublicRoute />}>
               <Route element={<AuthLayout />}>
-                <Route path="/home-page" element={<HomePage />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
               </Route>

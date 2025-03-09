@@ -6,7 +6,7 @@ const Navbar = () => {
   const location = useLocation();
   const items = [
     {
-      key: "/home-page",
+      key: "/",
       label: `Mis hábitos`,
     },
     {

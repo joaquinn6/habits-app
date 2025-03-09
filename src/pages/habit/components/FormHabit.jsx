@@ -60,14 +60,14 @@ const FormHabit = () => {
         "Correcto",
         "Habito actualizado correctamente"
       );
-      navigate("/");
+      navigate("/home-page");
     }
   }, [update, openNotification]);
 
   useEffect(() => {
     if (create) {
       openNotification("success", "Correcto", "Habito creado correctamente");
-      navigate("/");
+      navigate("/home-page");
     }
   }, [create, openNotification]);
 
