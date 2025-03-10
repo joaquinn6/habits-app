@@ -13,7 +13,6 @@ import utc from "dayjs/plugin/utc";
 //!FUTURE: creación/login con cuenta de google/facebook
 //TODO: tour al ser la primera vez (supuestamente hay hooks para saber si es la primera vez)
 //TODO: birthday event: notificación a entrar en el home-page
-//TODO: deployar vercel o netlify
 //TODO: que hacer con las metas ?
 dayjs.extend(utc);
 const Calendar = () => {
@@ -79,7 +78,7 @@ const Calendar = () => {
 
   const getMarkByDate = (date) => {
     return marks.find((item) => {
-      const dateMark = dayjs(item.date);
+      const dateMark = dayjs(dayjs.utc(item.date).local());
       return (
         date.isSame(dateMark, "day") &&
         date.isSame(dateMark, "month") &&

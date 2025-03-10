@@ -3,7 +3,7 @@
   "short_name": "MisHábitos",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#353535",
+  "background_color": "#262525",
   "description": "Una aplicación para registrar tus hábitos.",
   "icons": [
     {

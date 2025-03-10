@@ -26,9 +26,9 @@ export default defineConfig({
       includeAssets: ["calendar192.png.png", "calendar.svg"],
       manifest: {
         name: "Hábitos",
-        short_name: "MyH",
-        description: "My Awesome App description",
-        theme_color: "#ffffff",
+        short_name: "Hábitos",
+        description: "Lleva el control de tus hábitos",
+        theme_color: "#676BBE",
         icons: [
           {
             src: "calendar192.png",
