@@ -6,7 +6,6 @@ import AutoImport from "unplugin-auto-import/vite";
 import { VitePWA } from "vite-plugin-pwa";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -21,28 +20,28 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: "autoUpdate",
-      inject: {
-        injectManifest: true,
+      devOptions: {
+        enabled: true,
       },
-      name: "Mis hábitos",
-      short_name: "MisHábitos",
-      start_url: "/",
-      theme_color: "#676BBE",
-      background_color: "#353535",
-      display: "standalone",
-      description: "Una aplicación para registrar tus hábitos.",
-      icons: [
-        {
-          src: "/calendar192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          src: "/calendar512.png",
-          sizes: "512x512",
-          type: "image/png",
-        },
-      ],
+      includeAssets: ["calendar192.png.png", "calendar.svg"],
+      manifest: {
+        name: "Hábitos",
+        short_name: "MyH",
+        description: "My Awesome App description",
+        theme_color: "#ffffff",
+        icons: [
+          {
+            src: "calendar192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "calendar512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      },
     }),
   ],
   base: "/",
