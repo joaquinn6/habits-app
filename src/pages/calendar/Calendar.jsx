@@ -78,7 +78,7 @@ const Calendar = () => {
 
   const getMarkByDate = (date) => {
     return marks.find((item) => {
-      const dateMark = dayjs(dayjs.utc(item.date).local());
+      const dateMark = dayjs(dayjs(item.date));
       return (
         date.isSame(dateMark, "day") &&
         date.isSame(dateMark, "month") &&

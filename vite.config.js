@@ -28,7 +28,7 @@ export default defineConfig({
         name: "Hábitos",
         short_name: "Hábitos",
         description: "Lleva el control de tus hábitos",
-        theme_color: "#676BBE",
+        theme_color: "#0E0E0F",
         icons: [
           {
             src: "calendar192.png",
