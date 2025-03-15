@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { habitService } from "@/services";
 
 const habitStore = create((set) => ({
-  list: null,
+  list: [],
   create: null,
   update: null,
   deleted: null,
@@ -14,10 +14,8 @@ const habitStore = create((set) => ({
     try {
       const data = await habitService.createHabit(body);
       set({ create: data, loading: false });
-      setTimeout(() => set({ create: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   updateHabit: async (id, body) => {
@@ -25,10 +23,8 @@ const habitStore = create((set) => ({
     try {
       const data = await habitService.updateHabit(id, body);
       set({ update: data, loading: false });
-      setTimeout(() => set({ update: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   getHabit: async (id) => {
@@ -36,21 +32,17 @@ const habitStore = create((set) => ({
     try {
       const data = await habitService.getHabit(id);
       set({ entity: data, loading: false });
-      setTimeout(() => set({ entity: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   getHabits: async () => {
-    set({ list: null, loading: true, error: null });
+    set({ list: [], loading: true, error: null });
     try {
       const data = await habitService.getHabits();
       set({ list: data, loading: false });
-      setTimeout(() => set({ list: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   deleteHabit: async (id) => {
@@ -58,10 +50,8 @@ const habitStore = create((set) => ({
     try {
       const data = await habitService.deleteHabit(id);
       set({ deleted: data, loading: false });
-      setTimeout(() => set({ deleted: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
 }));

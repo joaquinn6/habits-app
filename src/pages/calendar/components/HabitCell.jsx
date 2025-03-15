@@ -3,19 +3,21 @@ import markStore from "@/stores/mark.store";
 import { Tooltip } from "antd";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import habitStore from "@/stores/habit.store";
 
 dayjs.extend(utc);
-const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
+const HabitCell = ({ date, mark = {}, openModal }) => {
+  const { entity } = habitStore();
   const { createMark, updateMark } = markStore();
   const holdTimer = useRef(null);
   const onClick = () => {
-    const entity = {
+    const request = {
       date: date.utc().startOf("day").toISOString(),
     };
-    if (!mark._id) createMark(habit._id, entity);
+    if (!mark._id) createMark(entity._id, request);
     else {
-      entity.times = mark.times + 1;
-      updateMark(mark._id, entity);
+      request.times = mark.times + 1;
+      updateMark(mark._id, request);
     }
   };
 
@@ -44,7 +46,7 @@ const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
       Tooltip
       key={date}
       title={mark._id ? tooltip : ""}
-      color={habit.color}
+      color={entity?.color}
     >
       <div
         onClick={onClick}
@@ -57,11 +59,11 @@ const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
         style={{
           height: "100%",
           width: "100%",
-          borderRight: mark.note ? `double  3px ${habit.color}` : "None",
+          borderRight: mark.note ? `double  3px ${entity?.color}` : "None",
         }}
       >
-        {habit.emoji?.repeat(mark.times) ||
-          (habit.type == "GOOD" ? "🟢" : "🔴").repeat(mark.times)}
+        {entity?.emoji?.repeat(mark.times) ||
+          (entity?.type == "GOOD" ? "🟢" : "🔴").repeat(mark.times)}
       </div>
     </Tooltip>
   );
@@ -69,7 +71,6 @@ const HabitCell = ({ date, habit = {}, mark = {}, openModal }) => {
 
 HabitCell.propTypes = {
   date: PropTypes.any.isRequired,
-  habit: PropTypes.object.isRequired,
   mark: PropTypes.object,
   openModal: PropTypes.func,
 };

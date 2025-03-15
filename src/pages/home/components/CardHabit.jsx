@@ -8,12 +8,14 @@ import {
   RiseOutlined,
 } from "@icons";
 import habitStore from "@/stores/habit.store";
+import userStore from "@/stores/user.store";
 
 const CardHabit = ({ habit, onChange }) => {
   const { deleted, deleteHabit } = habitStore();
   const [localValue, setLocalValue] = useState([]);
-  const navigate = useNavigate();
+  const { isTestUser } = userStore();
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (habit) {
       setLocalValue(habit);
@@ -70,6 +72,7 @@ const CardHabit = ({ habit, onChange }) => {
             okText="Si"
             cancelText="No"
             onConfirm={onDeleteHabit}
+            disabled={isTestUser}
           >
             <DeleteOutlined />
           </Popconfirm>,

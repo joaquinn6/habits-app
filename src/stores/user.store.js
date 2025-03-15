@@ -9,15 +9,14 @@ const userStore = create((set) => ({
   entity: null,
   password: null,
   deleted: null,
+  isTestUser: false,
   createUser: async (body) => {
     set({ create: null, loading: true, error: null });
     try {
       const data = await userService.createUser(body);
       set({ create: data, loading: false });
-      setTimeout(() => set({ create: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   deleteUser: async () => {
@@ -25,10 +24,8 @@ const userStore = create((set) => ({
     try {
       const data = await userService.deleteUser();
       set({ deleted: data, loading: false });
-      setTimeout(() => set({ deleted: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   updateUser: async (body) => {
@@ -36,10 +33,8 @@ const userStore = create((set) => ({
     try {
       const data = await userService.updateUser(body);
       set({ update: data, loading: false });
-      setTimeout(() => set({ update: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   getUser: async () => {
@@ -47,10 +42,8 @@ const userStore = create((set) => ({
     try {
       const data = await userService.getUser();
       set({ entity: data, loading: false });
-      setTimeout(() => set({ entity: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
   },
   putPassword: async (body) => {
@@ -58,11 +51,12 @@ const userStore = create((set) => ({
     try {
       const data = await userService.changePassword(body);
       set({ password: data, loading: false });
-      setTimeout(() => set({ password: null }), 2000);
     } catch (err) {
       set({ error: err, loading: false });
-      setTimeout(() => set({ error: null }), 2000);
     }
+  },
+  changeTestUser: (email) => {
+    set({ isTestUser: email == "test@test.com" });
   },
 }));
 

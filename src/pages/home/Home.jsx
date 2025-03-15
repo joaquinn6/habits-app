@@ -4,7 +4,6 @@ import habitStore from "@/stores/habit.store";
 import CardHabit from "./components/CardHabit";
 const Home = () => {
   const { getHabits, list } = habitStore();
-  const [habits, setHabits] = useState([]);
   const navigate = useNavigate();
   const onNewHabit = () => {
     navigate("/habit");
@@ -13,12 +12,6 @@ const Home = () => {
   useEffect(() => {
     getHabits();
   }, []);
-
-  useEffect(() => {
-    if (list) {
-      setHabits(list);
-    }
-  }, [list]);
 
   return (
     <div>
@@ -45,7 +38,7 @@ const Home = () => {
         >
           <List
             grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 2 }}
-            dataSource={habits}
+            dataSource={list}
             renderItem={(item) => (
               <List.Item>
                 <CardHabit habit={item} onChange={getHabits} />

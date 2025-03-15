@@ -20,8 +20,6 @@ const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
     markStore();
   const { entity, getHabit } = habitStore();
-  const [habit, setHabit] = useState({});
-  const [marks, setMarks] = useState([]);
   const [query, setQuery] = useState({
     type: "MONTH",
     month: dayjs().month() + 1,
@@ -51,34 +49,21 @@ const Calendar = () => {
     if (id) {
       getHabit(id);
     } else {
-      setHabit(null);
       getMarks();
     }
   }, [id, getHabit]);
-
-  useEffect(() => {
-    if (entity) {
-      setHabit(entity);
-    }
-  }, [entity]);
-
-  useEffect(() => {
-    if (list) {
-      setMarks(list);
-    }
-  }, [list]);
 
   useEffect(() => {
     if (create || update || deleted) getMarks();
   }, [create, update, deleted]);
 
   const modalOpen = (date, mark) => {
-    seDataModal({ date, mark, habit });
+    seDataModal({ date, mark, entity });
     setIsModalOpen(true);
   };
 
   const getMarkByDate = (date) => {
-    return marks.find((item) => {
+    return list?.find((item) => {
       const dateMark = dayjs(dayjs(item.date));
       return (
         date.isSame(dateMark, "day") &&
@@ -89,7 +74,7 @@ const Calendar = () => {
   };
 
   const getMarkByMonth = (date) => {
-    return marks.find((item) => {
+    return list?.find((item) => {
       return date.year() === item.year && date.$M === item.month - 1;
     });
   };
@@ -99,7 +84,6 @@ const Calendar = () => {
 
     return id ? (
       <HabitCell
-        habit={habit}
         mark={markDate}
         date={value}
         onChange={getMarks}
@@ -113,7 +97,7 @@ const Calendar = () => {
   const monthCellRender = (value) => {
     const markDate = getMarkByMonth(value);
     return id ? (
-      <HabitCellYear habit={habit} mark={markDate} key={value} />
+      <HabitCellYear habit={entity} mark={markDate} key={value} />
     ) : (
       <HabitsCellYear mark={markDate} date={value} key={value} />
     );
@@ -145,7 +129,7 @@ const Calendar = () => {
       >
         <Card
           variant="borderless"
-          title={habit ? `Calendario de ${habit.name}` : `Calendario`}
+          title={entity ? `Calendario de ${entity.name}` : `Calendario`}
         >
           <CalendarAntd
             fullscreen
