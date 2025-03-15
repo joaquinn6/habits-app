@@ -48,9 +48,8 @@ const Calendar = () => {
   useEffect(() => {
     if (id) {
       getHabit(id);
-    } else {
-      getMarks();
     }
+    getMarks();
   }, [id, getHabit]);
 
   useEffect(() => {
