@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button, Col, Row, Statistic } from "antd";
+import { Card, Col, Row, Statistic } from "antd";
 import statsStore from "@/stores/stats.store";
 import habitStore from "@/stores/habit.store";
 import dayjs from "dayjs";
@@ -28,27 +28,60 @@ const Stats = () => {
     }
   }, [storeHabit.entity]);
 
+  const formatDate = (date) => {
+    return dayjs(date).locale("es").format("dddd D [de] MMMM");
+  };
+
+  const isGood = useMemo(
+    () => storeHabit.entity?.type == "GOOD",
+    [storeHabit.entity]
+  );
   return (
-    <Row gutter={16}>
-      <Col span={12}>
-        <Statistic
-          title="Marcas al año"
-          value={entity?.totalByYear[0].total_times}
-        />
-      </Col>
-      <Col span={12}>
-        <Statistic title="Account Balance (CNY)" value={112893} precision={2} />
-        <Button
-          style={{
-            marginTop: 16,
-          }}
-          type="primary"
+    <Row justify="center">
+      <Col
+        xs={{ flex: "100%" }}
+        sm={{ flex: "80%" }}
+        md={{ flex: "60%" }}
+        lg={{ flex: "60%" }}
+        xl={{ flex: "60%" }}
+      >
+        <Card
+          variant="borderless"
+          title={`Estadísticas de ${storeHabit.entity?.name}`}
         >
-          Recharge
-        </Button>
-      </Col>
-      <Col span={12}>
-        <Statistic title="Active Users" value={112893} loading />
+          <Row justify="space-evenly">
+            <Col
+              xs={{ flex: "100%" }}
+              sm={{ flex: "100%" }}
+              md={{ flex: "40%" }}
+              lg={{ flex: "30%" }}
+              xl={{ flex: "30%" }}
+            >
+              <Statistic
+                title="Cantidad total este año"
+                value={entity?.totalByYear[0].total_times}
+              />
+            </Col>
+            {entity &&
+            entity?.bestLastDay.length > 0 &&
+            entity?.bestLastDay[0]?.times > 1 ? (
+              <Col
+                xs={{ flex: "100%" }}
+                sm={{ flex: "100%" }}
+                md={{ flex: "40%" }}
+                lg={{ flex: "30%" }}
+                xl={{ flex: "30%" }}
+              >
+                <Statistic
+                  title={isGood ? "Mejor día" : "Peor día"}
+                  value={`${entity.bestLastDay[0].times} veces el ${formatDate(
+                    entity.bestLastDay[0].date
+                  )}`}
+                />
+              </Col>
+            ) : null}
+          </Row>
+        </Card>
       </Col>
     </Row>
   );

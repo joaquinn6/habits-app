@@ -58,6 +58,7 @@ const CardHabit = ({ habit, onChange }) => {
           ? "green"
           : "red"
       }
+      style={{ fontSize: "20px" }}
     >
       <Card
         variant="borderless"
