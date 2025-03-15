@@ -7,32 +7,33 @@ import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 const Stats = () => {
-  const { getStatsByHabit, list } = statsStore();
-  const { entity, getHabit } = habitStore();
-  const [query, setQuery] = useState({ type: "NONE" });
+  const { getStatsByHabit, entity } = statsStore();
+  const storeHabit = habitStore();
+  const [query, setQuery] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    getStatsByHabit(id, query);
+    if (query) getStatsByHabit(id, query);
   }, [query]);
 
   useEffect(() => {
-    getHabit(id);
+    storeHabit.getHabit(id);
   }, []);
 
   useEffect(() => {
-    if (entity) {
-      if (entity.with_goals) setQuery({ type: entity.goals.measure });
+    if (storeHabit.entity) {
+      if (storeHabit.entity.with_goals)
+        setQuery({ type: storeHabit.entity.goals.measure });
       else setQuery({ type: "NONE" });
     }
-  }, [entity]);
+  }, [storeHabit.entity]);
 
   return (
     <Row gutter={16}>
       <Col span={12}>
         <Statistic
           title="Marcas al año"
-          value={list ? list[0]?.totals_times : ""}
+          value={entity?.totalByYear[0].total_times}
         />
       </Col>
       <Col span={12}>
