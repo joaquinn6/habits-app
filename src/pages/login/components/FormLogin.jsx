@@ -67,7 +67,6 @@ const FormLogin = () => {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Recuérdate</Checkbox>
           </Form.Item>
-          <a href="">Olvide mi contraseña</a>
         </Flex>
       </Form.Item>
 

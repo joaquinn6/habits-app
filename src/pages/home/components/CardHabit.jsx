@@ -1,7 +1,12 @@
 import { Card, Popconfirm, Badge } from "antd";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { CalendarOutlined, EditOutlined, DeleteOutlined } from "@icons";
+import {
+  CalendarOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  RiseOutlined,
+} from "@icons";
 import habitStore from "@/stores/habit.store";
 
 const CardHabit = ({ habit, onChange }) => {
@@ -28,6 +33,9 @@ const CardHabit = ({ habit, onChange }) => {
   const onHabitCalendar = () => {
     navigate(`/habit/${localValue._id}/calendar`);
   };
+  const onStats = () => {
+    navigate(`/habit/${localValue._id}/stats`);
+  };
   const onDeleteHabit = () => {
     deleteHabit(localValue._id);
   };
@@ -53,6 +61,7 @@ const CardHabit = ({ habit, onChange }) => {
         variant="borderless"
         actions={[
           <CalendarOutlined key="calendar" onClick={onHabitCalendar} />,
+          <RiseOutlined key="statistics" onClick={onStats} />,
           <EditOutlined key="edit" onClick={onEditHabit} />,
           <Popconfirm
             placement="top"
