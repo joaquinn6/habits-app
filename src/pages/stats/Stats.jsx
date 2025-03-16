@@ -88,9 +88,9 @@ const Stats = () => {
               >
                 <Statistic
                   title={isGood ? "Mejor día" : "Peor día"}
-                  value={`${
-                    entity.bestWeek[0].total_times
-                  } veces del ${formatDate(entity.bestWeek[0].date)}`}
+                  value={`${entity.bestLastDay[0].times} veces el ${formatDate(
+                    entity.bestLastDay[0].date
+                  )}`}
                 />
               </Col>
             ) : null}
