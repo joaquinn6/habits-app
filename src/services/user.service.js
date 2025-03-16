@@ -19,6 +19,7 @@ async function createUser(body) {
   const urlPath = `/users`;
   try {
     const response = await axios.post(urlPath, body);
+    sessionStorage.setItem("user", JSON.stringify(response.data));
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);

@@ -18,13 +18,13 @@ const FormLogin = () => {
     if (logged) {
       navigate("/home-page");
     }
-  }, [logged, navigate, openNotification]);
+  }, [logged]);
 
   useEffect(() => {
     if (error) {
       openNotification("error", "Error", error);
     }
-  }, [error, navigate, openNotification]);
+  }, [error]);
 
   return (
     <Form

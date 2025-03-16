@@ -28,16 +28,15 @@ const FormRegister = () => {
 
   useEffect(() => {
     if (create) {
-      openNotification("success", "Correcto", "Usuario creado correctamente");
-      navigate("/login");
+      navigate("/home-page");
     }
-  }, [create, navigate, openNotification]);
+  }, [create]);
 
   useEffect(() => {
     if (error) {
       openNotification("error", "Error", error);
     }
-  }, [error, navigate, openNotification]);
+  }, [error]);
 
   return (
     <Form
