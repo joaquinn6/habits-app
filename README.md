@@ -3,7 +3,8 @@
 🚀 _Un proyecto interactivo con diseño responsivo y habilitado para ser instalado en dispositivos mobiles._
 🚀 _An interactive project with responsive design and enabled to be installed on mobile devices._
 
-📌 **Enlace a la demo | Live demo link:** [🔗 Ver en Vivo | View Live](https://habits-three-iota.vercel.app/home-page){:target="_blank"}
+📌 **Enlace a la demo | Live demo link:** [🔗 Ver en Vivo | View Live](https://habits-three-iota.vercel.app/home-page)
+
 
 ---
 
@@ -76,8 +77,8 @@ _This project is not just a presentation letter, but a real showcase of my skill
 ## 📬 Contacto | Contact
 
 - **📧 Email:** joaquin.software.e@gmail.com  
-- **💼 LinkedIn:** [Mi LinkedIn](https://www.linkedin.com/in/joaquin-n6/){:target="_blank"}
-- **🐙 GitHub:** [Mi GitHub](https://github.com/joaquinn6){:target="_blank"}
+- **💼 LinkedIn:** [Mi LinkedIn](https://www.linkedin.com/in/joaquin-n6/)  
+- **🐙 GitHub:** [Mi GitHub](https://github.com/joaquinn6)  
 
 ---
 
