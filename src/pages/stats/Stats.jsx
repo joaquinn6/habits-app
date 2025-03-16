@@ -3,9 +3,7 @@ import { Card, Col, Row, Statistic } from "antd";
 import statsStore from "@/stores/stats.store";
 import habitStore from "@/stores/habit.store";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 
-dayjs.extend(utc);
 const Stats = () => {
   const { getStatsByHabit, entity } = statsStore();
   const storeHabit = habitStore();
@@ -36,6 +34,22 @@ const Stats = () => {
     () => storeHabit.entity?.type == "GOOD",
     [storeHabit.entity]
   );
+
+  const getWeekRange = (weekNumber) => {
+    const year = dayjs().year();
+    const startDate = dayjs()
+      .year(year)
+      .week(weekNumber + 1)
+      .startOf("week");
+    const endDate = dayjs()
+      .year(year)
+      .week(weekNumber + 1)
+      .endOf("week");
+
+    return `de ${startDate.format("DD/MM/YY")} al ${endDate.format(
+      "DD/MM/YY"
+    )}`;
+  };
   return (
     <Row justify="center">
       <Col
@@ -53,7 +67,7 @@ const Stats = () => {
             <Col
               xs={{ flex: "100%" }}
               sm={{ flex: "100%" }}
-              md={{ flex: "40%" }}
+              md={{ flex: "100%" }}
               lg={{ flex: "30%" }}
               xl={{ flex: "30%" }}
             >
@@ -68,18 +82,34 @@ const Stats = () => {
               <Col
                 xs={{ flex: "100%" }}
                 sm={{ flex: "100%" }}
-                md={{ flex: "40%" }}
+                md={{ flex: "10%" }}
                 lg={{ flex: "30%" }}
                 xl={{ flex: "30%" }}
               >
                 <Statistic
                   title={isGood ? "Mejor día" : "Peor día"}
-                  value={`${entity.bestLastDay[0].times} veces el ${formatDate(
-                    entity.bestLastDay[0].date
-                  )}`}
+                  value={`${
+                    entity.bestWeek[0].total_times
+                  } veces del ${formatDate(entity.bestWeek[0].date)}`}
                 />
               </Col>
             ) : null}
+            <Col
+              xs={{ flex: "100%" }}
+              sm={{ flex: "100%" }}
+              md={{ flex: "100%" }}
+              lg={{ flex: "30%" }}
+              xl={{ flex: "30%" }}
+            >
+              <Statistic
+                title={isGood ? "Mejor semana" : "Peor semana"}
+                value={`${entity?.bestWeek[0]?.total_times} veces  ${
+                  entity?.bestWeek[0]?.week !== undefined
+                    ? getWeekRange(entity?.bestWeek[0]?.week)
+                    : "Semana no disponible" // o cualquier otro valor por defecto
+                }`}
+              />
+            </Col>
           </Row>
         </Card>
       </Col>
