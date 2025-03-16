@@ -55,7 +55,11 @@ const Calendar = () => {
 
   useEffect(() => {
     getMarks();
-    setTimeout(() => setOpen(true), 2000);
+    const firstTime = localStorage.getItem("firstTime");
+    if (!firstTime && id) {
+      setOpen(true);
+      localStorage.setItem("firstTime", "YES");
+    }
   }, []);
 
   useEffect(() => {
