@@ -17,6 +17,8 @@ const userStore = create((set) => ({
       set({ create: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ create: null, error: null }));
     }
   },
   deleteUser: async () => {
@@ -26,6 +28,8 @@ const userStore = create((set) => ({
       set({ deleted: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ deleted: null, error: null }));
     }
   },
   updateUser: async (body) => {
@@ -35,6 +39,8 @@ const userStore = create((set) => ({
       set({ update: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ update: null, error: null }));
     }
   },
   getUser: async () => {
@@ -53,6 +59,8 @@ const userStore = create((set) => ({
       set({ password: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ password: null, error: null }));
     }
   },
   changeTestUser: (email) => {

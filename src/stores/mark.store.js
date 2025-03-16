@@ -15,6 +15,8 @@ const markStore = create((set) => ({
       set({ create: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ create: null, error: null }));
     }
   },
   updateMark: async (id, body) => {
@@ -24,6 +26,8 @@ const markStore = create((set) => ({
       set({ update: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ update: null, error: null }));
     }
   },
   getMarksByHabit: async (id, query) => {
@@ -51,6 +55,8 @@ const markStore = create((set) => ({
       set({ deleted: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ deleted: null, error: null }));
     }
   },
 }));

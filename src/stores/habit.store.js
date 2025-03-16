@@ -16,6 +16,8 @@ const habitStore = create((set) => ({
       set({ create: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ create: null, error: null }));
     }
   },
   updateHabit: async (id, body) => {
@@ -25,6 +27,8 @@ const habitStore = create((set) => ({
       set({ update: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ update: null, error: null }));
     }
   },
   getHabit: async (id) => {
@@ -52,6 +56,8 @@ const habitStore = create((set) => ({
       set({ deleted: data, loading: false });
     } catch (err) {
       set({ error: err, loading: false });
+    } finally {
+      setTimeout(() => set({ deleted: null, error: null }));
     }
   },
 }));
