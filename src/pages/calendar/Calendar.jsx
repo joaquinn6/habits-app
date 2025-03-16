@@ -76,6 +76,7 @@ const Calendar = () => {
   const modalOpen = (date, mark) => {
     seDataModal({ date, mark, entity });
     setIsModalOpen(true);
+    setOpen(false);
   };
 
   const getMarkByDate = (date) => {
@@ -105,6 +106,12 @@ const Calendar = () => {
         onChange={getMarks}
         openModal={modalOpen}
         key={value}
+        ref={
+          value.format("DD/MM/YY") ==
+          dayjs().startOf("month").format("DD/MM/YY")
+            ? ref1
+            : null
+        }
       />
     ) : (
       <HabitsCell mark={markDate} date={value} key={value} />
@@ -152,7 +159,6 @@ const Calendar = () => {
               fullscreen
               cellRender={cellRender}
               onPanelChange={onPanelChange}
-              ref={ref1}
             />
           </Card>
         </Col>

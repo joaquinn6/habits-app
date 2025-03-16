@@ -6,7 +6,8 @@ import utc from "dayjs/plugin/utc";
 import habitStore from "@/stores/habit.store";
 
 dayjs.extend(utc);
-const HabitCell = ({ date, mark = {}, openModal }) => {
+
+const HabitCell = forwardRef(({ date, mark = {}, openModal }, ref) => {
   const { entity } = habitStore();
   const { createMark, updateMark } = markStore();
   const holdTimer = useRef(null);
@@ -61,13 +62,14 @@ const HabitCell = ({ date, mark = {}, openModal }) => {
           width: "100%",
           borderRight: mark.note ? `double  3px ${entity?.color}` : "None",
         }}
+        ref={ref}
       >
         {entity?.emoji?.repeat(mark.times) ||
           (entity?.type == "GOOD" ? "🟢" : "🔴").repeat(mark.times)}
       </div>
     </Tooltip>
   );
-};
+});
 
 HabitCell.propTypes = {
   date: PropTypes.any.isRequired,
