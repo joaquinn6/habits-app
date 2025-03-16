@@ -78,7 +78,7 @@ const FormHabit = () => {
   }, [error, openNotification]);
 
   useEffect(() => {
-    if (entity) {
+    if (entity && id) {
       form.setFieldsValue({
         name: entity.name,
         type: entity.type,
@@ -97,7 +97,7 @@ const FormHabit = () => {
         }
       );
     }
-  }, [entity, form]);
+  }, [entity]);
 
   const onFinish = (values) => {
     const getColor = (val) => {

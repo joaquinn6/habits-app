@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Card, Col, Row, Statistic } from "antd";
+import { Card, Col, Row, Statistic, Empty } from "antd";
 import statsStore from "@/stores/stats.store";
 import habitStore from "@/stores/habit.store";
 import dayjs from "dayjs";
@@ -50,7 +50,15 @@ const Stats = () => {
       "DD/MM/YY"
     )}`;
   };
-  return (
+
+  function getMonth(month) {
+    const fecha = dayjs()
+      .month(month - 1)
+      .locale("es");
+    return fecha.format("MMMM");
+  }
+
+  return entity && entity.totalByYear.length > 0 ? (
     <Row justify="center">
       <Col
         xs={{ flex: "100%" }}
@@ -63,7 +71,7 @@ const Stats = () => {
           variant="borderless"
           title={`Estadísticas de ${storeHabit.entity?.name}`}
         >
-          <Row justify="space-evenly">
+          <Row justify="start">
             <Col
               xs={{ flex: "100%" }}
               sm={{ flex: "100%" }}
@@ -73,16 +81,15 @@ const Stats = () => {
             >
               <Statistic
                 title="Cantidad total este año"
-                value={entity?.totalByYear[0].total_times}
+                value={entity.totalByYear[0].total_times}
               />
             </Col>
-            {entity &&
-            entity?.bestLastDay.length > 0 &&
-            entity?.bestLastDay[0]?.times > 1 ? (
+            {entity.bestLastDay.length > 0 &&
+            entity.bestLastDay[0].times > 1 ? (
               <Col
                 xs={{ flex: "100%" }}
                 sm={{ flex: "100%" }}
-                md={{ flex: "10%" }}
+                md={{ flex: "100%" }}
                 lg={{ flex: "30%" }}
                 xl={{ flex: "30%" }}
               >
@@ -103,17 +110,31 @@ const Stats = () => {
             >
               <Statistic
                 title={isGood ? "Mejor semana" : "Peor semana"}
-                value={`${entity?.bestWeek[0]?.total_times} veces  ${
-                  entity?.bestWeek[0]?.week !== undefined
-                    ? getWeekRange(entity?.bestWeek[0]?.week)
-                    : "Semana no disponible" // o cualquier otro valor por defecto
-                }`}
+                value={`${entity.bestWeek[0]?.total_times} veces ${getWeekRange(
+                  entity?.bestWeek[0]?.week
+                )}`}
+              />
+            </Col>
+            <Col
+              xs={{ flex: "100%" }}
+              sm={{ flex: "100%" }}
+              md={{ flex: "100%" }}
+              lg={{ flex: "30%" }}
+              xl={{ flex: "30%" }}
+            >
+              <Statistic
+                title={isGood ? "Mejor mes" : "Peor mes"}
+                value={`${entity.bestMonth[0]?.total_times} veces en ${getMonth(
+                  entity.bestMonth[0]?.month
+                )}`}
               />
             </Col>
           </Row>
         </Card>
       </Col>
     </Row>
+  ) : (
+    <Empty description="Aun no hay marcas en este hábito" />
   );
 };
 export default Stats;

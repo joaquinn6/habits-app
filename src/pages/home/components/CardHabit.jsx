@@ -68,8 +68,8 @@ const CardHabit = ({ habit, onChange }) => {
           <EditOutlined key="edit" onClick={onEditHabit} />,
           <Popconfirm
             placement="top"
-            title="¿Seguro que desea eliminar el habito?"
-            description="Al eliminar se vaciara todo el calendario con este habito"
+            title="¿Seguro que desea eliminar el hábito?"
+            description="Al eliminar se vaciara todo el calendario con este hábito"
             okText="Si"
             cancelText="No"
             onConfirm={onDeleteHabit}

@@ -137,7 +137,7 @@ const FormPersonal = () => {
   const config = {
     title: "¿Estas seguro de eliminar tu cuenta?",
     content:
-      " Al eliminar tu cuenta se perderán tus hábitos y las marcas de cada habito. No hay forma de revertir",
+      " Al eliminar tu cuenta se perderán tus hábitos y las marcas de cada hábito. No hay forma de revertir",
   };
 
   return (

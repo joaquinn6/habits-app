@@ -22,7 +22,7 @@ const Habit = () => {
         xl={{ flex: "60%" }}
       >
         <Card
-          title={id ? "Editar habito" : "Nuevo habito"}
+          title={id ? "Editar hábito" : "Nuevo hábito"}
           variant="borderless"
         >
           <FormHabit />
