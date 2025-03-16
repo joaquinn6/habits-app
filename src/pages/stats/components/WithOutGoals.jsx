@@ -39,64 +39,69 @@ const WithOutGoals = () => {
     return fecha.format("MMMM");
   }
 
+  function timesOrTimes(times) {
+    return times > 1 ? "veces" : "vez";
+  }
+
   return (
     <Row justify="start">
       <Col
         xs={{ flex: "100%" }}
         sm={{ flex: "100%" }}
-        md={{ flex: "100%" }}
-        lg={{ flex: "30%" }}
-        xl={{ flex: "30%" }}
+        md={{ flex: "50%" }}
+        lg={{ flex: "50%" }}
+        xl={{ flex: "50%" }}
       >
         <Statistic
           title="Cantidad total este año"
           value={entity.totalByYear[0].total_times}
         />
       </Col>
+      <Col
+        xs={{ flex: "100%" }}
+        sm={{ flex: "100%" }}
+        md={{ flex: "50%" }}
+        lg={{ flex: "50%" }}
+        xl={{ flex: "50%" }}
+      >
+        <Statistic
+          title={isGood ? "Mejor mes" : "Peor mes"}
+          value={`${entity.bestMonth[0]?.total_times} ${timesOrTimes(
+            entity.bestMonth[0]?.total_times
+          )} en ${getMonth(entity.bestMonth[0]?.month)}`}
+        />
+      </Col>
+
+      <Col
+        xs={{ flex: "100%" }}
+        sm={{ flex: "100%" }}
+        md={{ flex: "50%" }}
+        lg={{ flex: "50%" }}
+        xl={{ flex: "50%" }}
+      >
+        <Statistic
+          title={isGood ? "Mejor semana" : "Peor semana"}
+          value={`${entity.bestWeek[0]?.total_times} ${timesOrTimes(
+            entity.bestWeek[0]?.total_times
+          )} ${getWeekRange(entity?.bestWeek[0]?.week)}`}
+        />
+      </Col>
       {entity.bestLastDay.length > 0 && entity.bestLastDay[0].times > 1 ? (
         <Col
           xs={{ flex: "100%" }}
           sm={{ flex: "100%" }}
-          md={{ flex: "100%" }}
-          lg={{ flex: "30%" }}
-          xl={{ flex: "30%" }}
+          md={{ flex: "50%" }}
+          lg={{ flex: "50%" }}
+          xl={{ flex: "50%" }}
         >
           <Statistic
             title={isGood ? "Mejor día" : "Peor día"}
-            value={`${entity.bestLastDay[0].times} veces el ${formatDate(
-              entity.bestLastDay[0].date
-            )}`}
+            value={`${entity.bestLastDay[0].times} ${timesOrTimes(
+              entity.bestLastDay[0].times
+            )} el ${formatDate(entity.bestLastDay[0].date)}`}
           />
         </Col>
       ) : null}
-      <Col
-        xs={{ flex: "100%" }}
-        sm={{ flex: "100%" }}
-        md={{ flex: "100%" }}
-        lg={{ flex: "30%" }}
-        xl={{ flex: "30%" }}
-      >
-        <Statistic
-          title={isGood ? "Mejor semana" : "Peor semana"}
-          value={`${entity.bestWeek[0]?.total_times} veces ${getWeekRange(
-            entity?.bestWeek[0]?.week
-          )}`}
-        />
-      </Col>
-      <Col
-        xs={{ flex: "100%" }}
-        sm={{ flex: "100%" }}
-        md={{ flex: "100%" }}
-        lg={{ flex: "30%" }}
-        xl={{ flex: "30%" }}
-      >
-        <Statistic
-          title={isGood ? "Mejor mes" : "Peor mes"}
-          value={`${entity.bestMonth[0]?.total_times} veces en ${getMonth(
-            entity.bestMonth[0]?.month
-          )}`}
-        />
-      </Col>
     </Row>
   );
 };

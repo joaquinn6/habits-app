@@ -1,102 +1,91 @@
-import { Col, Row, Statistic } from "antd";
+import { Col, Row, Card, Progress, Flex } from "antd";
 import statsStore from "@/stores/stats.store";
 import habitStore from "@/stores/habit.store";
 import dayjs from "dayjs";
 
+const colorsGood = {
+  "0%": "#CD695ED6",
+  "40%": "#DFB83BBE",
+  "80%": "#2B7113C0",
+};
+
+const colorsBad = {
+  "0%": "#2B7113C0",
+  "40%": "#DFB83BBE",
+  "80%": "#CD695ED6",
+};
+
 const WithGoals = () => {
   const { entity } = statsStore();
   const storeHabit = habitStore();
-
-  const formatDate = (date) => {
-    return dayjs(date).locale("es").format("dddd D [de] MMMM");
-  };
+  const [graphics, setGraphics] = useState([]);
 
   const isGood = useMemo(
     () => storeHabit.entity?.type == "GOOD",
     [storeHabit.entity]
   );
 
-  const getWeekRange = (weekNumber) => {
-    const year = dayjs().year();
-    const startDate = dayjs()
-      .year(year)
-      .week(weekNumber + 1)
-      .startOf("week");
-    const endDate = dayjs()
-      .year(year)
-      .week(weekNumber + 1)
-      .endOf("week");
+  useEffect(() => {
+    if (entity && entity.groupByMonth) makeGraphics();
+  }, [entity]);
 
-    return `de ${startDate.format("DD/MM/YY")} al ${endDate.format(
-      "DD/MM/YY"
-    )}`;
+  const makeGraphicWeek = () => {
+    const currentWeek = dayjs().week() - 1;
+    const thisWeek = entity.groupByWeek.find(
+      (item) => item.week == currentWeek
+    );
+    const times = thisWeek ? thisWeek.total_times : 0;
+    const percent = parseInt((times * 100) / storeHabit.entity.goals.per_week);
+    return { percent, nameCard: "Esta semana" };
   };
 
-  function getMonth(month) {
-    const fecha = dayjs()
-      .month(month - 1)
-      .locale("es");
-    return fecha.format("MMMM");
-  }
+  const makeGraphicMonth = () => {
+    const currentMonth = dayjs().month() + 1;
+    const thisMonth = entity.groupByMonth.find(
+      (item) => item.month == currentMonth
+    );
+    const times = thisMonth ? thisMonth.total_times : 0;
+    const percent = parseInt((times * 100) / storeHabit.entity.goals.per_month);
+    return { percent, nameCard: "Este mes" };
+  };
+
+  const makeGraphicYear = () => {
+    const times = entity.totalByYear[0].total_times;
+    const percent = parseInt((times * 100) / storeHabit.entity.goals.per_year);
+    return { percent, nameCard: "Este año" };
+  };
+
+  const makeGraphics = () => {
+    const graphicWeek = makeGraphicWeek();
+    const graphicMonth = makeGraphicMonth();
+    const graphicYear = makeGraphicYear();
+    setGraphics([graphicWeek, graphicMonth, graphicYear]);
+  };
 
   return (
-    <Row justify="start">
-      <Col
-        xs={{ flex: "100%" }}
-        sm={{ flex: "100%" }}
-        md={{ flex: "100%" }}
-        lg={{ flex: "30%" }}
-        xl={{ flex: "30%" }}
-      >
-        <Statistic
-          title="Cantidad total este año"
-          value={entity.totalByYear[0].total_times}
-        />
-      </Col>
-      {entity.bestLastDay.length > 0 && entity.bestLastDay[0].times > 1 ? (
+    <Row justify="space-between">
+      {graphics.map((graphic) => (
         <Col
+          key={graphic.nameCard}
           xs={{ flex: "100%" }}
           sm={{ flex: "100%" }}
-          md={{ flex: "100%" }}
-          lg={{ flex: "30%" }}
-          xl={{ flex: "30%" }}
+          md={{ flex: "30%" }}
+          lg={{ flex: "20%" }}
+          xl={{ flex: "20%" }}
+          style={{ marginTop: 30 }}
         >
-          <Statistic
-            title={isGood ? "Mejor día" : "Peor día"}
-            value={`${entity.bestLastDay[0].times} veces el ${formatDate(
-              entity.bestLastDay[0].date
-            )}`}
-          />
+          <Card title={graphic.nameCard}>
+            <Row justify="center">
+              <Progress
+                type="dashboard"
+                percent={graphic.percent}
+                strokeColor={isGood ? colorsGood : colorsBad}
+                status={!isGood && graphic.percent >= 100 ? "exception" : ""}
+              />
+            </Row>
+          </Card>
         </Col>
-      ) : null}
-      <Col
-        xs={{ flex: "100%" }}
-        sm={{ flex: "100%" }}
-        md={{ flex: "100%" }}
-        lg={{ flex: "30%" }}
-        xl={{ flex: "30%" }}
-      >
-        <Statistic
-          title={isGood ? "Mejor semana" : "Peor semana"}
-          value={`${entity.bestWeek[0]?.total_times} veces ${getWeekRange(
-            entity?.bestWeek[0]?.week
-          )}`}
-        />
-      </Col>
-      <Col
-        xs={{ flex: "100%" }}
-        sm={{ flex: "100%" }}
-        md={{ flex: "100%" }}
-        lg={{ flex: "30%" }}
-        xl={{ flex: "30%" }}
-      >
-        <Statistic
-          title={isGood ? "Mejor mes" : "Peor mes"}
-          value={`${entity.bestMonth[0]?.total_times} veces en ${getMonth(
-            entity.bestMonth[0]?.month
-          )}`}
-        />
-      </Col>
+      ))}
     </Row>
   );
 };

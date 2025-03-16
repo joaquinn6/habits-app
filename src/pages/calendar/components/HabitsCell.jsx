@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
-import { Tooltip, Space } from "antd";
+import { Tooltip } from "antd";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 const HabitsCell = ({ date, mark = {} }) => {
   const tooltip = () => {
-    return mark.marks?.map((item) => (
-      <>
+    return mark.marks?.map((item, index) => (
+      <span key={index}>
         {phrase(item)}
         <br />
-      </>
+      </span>
     ));
   };
   const phrase = (markItem) => {
@@ -21,12 +21,8 @@ const HabitsCell = ({ date, mark = {} }) => {
   return (
     <Tooltip title={mark?.marks?.length > 0 ? tooltip : ""} key={date}>
       <div style={{ height: "100%", width: "100%" }}>
-        {mark.marks?.map((item) => {
-          return (
-            <>
-              {item.habit_emoji.repeat(item.times)} <Space />
-            </>
-          );
+        {mark.marks?.map((item, index) => {
+          return <span key={index}>{item.habit_emoji.repeat(item.times)}</span>;
         })}
       </div>
     </Tooltip>
