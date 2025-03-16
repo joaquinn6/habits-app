@@ -3,7 +3,7 @@
 🚀 _Un proyecto interactivo con diseño responsivo y habilitado para ser instalado en dispositivos mobiles._
 🚀 _An interactive project with responsive design and enabled to be installed on mobile devices._
 
-📌 **Enlace a la demo | Live demo link:** [🔗 Ver en Vivo | View Live](https://habits-three-iota.vercel.app/home-page)
+📌 **Enlace a la demo | Live demo link:** [🔗 Ver en Vivo | View Live](https://habits-three-iota.vercel.app/home-page){:target="_blank"}
 
 ---
 
@@ -37,7 +37,7 @@ _This project is not just a presentation letter, but a real showcase of my skill
 ## ✨ Características Principales | Key Features
 
 ### Español:
-✅ Diseño moderno y responsivo con Ant Design.  
+✅ Diseño moderno y responsivo con Ant Design.
 ✅ Modo claro/oscuro con personalización del tema. 
 ✅ Calendario interactivo con soporte para eventos y notas.
 ✅ Tour de usuario para pantalla de calendario.
@@ -76,8 +76,8 @@ _This project is not just a presentation letter, but a real showcase of my skill
 ## 📬 Contacto | Contact
 
 - **📧 Email:** joaquin.software.e@gmail.com  
-- **💼 LinkedIn:** [Mi LinkedIn](https://www.linkedin.com/in/joaquin-n6/)  
-- **🐙 GitHub:** [Mi GitHub](https://github.com/joaquinn6)  
+- **💼 LinkedIn:** [Mi LinkedIn](https://www.linkedin.com/in/joaquin-n6/){:target="_blank"}
+- **🐙 GitHub:** [Mi GitHub](https://github.com/joaquinn6){:target="_blank"}
 
 ---
 
