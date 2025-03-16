@@ -12,7 +12,6 @@ import utc from "dayjs/plugin/utc";
 
 //!FUTURE: creación/login con cuenta de google/facebook
 //!FUTURE: birthday event: notificación a entrar en el home-page
-//TODO: tour al ser la primera vez (supuestamente hay hooks para saber si es la primera vez)
 
 dayjs.extend(utc);
 const Calendar = () => {
