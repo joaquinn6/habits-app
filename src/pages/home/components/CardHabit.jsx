@@ -1,14 +1,21 @@
 import { Card, Popconfirm, Badge } from "antd";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { CalendarOutlined, EditOutlined, DeleteOutlined } from "@icons";
+import {
+  CalendarOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  RiseOutlined,
+} from "@icons";
 import habitStore from "@/stores/habit.store";
+import userStore from "@/stores/user.store";
 
 const CardHabit = ({ habit, onChange }) => {
   const { deleted, deleteHabit } = habitStore();
   const [localValue, setLocalValue] = useState([]);
-  const navigate = useNavigate();
+  const { isTestUser } = userStore();
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (habit) {
       setLocalValue(habit);
@@ -27,6 +34,9 @@ const CardHabit = ({ habit, onChange }) => {
 
   const onHabitCalendar = () => {
     navigate(`/habit/${localValue._id}/calendar`);
+  };
+  const onStats = () => {
+    navigate(`/habit/${localValue._id}/stats`);
   };
   const onDeleteHabit = () => {
     deleteHabit(localValue._id);
@@ -48,19 +58,22 @@ const CardHabit = ({ habit, onChange }) => {
           ? "green"
           : "red"
       }
+      style={{ fontSize: "20px" }}
     >
       <Card
         variant="borderless"
         actions={[
           <CalendarOutlined key="calendar" onClick={onHabitCalendar} />,
+          <RiseOutlined key="statistics" onClick={onStats} />,
           <EditOutlined key="edit" onClick={onEditHabit} />,
           <Popconfirm
             placement="top"
-            title="¿Seguro que desea eliminar el habito?"
-            description="Al eliminar se vaciara todo el calendario con este habito"
+            title="¿Seguro que desea eliminar el hábito?"
+            description="Al eliminar se vaciara todo el calendario con este hábito"
             okText="Si"
             cancelText="No"
             onConfirm={onDeleteHabit}
+            disabled={isTestUser}
           >
             <DeleteOutlined />
           </Popconfirm>,

@@ -18,13 +18,13 @@ const FormLogin = () => {
     if (logged) {
       navigate("/home-page");
     }
-  }, [logged, navigate, openNotification]);
+  }, [logged]);
 
   useEffect(() => {
     if (error) {
       openNotification("error", "Error", error);
     }
-  }, [error, navigate, openNotification]);
+  }, [error]);
 
   return (
     <Form
@@ -67,7 +67,6 @@ const FormLogin = () => {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Recuérdate</Checkbox>
           </Form.Item>
-          <a href="">Olvide mi contraseña</a>
         </Flex>
       </Form.Item>
 

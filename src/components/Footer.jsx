@@ -23,7 +23,7 @@ const Footer = () => {
         shape="round"
         icon={<LinkedinOutlined />}
       >
-        Contactame
+        Contáctame
       </Button>
     </div>
   );

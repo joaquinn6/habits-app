@@ -16,7 +16,17 @@ import Habit from "./pages/habit/Habit";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import Calendar from "./pages/calendar/Calendar";
+import Stats from "./pages/stats/Stats";
+import userStore from "./stores/user.store";
 const App = () => {
+  const { changeTestUser } = userStore();
+  useEffect(() => {
+    const user = JSON.parse(
+      localStorage.getItem("user") || sessionStorage.getItem("user")
+    );
+    changeTestUser(user.email);
+  }, []);
+
   return (
     <ThemeProvider>
       <NotificationProvider>
@@ -31,6 +41,7 @@ const App = () => {
                 <Route path="/habit" element={<Habit />} />
                 <Route path="/habit/:id" element={<Habit />} />
                 <Route path="/habit/:id/calendar" element={<Calendar />} />
+                <Route path="/habit/:id/stats" element={<Stats />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="*" element={<NotFound />} />
               </Route>

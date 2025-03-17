@@ -5,12 +5,13 @@ import PropTypes from "prop-types";
 import { runes } from "runes2";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import habitStore from "@/stores/habit.store";
 
 dayjs.extend(utc);
-const ModalMarkDetail = ({ isOpen, onClose, mark, habit, date }) => {
+const ModalMarkDetail = ({ isOpen, onClose, mark, date }) => {
   const [form] = Form.useForm();
   const { updateMark, createMark, deleteMark } = markStore();
-
+  const { entity } = habitStore();
   useEffect(() => {
     form.setFieldsValue({
       times: mark.times || 0,
@@ -21,7 +22,7 @@ const ModalMarkDetail = ({ isOpen, onClose, mark, habit, date }) => {
   const onFinish = () => {
     const values = form.getFieldsValue();
     if (!mark._id && values.times > 0)
-      createMark(habit._id, {
+      createMark(entity._id, {
         date: date.utc().startOf("day").toISOString(),
         times: values.times,
         note: values.note,
@@ -121,7 +122,6 @@ ModalMarkDetail.propTypes = {
   isOpen: PropTypes.node.isRequired,
   onClose: PropTypes.node.isRequired,
   mark: PropTypes.object.isRequired,
-  habit: PropTypes.object.isRequired,
   date: PropTypes.any.isRequired,
 };
 export default ModalMarkDetail;

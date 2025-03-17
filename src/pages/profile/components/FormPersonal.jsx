@@ -61,13 +61,21 @@ const genders = [
 ];
 const FormPersonal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { update, loading, error, entity, updateUser, deleteUser, deleted } =
-    userStore();
+  const {
+    isTestUser,
+    update,
+    loading,
+    error,
+    entity,
+    updateUser,
+    deleteUser,
+    deleted,
+  } = userStore();
   const { openNotification } = useNotificationContext();
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [modal, contextHolder] = Modal.useModal();
-  const [isTestUser, setIsTestUser] = useState(true);
+
   useEffect(() => {
     if (update) {
       openNotification(
@@ -94,7 +102,6 @@ const FormPersonal = () => {
         country: entity.country,
         gender: entity.gender,
       });
-      setIsTestUser(entity.email == "test@test.com");
     }
   }, [entity, form]);
 
@@ -130,7 +137,7 @@ const FormPersonal = () => {
   const config = {
     title: "¿Estas seguro de eliminar tu cuenta?",
     content:
-      " Al eliminar tu cuenta se perderán tus hábitos y las marcas de cada habito. No hay forma de revertir",
+      " Al eliminar tu cuenta se perderán tus hábitos y las marcas de cada hábito. No hay forma de revertir",
   };
 
   return (
