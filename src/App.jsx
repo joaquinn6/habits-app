@@ -17,16 +17,7 @@ import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import Calendar from "./pages/calendar/Calendar";
 import Stats from "./pages/stats/Stats";
-import userStore from "./stores/user.store";
 const App = () => {
-  const { changeTestUser } = userStore();
-  useEffect(() => {
-    const user = JSON.parse(
-      localStorage.getItem("user") || sessionStorage.getItem("user")
-    );
-    changeTestUser(user.email);
-  }, []);
-
   return (
     <ThemeProvider>
       <NotificationProvider>
