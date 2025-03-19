@@ -8,12 +8,10 @@ import HabitCellYear from "./components/HabitCellYear";
 import HabitsCellYear from "./components/HabitsCellYear";
 import dayjs from "dayjs";
 import ModalMarkDetail from "./components/ModalMarkDetail";
-import utc from "dayjs/plugin/utc";
 
 //!FUTURE: creación/login con cuenta de google/facebook
 //!FUTURE: birthday event: notificación a entrar en el home-page
 
-dayjs.extend(utc);
 const Calendar = () => {
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
     markStore();
@@ -84,7 +82,7 @@ const Calendar = () => {
 
   const getMarkByDate = (date) => {
     return list?.find((item) => {
-      const dateMark = dayjs.utc(item.date);
+      const dateMark = dayjs(item.date);
       return (
         date.isSame(dateMark, "day") &&
         date.isSame(dateMark, "month") &&

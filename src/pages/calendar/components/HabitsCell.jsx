@@ -1,9 +1,5 @@
 import PropTypes from "prop-types";
 import { Tooltip } from "antd";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-
-dayjs.extend(utc);
 const HabitsCell = ({ date, mark = {} }) => {
   const tooltip = () => {
     return mark.marks?.map((item, index) => (

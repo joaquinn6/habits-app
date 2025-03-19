@@ -14,12 +14,10 @@ import {
 import { useNotificationContext } from "@/context/NotificationContext";
 import userStore from "@/stores/user.store";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import ModalChangePassword from "./ModalChangePassword";
 import { useNavigate } from "react-router-dom";
 import { runes } from "runes2";
 
-dayjs.extend(utc);
 const { Option } = Select;
 const countries = [
   { code: "AR", name: "Argentina", flag: "https://flagcdn.com/w40/ar.png" },
@@ -98,7 +96,7 @@ const FormPersonal = () => {
         first_name: entity.first_name,
         last_name: entity.last_name,
         email: entity?.email,
-        birth_date: dayjs.utc(entity.birth_date).local(),
+        birth_date: dayjs(entity.birth_date).local(),
         country: entity.country,
         gender: entity.gender,
       });
@@ -123,7 +121,7 @@ const FormPersonal = () => {
       email: values.email,
       first_name: values.first_name,
       last_name: values.last_name,
-      birth_date: values.birth_date.utc().startOf("day").toISOString(),
+      birth_date: values.birth_date.startOf("day").toISOString(),
       country: values.country,
       gender: values.gender,
       password: "",

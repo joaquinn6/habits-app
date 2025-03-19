@@ -4,10 +4,8 @@ import markStore from "@/stores/mark.store";
 import PropTypes from "prop-types";
 import { runes } from "runes2";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import habitStore from "@/stores/habit.store";
 
-dayjs.extend(utc);
 const ModalMarkDetail = ({ isOpen, onClose, mark, date }) => {
   const [form] = Form.useForm();
   const { updateMark, createMark, deleteMark } = markStore();
@@ -23,7 +21,7 @@ const ModalMarkDetail = ({ isOpen, onClose, mark, date }) => {
     const values = form.getFieldsValue();
     if (!mark._id && values.times > 0)
       createMark(entity._id, {
-        date: date.utc().startOf("day").toISOString(),
+        date: date.startOf("day").toISOString(),
         times: values.times,
         note: values.note,
       });
@@ -34,7 +32,7 @@ const ModalMarkDetail = ({ isOpen, onClose, mark, date }) => {
       updateMark(mark._id, {
         times: values.times,
         note: values.note,
-        date: date.utc().startOf("day").toISOString(),
+        date: date.startOf("day").toISOString(),
       });
 
     onClose();
