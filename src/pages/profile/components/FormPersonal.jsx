@@ -96,7 +96,7 @@ const FormPersonal = () => {
         first_name: entity.first_name,
         last_name: entity.last_name,
         email: entity?.email,
-        birth_date: dayjs(entity.birth_date).local(),
+        birth_date: dayjs(entity.birth_date),
         country: entity.country,
         gender: entity.gender,
       });
