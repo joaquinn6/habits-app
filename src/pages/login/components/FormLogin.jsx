@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input, Flex, Spin } from "antd";
 import authStore from "@/stores/auth.store";
 import awakeStore from "@/stores/awake.store";
+import { DEMO_USER } from "@/globalVars.js";
 import { useNotificationContext } from "@/context/NotificationContext";
 const FormLogin = () => {
   const { logged, loading, error, login } = authStore();
@@ -12,6 +13,9 @@ const FormLogin = () => {
 
   const onFinish = (values) => {
     login(values, values.remember);
+  };
+  const onClickDemo = () => {
+    login(DEMO_USER, false);
   };
   const onClickRegister = () => {
     navigate("/register");
@@ -81,6 +85,9 @@ const FormLogin = () => {
         <Form.Item>
           <Button block type="primary" htmlType="submit">
             Aceptar
+          </Button>
+          <Button block onClick={onClickDemo} style={{ marginTop: 8 }}>
+            Probar con usuario de prueba
           </Button>
           <Flex justify="center" align="center">
             <Button

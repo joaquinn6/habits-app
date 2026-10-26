@@ -6,9 +6,32 @@ import {
   TrophyOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import authStore from "@/stores/auth.store";
+import awakeStore from "@/stores/awake.store";
+import { useNotificationContext } from "@/context/NotificationContext";
+import { DEMO_USER } from "@/globalVars.js";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { logged, loading, error, login } = authStore();
+  const { sleeping } = awakeStore();
+  const { openNotification } = useNotificationContext();
+
+  useEffect(() => {
+    if (logged) {
+      navigate("/home-page");
+    }
+  }, [logged]);
+
+  useEffect(() => {
+    if (error) {
+      openNotification("error", "Error", error);
+    }
+  }, [error]);
+
+  const onClickDemo = () => {
+    login(DEMO_USER, false);
+  };
   const features = [
     {
       icon: <CheckCircleOutlined style={{ fontSize: 40, color: "#52c41a" }} />,
@@ -68,12 +91,12 @@ const HomePage = () => {
                 allá del aprendizaje técnico, la aplicación busca aportar valor
                 a quienes deseen mejorar su día a día a través del
                 autoconocimiento y la constancia. Te invito a probarla: si solo
-                quieres explorarla, puedes usar el usuario de prueba
-                <Text style={{ fontSize: "20px" }} type="warning" strong>
-                  (test@test.com : 123qwe)
-                </Text>
+                quieres explorarla, puedes entrar con el{" "}
+                <Text type="warning" strong>
+                  usuario de prueba
+                </Text>{" "}
                 para conocer sus funciones. Y si te gusta ¡Regístrate y comienza
-                a transformar sus hábitos!
+                a transformar tus hábitos!
               </Paragraph>
             </Typography>
           </Card>
@@ -105,15 +128,21 @@ const HomePage = () => {
           </Col>
         ))}
       </Row>
-      <Row justify="center">
-        <Button
-          type="primary"
-          size="large"
-          style={{ marginTop: 20 }}
-          onClick={onClick}
-        >
-          ¡Empieza ahora!
-        </Button>
+      <Row justify="center" gutter={[16, 16]} style={{ marginTop: 20 }}>
+        <Col>
+          <Button type="primary" size="large" onClick={onClick}>
+            ¡Empieza ahora!
+          </Button>
+        </Col>
+        <Col>
+          <Button
+            size="large"
+            loading={loading || sleeping}
+            onClick={onClickDemo}
+          >
+            Probar con usuario de prueba
+          </Button>
+        </Col>
       </Row>
     </Space>
   );

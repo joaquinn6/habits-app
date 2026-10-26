@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { userService } from "@/services";
+import { DEMO_USER } from "@/globalVars.js";
 
 const userStore = create((set) => ({
   create: null,
@@ -64,7 +65,7 @@ const userStore = create((set) => ({
     }
   },
   changeTestUser: (email) => {
-    set({ isTestUser: email == "test@test.com" });
+    set({ isTestUser: email == DEMO_USER.email });
   },
 }));
 
