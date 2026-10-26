@@ -3,3 +3,4 @@ export * from "./user.service";
 export * from "./habit.service";
 export * from "./mark.service";
 export * from "./stats.service";
+export * from "./awake.service";
