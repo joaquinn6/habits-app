@@ -20,17 +20,18 @@ const { Option } = Select;
 const types = [
   {
     key: "GOOD",
-    name: "Positivo",
+    name: "habit.good",
     icon: <CheckCircleOutlined style={{ marginRight: 8 }} />,
   },
   {
     key: "BAD",
-    name: "Negativo",
+    name: "habit.bad",
     icon: <CloseCircleOutlined style={{ marginRight: 8 }} />,
   },
 ];
 
 const FormHabit = () => {
+  const { t } = useTranslation();
   const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
   const { id } = useParams();
   const [iconValue, setIconValue] = useState("");
@@ -55,25 +56,21 @@ const FormHabit = () => {
   };
   useEffect(() => {
     if (update) {
-      openNotification(
-        "success",
-        "Correcto",
-        "Habito actualizado correctamente"
-      );
+      openNotification("success", t("common.success"), t("habit.updated"));
       navigate("/home-page");
     }
   }, [update, openNotification]);
 
   useEffect(() => {
     if (create) {
-      openNotification("success", "Correcto", "Habito creado correctamente");
+      openNotification("success", t("common.success"), t("habit.created"));
       navigate("/home-page");
     }
   }, [create, openNotification]);
 
   useEffect(() => {
     if (error) {
-      openNotification("error", "Error", error);
+      openNotification("error", t("common.error"), error);
     }
   }, [error, openNotification]);
 
@@ -138,17 +135,17 @@ const FormHabit = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item
-            label="Nombre"
+            label={t("habit.name")}
             name="name"
             rules={[
               {
                 required: true,
-                message: "Nombre es requerido",
+                message: t("habit.nameRequired"),
               },
             ]}
           >
             <Input
-              placeholder="Nombre"
+              placeholder={t("habit.name")}
               count={{
                 show: true,
                 max: 20,
@@ -166,9 +163,9 @@ const FormHabit = () => {
           lg={{ flex: "50%" }}
           xl={{ flex: "50%" }}
         >
-          <Form.Item label="Descripción" name="description">
+          <Form.Item label={t("habit.description")} name="description">
             <Input
-              placeholder="Descripción"
+              placeholder={t("habit.description")}
               count={{
                 show: true,
                 max: 40,
@@ -189,25 +186,25 @@ const FormHabit = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item
-            label="Tipo"
+            label={t("habit.type")}
             name="type"
             rules={[
               {
                 required: true,
-                message: "Tipo es requerido",
+                message: t("habit.typeRequired"),
               },
             ]}
           >
             <Select
               showSearch
-              placeholder="Tipo"
+              placeholder={t("habit.type")}
               optionFilterProp="children"
               style={{ width: "100%" }}
             >
               {types.map((type) => (
                 <Option key={type.key} value={type.key}>
                   {type.icon}
-                  {type.name}
+                  {t(type.name)}
                 </Option>
               ))}
             </Select>
@@ -221,7 +218,7 @@ const FormHabit = () => {
           lg={{ flex: "25%" }}
           xl={{ flex: "25%" }}
         >
-          <Form.Item label="Emoji" name="emoji">
+          <Form.Item label={t("habit.emoji")} name="emoji">
             <Input
               value={iconValue}
               onChange={handleChangeIcon}
@@ -233,7 +230,7 @@ const FormHabit = () => {
                 exceedFormatter: (txt, { max }) =>
                   runes(txt).slice(0, max).join(""),
               }}
-              placeholder="Emoji"
+              placeholder={t("habit.emoji")}
               allowClear
             />
           </Form.Item>
@@ -245,7 +242,7 @@ const FormHabit = () => {
           lg={{ flex: "25%" }}
           xl={{ flex: "25%" }}
         >
-          <Form.Item label="Color" name="color">
+          <Form.Item label={t("habit.color")} name="color">
             <ColorPicker />
           </Form.Item>
         </Col>
@@ -258,10 +255,10 @@ const FormHabit = () => {
           lg={{ flex: "50%" }}
           xl={{ flex: "50%" }}
         >
-          <Form.Item label="Con objetivos" name="with_goals">
+          <Form.Item label={t("habit.withGoals")} name="with_goals">
             <Switch
-              checkedChildren="Si"
-              unCheckedChildren="No"
+              checkedChildren={t("common.yes")}
+              unCheckedChildren={t("common.no")}
               checked={withGoals}
             />
           </Form.Item>
@@ -270,16 +267,14 @@ const FormHabit = () => {
       <Row>
         {withGoals ? (
           <Form.Item
-            label="Objetivo"
+            label={t("habit.goal")}
             required
             name="goals"
             rules={[
               {
                 validator: () => {
                   if (!goals || Object.values(goals).every((v) => v === 0)) {
-                    return Promise.reject(
-                      new Error("Objetivos son requeridos")
-                    );
+                    return Promise.reject(new Error(t("habit.goalsRequired")));
                   }
                   return Promise.resolve();
                 },
@@ -304,7 +299,7 @@ const FormHabit = () => {
         <Col>
           <Form.Item>
             <Button color="primary" variant="solid" htmlType="submit">
-              Guardar
+              {t("common.save")}
             </Button>
           </Form.Item>
         </Col>

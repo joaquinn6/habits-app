@@ -3,6 +3,7 @@ import { Col, Row, Card } from "antd";
 import FormHabit from "./components/FormHabit";
 import habitStore from "@/stores/habit.store";
 const Habit = () => {
+  const { t } = useTranslation();
   const { getHabit } = habitStore();
   const { id } = useParams();
 
@@ -22,7 +23,7 @@ const Habit = () => {
         xl={{ flex: "60%" }}
       >
         <Card
-          title={id ? "Editar hábito" : "Nuevo hábito"}
+          title={id ? t("habit.editTitle") : t("habit.newTitle")}
           variant="borderless"
         >
           <FormHabit />

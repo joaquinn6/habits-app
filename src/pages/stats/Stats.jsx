@@ -7,6 +7,7 @@ import WithGoals from "./components/WithGoals";
 import WithOutGoals from "./components/WithOutGoals";
 
 const Stats = () => {
+  const { t } = useTranslation();
   const { getStatsByHabit, entity, loading } = statsStore();
   const storeHabit = habitStore();
   const [query, setQuery] = useState(null);
@@ -51,7 +52,7 @@ const Stats = () => {
       <CardStats children={<WithOutGoals />} />
     )
   ) : (
-    <Empty description="Aun no hay marcas en este hábito" />
+    <Empty description={t("stats.empty")} />
   );
 };
 export default Stats;

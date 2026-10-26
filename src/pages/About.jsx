@@ -1,8 +1,9 @@
 const About = () => {
+  const { t } = useTranslation();
   return (
     <div>
-      <h1>Acerca de</h1>
-      <p>Esta es la página Acerca de nosotros.</p>
+      <h1>{t("about.title")}</h1>
+      <p>{t("about.text")}</p>
     </div>
   );
 };

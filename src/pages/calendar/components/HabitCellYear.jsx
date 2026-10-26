@@ -3,12 +3,11 @@ import { Tooltip } from "antd";
 import habitStore from "@/stores/habit.store";
 
 const HabitCellYear = ({ mark = {}, date }) => {
+  const { t } = useTranslation();
   const { entity } = habitStore();
   return (
     <Tooltip
-      title={
-        mark.times ? `${mark.times} ${mark.times > 1 ? "veces" : "vez"}` : ""
-      }
+      title={mark.times ? t("common.times", { count: mark.times }) : ""}
       key={date}
       color={entity?.color}
     >

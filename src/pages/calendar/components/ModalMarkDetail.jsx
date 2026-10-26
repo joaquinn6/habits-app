@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import habitStore from "@/stores/habit.store";
 
 const ModalMarkDetail = ({ isOpen, onClose, mark, date }) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { updateMark, createMark, deleteMark } = markStore();
   const { entity } = habitStore();
@@ -40,17 +41,17 @@ const ModalMarkDetail = ({ isOpen, onClose, mark, date }) => {
 
   return (
     <Modal
-      title="Marcador"
+      title={t("calendar.markTitle")}
       open={isOpen}
       onCancel={onClose}
       footer={[
         <Button key="cancel" onClick={onClose}>
-          Cancelar
+          {t("common.cancel")}
         </Button>,
         <Button key="submit" type="primary" onClick={onFinish}>
           {mark._id && form.getFieldValue("times") == 0
-            ? "Eliminar"
-            : "Guardar"}
+            ? t("common.delete")
+            : t("common.save")}
         </Button>,
       ]}
     >
@@ -98,7 +99,7 @@ const ModalMarkDetail = ({ isOpen, onClose, mark, date }) => {
           >
             <Form.Item name="note">
               <Input.TextArea
-                placeholder="Nota"
+                placeholder={t("calendar.note")}
                 autoSize={{ minRows: 3, maxRows: 5 }}
                 count={{
                   show: true,

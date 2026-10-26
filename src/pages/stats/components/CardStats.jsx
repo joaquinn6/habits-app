@@ -3,6 +3,7 @@ import habitStore from "@/stores/habit.store";
 import PropTypes from "prop-types";
 
 const CardStats = ({ children }) => {
+  const { t } = useTranslation();
   const { entity } = habitStore();
 
   return (
@@ -14,7 +15,10 @@ const CardStats = ({ children }) => {
         lg={{ flex: "60%" }}
         xl={{ flex: "60%" }}
       >
-        <Card variant="borderless" title={`Estadísticas de ${entity.name}`}>
+        <Card
+          variant="borderless"
+          title={t("stats.titleOf", { name: entity.name })}
+        >
           {children}
         </Card>
       </Col>

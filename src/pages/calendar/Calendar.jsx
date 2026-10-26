@@ -13,6 +13,7 @@ import ModalMarkDetail from "./components/ModalMarkDetail";
 //!FUTURE: birthday event: notificación a entrar en el home-page
 
 const Calendar = () => {
+  const { t } = useTranslation();
   const { getMarksByHabit, getMarksByUser, list, create, update, deleted } =
     markStore();
   const { entity, getHabit } = habitStore();
@@ -37,15 +38,13 @@ const Calendar = () => {
 
   const steps = [
     {
-      title: "Crea una marca",
-      description:
-        "Al hacer click/tab en el día, se creara una marca nueva o se sumara una si ya existe.",
+      title: t("calendar.tourCreateTitle"),
+      description: t("calendar.tourCreateDescription"),
       target: () => ref1.current,
     },
     {
-      title: "Editar o eliminar",
-      description:
-        "Si estas en tu celular, al mantener apretado puedes editar las marcas del día y agregar una descripción, si estas desde un ordenador, lo haces con click derecho",
+      title: t("calendar.tourEditTitle"),
+      description: t("calendar.tourEditDescription"),
       target: () => ref1.current,
     },
   ];
@@ -154,7 +153,11 @@ const Calendar = () => {
         >
           <Card
             variant="borderless"
-            title={entity ? `Calendario de ${entity.name}` : `Calendario`}
+            title={
+              entity
+                ? t("calendar.titleOf", { name: entity.name })
+                : t("calendar.title")
+            }
           >
             <CalendarAntd
               fullscreen

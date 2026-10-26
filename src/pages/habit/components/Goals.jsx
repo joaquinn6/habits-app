@@ -6,22 +6,23 @@ import { CalendarOutlined } from "@icons";
 const typesGoals = [
   {
     key: "WEEK",
-    name: "Semana",
+    name: "habit.week",
     icon: <CalendarOutlined style={{ marginRight: 8 }} />,
   },
   {
     key: "MONTH",
-    name: "Mes",
+    name: "habit.month",
     icon: <CalendarOutlined style={{ marginRight: 8 }} />,
   },
   {
     key: "YEAR",
-    name: "Año",
+    name: "habit.year",
     icon: <CalendarOutlined style={{ marginRight: 8 }} />,
   },
 ];
 
 const Goals = ({ goals, onSubmit, typeHabit }) => {
+  const { t } = useTranslation();
   const [typeGoal, setTypeGoal] = useState(goals.measure); // Tipo seleccionado
   const [goalValue, setGoalValue] = useState(goals.times); // Valor ingresado
   const [goalValues, setGoalValues] = useState(goals); // Valores calculados
@@ -92,7 +93,7 @@ const Goals = ({ goals, onSubmit, typeHabit }) => {
         <Col xs={24} md={12}>
           <Select
             showSearch
-            placeholder="Tipo"
+            placeholder={t("habit.type")}
             optionFilterProp="children"
             style={{ width: "100%" }}
             value={typeGoal || undefined}
@@ -100,7 +101,7 @@ const Goals = ({ goals, onSubmit, typeHabit }) => {
           >
             {typesGoals.map((type) => (
               <Select.Option key={type.key} value={type.key}>
-                {type.icon} {type.name}
+                {type.icon} {t(type.name)}
               </Select.Option>
             ))}
           </Select>
@@ -123,13 +124,13 @@ const Goals = ({ goals, onSubmit, typeHabit }) => {
 
       <Row>
         <Descriptions column={{ xs: 1, sm: 1, md: 2, lg: 4, xl: 4 }}>
-          <Descriptions.Item label="Semana">
+          <Descriptions.Item label={t("habit.week")}>
             {goalValues.per_week}
           </Descriptions.Item>
-          <Descriptions.Item label="Mes">
+          <Descriptions.Item label={t("habit.month")}>
             {goalValues.per_month}
           </Descriptions.Item>
-          <Descriptions.Item label="Año">
+          <Descriptions.Item label={t("habit.year")}>
             {goalValues.per_year}
           </Descriptions.Item>
         </Descriptions>

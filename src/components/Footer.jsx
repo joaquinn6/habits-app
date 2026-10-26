@@ -2,6 +2,7 @@ import { Button } from "antd";
 import { GithubOutlined, LinkedinOutlined } from "@icons";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const onClick = (url) => {
     window.open(url, "_blank");
   };
@@ -14,7 +15,7 @@ const Footer = () => {
         shape="round"
         icon={<GithubOutlined />}
       >
-        Creado por joaquin_n6
+        {t("footer.createdBy")}
       </Button>
       <Button
         onClick={() => onClick("https://www.linkedin.com/in/joaquin-n6/")}
@@ -23,7 +24,7 @@ const Footer = () => {
         shape="round"
         icon={<LinkedinOutlined />}
       >
-        Contáctame
+        {t("footer.contact")}
       </Button>
     </div>
   );

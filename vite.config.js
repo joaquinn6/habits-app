@@ -10,7 +10,12 @@ export default defineConfig({
   plugins: [
     react(),
     AutoImport({
-      imports: ["react", "react-router-dom"], // Autoimporta React y React Router
+      // Autoimporta React, React Router y el hook de traducciones
+      imports: [
+        "react",
+        "react-router-dom",
+        { "react-i18next": ["useTranslation"] },
+      ],
       dts: "src/auto-imports.d.ts", // Opcional, mejora autocompletado en TypeScript
       eslintrc: {
         enabled: true, // Genera reglas para ESLint

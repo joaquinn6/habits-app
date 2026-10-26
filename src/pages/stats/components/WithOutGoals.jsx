@@ -4,11 +4,12 @@ import habitStore from "@/stores/habit.store";
 import dayjs from "dayjs";
 
 const WithOutGoals = () => {
+  const { t } = useTranslation();
   const { entity } = statsStore();
   const storeHabit = habitStore();
 
   const formatDate = (date) => {
-    return dayjs(date).locale("es").format("dddd D [de] MMMM");
+    return dayjs(date).format(t("stats.dayFormat"));
   };
 
   const isGood = useMemo(
@@ -27,20 +28,20 @@ const WithOutGoals = () => {
       .week(weekNumber + 1)
       .endOf("week");
 
-    return `de ${startDate.format("DD/MM/YY")} al ${endDate.format(
-      "DD/MM/YY"
-    )}`;
+    return {
+      start: startDate.format(t("stats.shortDateFormat")),
+      end: endDate.format(t("stats.shortDateFormat")),
+    };
   };
 
   function getMonth(month) {
-    const fecha = dayjs()
+    return dayjs()
       .month(month - 1)
-      .locale("es");
-    return fecha.format("MMMM");
+      .format("MMMM");
   }
 
   function timesOrTimes(times) {
-    return times > 1 ? "veces" : "vez";
+    return t("common.times", { count: times });
   }
 
   return (
@@ -53,7 +54,7 @@ const WithOutGoals = () => {
         xl={{ flex: "50%" }}
       >
         <Statistic
-          title="Cantidad total este año"
+          title={t("stats.totalYear")}
           value={entity.totalByYear[0].total_times}
         />
       </Col>
@@ -65,10 +66,11 @@ const WithOutGoals = () => {
         xl={{ flex: "50%" }}
       >
         <Statistic
-          title={isGood ? "Mejor mes" : "Peor mes"}
-          value={`${entity.bestMonth[0]?.total_times} ${timesOrTimes(
-            entity.bestMonth[0]?.total_times
-          )} en ${getMonth(entity.bestMonth[0]?.month)}`}
+          title={isGood ? t("stats.bestMonth") : t("stats.worstMonth")}
+          value={t("stats.inMonth", {
+            times: timesOrTimes(entity.bestMonth[0]?.total_times),
+            month: getMonth(entity.bestMonth[0]?.month),
+          })}
         />
       </Col>
 
@@ -80,10 +82,11 @@ const WithOutGoals = () => {
         xl={{ flex: "50%" }}
       >
         <Statistic
-          title={isGood ? "Mejor semana" : "Peor semana"}
-          value={`${entity.bestWeek[0]?.total_times} ${timesOrTimes(
-            entity.bestWeek[0]?.total_times
-          )} ${getWeekRange(entity?.bestWeek[0]?.week)}`}
+          title={isGood ? t("stats.bestWeek") : t("stats.worstWeek")}
+          value={t("stats.inWeek", {
+            times: timesOrTimes(entity.bestWeek[0]?.total_times),
+            ...getWeekRange(entity?.bestWeek[0]?.week),
+          })}
         />
       </Col>
       {entity.bestLastDay.length > 0 && entity.bestLastDay[0].times > 1 ? (
@@ -95,10 +98,11 @@ const WithOutGoals = () => {
           xl={{ flex: "50%" }}
         >
           <Statistic
-            title={isGood ? "Mejor día" : "Peor día"}
-            value={`${entity.bestLastDay[0].times} ${timesOrTimes(
-              entity.bestLastDay[0].times
-            )} el ${formatDate(entity.bestLastDay[0].date)}`}
+            title={isGood ? t("stats.bestDay") : t("stats.worstDay")}
+            value={t("stats.onDay", {
+              times: timesOrTimes(entity.bestLastDay[0].times),
+              date: formatDate(entity.bestLastDay[0].date),
+            })}
           />
         </Col>
       ) : null}

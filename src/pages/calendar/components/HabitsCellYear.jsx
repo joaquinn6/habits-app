@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Tooltip } from "antd";
 
 const HabitsCellYear = ({ date, mark = {} }) => {
+  const { t } = useTranslation();
   const tooltip = () => {
     return mark.marks?.map((item, index) => (
       <span key={index}>
@@ -11,9 +12,10 @@ const HabitsCellYear = ({ date, mark = {} }) => {
     ));
   };
   const phrase = (markItem) => {
-    return `${markItem.times} ${markItem.times > 1 ? "veces" : "vez"} ${
-      markItem.habit_name
-    }`;
+    return t("calendar.habitTimes", {
+      count: markItem.times,
+      name: markItem.habit_name,
+    });
   };
   return (
     <Tooltip title={mark?.marks?.length > 0 ? tooltip : ""} key={date}>

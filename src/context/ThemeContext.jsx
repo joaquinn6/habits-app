@@ -1,17 +1,14 @@
 import { createContext } from "react";
 import PropTypes from "prop-types";
 import { ConfigProvider, theme } from "antd";
-import esES from "antd/locale/es_ES"; // Configuración en español
-import dayjs from "dayjs";
-import "dayjs/locale/es";
-import updateLocale from "dayjs/plugin/updateLocale";
-dayjs.extend(updateLocale);
+import esES from "antd/locale/es_ES";
+import enUS from "antd/locale/en_US";
+
+const antdLocales = { es: esES, en: enUS };
 
 const ThemeContext = createContext();
-dayjs.updateLocale("es", {
-  weekStart: 0, // 0 = Domingo, 1 = Lunes (Por defecto)
-});
 export const ThemeProvider = ({ children }) => {
+  const { i18n } = useTranslation();
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
@@ -29,7 +26,7 @@ export const ThemeProvider = ({ children }) => {
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
       <ConfigProvider
-        locale={esES}
+        locale={antdLocales[i18n.language] ?? esES}
         componentSize="large"
         theme={{
           algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,

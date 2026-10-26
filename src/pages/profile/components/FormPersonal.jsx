@@ -20,44 +20,41 @@ import { runes } from "runes2";
 
 const { Option } = Select;
 const countries = [
-  { code: "AR", name: "Argentina", flag: "https://flagcdn.com/w40/ar.png" },
-  { code: "BO", name: "Bolivia", flag: "https://flagcdn.com/w40/bo.png" },
-  { code: "CL", name: "Chile", flag: "https://flagcdn.com/w40/cl.png" },
-  { code: "CO", name: "Colombia", flag: "https://flagcdn.com/w40/co.png" },
-  { code: "CR", name: "Costa Rica", flag: "https://flagcdn.com/w40/cr.png" },
-  { code: "CU", name: "Cuba", flag: "https://flagcdn.com/w40/cu.png" },
-  {
-    code: "DO",
-    name: "República Dominicana",
-    flag: "https://flagcdn.com/w40/do.png",
-  },
-  { code: "EC", name: "Ecuador", flag: "https://flagcdn.com/w40/ec.png" },
-  { code: "SV", name: "El Salvador", flag: "https://flagcdn.com/w40/sv.png" },
-  { code: "ES", name: "España", flag: "https://flagcdn.com/w40/es.png" },
-  { code: "GT", name: "Guatemala", flag: "https://flagcdn.com/w40/gt.png" },
-  { code: "HN", name: "Honduras", flag: "https://flagcdn.com/w40/hn.png" },
-  { code: "MX", name: "México", flag: "https://flagcdn.com/w40/mx.png" },
-  { code: "NI", name: "Nicaragua", flag: "https://flagcdn.com/w40/ni.png" },
-  { code: "PA", name: "Panamá", flag: "https://flagcdn.com/w40/pa.png" },
-  { code: "PY", name: "Paraguay", flag: "https://flagcdn.com/w40/py.png" },
-  { code: "PE", name: "Perú", flag: "https://flagcdn.com/w40/pe.png" },
-  { code: "PR", name: "Puerto Rico", flag: "https://flagcdn.com/w40/pr.png" },
-  { code: "UY", name: "Uruguay", flag: "https://flagcdn.com/w40/uy.png" },
-  { code: "VE", name: "Venezuela", flag: "https://flagcdn.com/w40/ve.png" },
+  { code: "AR", flag: "https://flagcdn.com/w40/ar.png" },
+  { code: "BO", flag: "https://flagcdn.com/w40/bo.png" },
+  { code: "CL", flag: "https://flagcdn.com/w40/cl.png" },
+  { code: "CO", flag: "https://flagcdn.com/w40/co.png" },
+  { code: "CR", flag: "https://flagcdn.com/w40/cr.png" },
+  { code: "CU", flag: "https://flagcdn.com/w40/cu.png" },
+  { code: "DO", flag: "https://flagcdn.com/w40/do.png" },
+  { code: "EC", flag: "https://flagcdn.com/w40/ec.png" },
+  { code: "SV", flag: "https://flagcdn.com/w40/sv.png" },
+  { code: "ES", flag: "https://flagcdn.com/w40/es.png" },
+  { code: "GT", flag: "https://flagcdn.com/w40/gt.png" },
+  { code: "HN", flag: "https://flagcdn.com/w40/hn.png" },
+  { code: "MX", flag: "https://flagcdn.com/w40/mx.png" },
+  { code: "NI", flag: "https://flagcdn.com/w40/ni.png" },
+  { code: "PA", flag: "https://flagcdn.com/w40/pa.png" },
+  { code: "PY", flag: "https://flagcdn.com/w40/py.png" },
+  { code: "PE", flag: "https://flagcdn.com/w40/pe.png" },
+  { code: "PR", flag: "https://flagcdn.com/w40/pr.png" },
+  { code: "UY", flag: "https://flagcdn.com/w40/uy.png" },
+  { code: "VE", flag: "https://flagcdn.com/w40/ve.png" },
 ];
 const genders = [
   {
     code: "FEMALE",
-    name: "Femenino",
+    name: "profile.female",
     icon: <WomanOutlined style={{ marginRight: 8 }} />,
   },
   {
     code: "MALE",
-    name: "Masculino",
+    name: "profile.male",
     icon: <ManOutlined style={{ marginRight: 8 }} />,
   },
 ];
 const FormPersonal = () => {
+  const { t, i18n } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     isTestUser,
@@ -73,20 +70,20 @@ const FormPersonal = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [modal, contextHolder] = Modal.useModal();
+  const countryNames = useMemo(
+    () => new Intl.DisplayNames([i18n.language], { type: "region" }),
+    [i18n.language]
+  );
 
   useEffect(() => {
     if (update) {
-      openNotification(
-        "success",
-        "Correcto",
-        "Usuario actualizado correctamente"
-      );
+      openNotification("success", t("common.success"), t("profile.updated"));
     }
   }, [update, openNotification]);
 
   useEffect(() => {
     if (error) {
-      openNotification("error", "Error", error);
+      openNotification("error", t("common.error"), error);
     }
   }, [error, openNotification]);
 
@@ -107,11 +104,7 @@ const FormPersonal = () => {
     if (deleted) {
       localStorage.removeItem("user");
       sessionStorage.removeItem("user");
-      openNotification(
-        "success",
-        "Correcto",
-        "Usuario eliminado correctamente"
-      );
+      openNotification("success", t("common.success"), t("profile.deleted"));
       navigate("/");
     }
   }, [deleted]);
@@ -133,9 +126,8 @@ const FormPersonal = () => {
   };
 
   const config = {
-    title: "¿Estas seguro de eliminar tu cuenta?",
-    content:
-      " Al eliminar tu cuenta se perderán tus hábitos y las marcas de cada hábito. No hay forma de revertir",
+    title: t("profile.deleteConfirmTitle"),
+    content: t("profile.deleteConfirmContent"),
   };
 
   return (
@@ -158,17 +150,17 @@ const FormPersonal = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item
-            label="Nombres"
+            label={t("fields.firstName")}
             name="first_name"
             rules={[
               {
                 required: true,
-                message: "Nombre es requerido",
+                message: t("fields.firstNameRequired"),
               },
             ]}
           >
             <Input
-              placeholder="Nombres"
+              placeholder={t("fields.firstName")}
               count={{
                 show: false,
                 max: 40,
@@ -186,9 +178,9 @@ const FormPersonal = () => {
           lg={{ flex: "50%" }}
           xl={{ flex: "50%" }}
         >
-          <Form.Item label="Apellidos" name="last_name">
+          <Form.Item label={t("fields.lastName")} name="last_name">
             <Input
-              placeholder="Apellidos"
+              placeholder={t("fields.lastName")}
               count={{
                 show: false,
                 max: 40,
@@ -209,17 +201,17 @@ const FormPersonal = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item
-            label="Correo electrónico"
+            label={t("fields.email")}
             name="email"
             rules={[
               {
                 required: true,
-                message: "¡Email es requerido!",
+                message: t("fields.emailRequired"),
               },
-              { type: "email", message: "Ingrese un correo válido" },
+              { type: "email", message: t("fields.emailInvalid") },
             ]}
           >
-            <Input placeholder="Email" disabled />
+            <Input placeholder={t("fields.emailPlaceholder")} disabled />
           </Form.Item>
         </Col>
         <Col
@@ -230,21 +222,21 @@ const FormPersonal = () => {
           xl={{ flex: "50%" }}
         >
           <Form.Item
-            label="Fecha de nacimiento"
+            label={t("fields.birthDate")}
             name="birth_date"
             rules={[
               {
                 required: true,
-                message: "Fecha de nacimiento es requerida",
+                message: t("fields.birthDateRequired"),
               },
-              { type: "date", message: "Ingrese una fecha válida" },
+              { type: "date", message: t("fields.dateInvalid") },
             ]}
           >
             <DatePicker
               style={{ width: "100%" }}
-              format="DD-MM-YYYY"
+              format={t("fields.dateFormat")}
               allowClear={false}
-              placeholder="Fecha de nacimiento"
+              placeholder={t("fields.birthDate")}
             />
           </Form.Item>
         </Col>
@@ -257,10 +249,10 @@ const FormPersonal = () => {
           lg={{ flex: "50%" }}
           xl={{ flex: "50%" }}
         >
-          <Form.Item label="País" name="country" rules={[]}>
+          <Form.Item label={t("profile.country")} name="country" rules={[]}>
             <Select
               showSearch
-              placeholder="Selecciona un país"
+              placeholder={t("profile.countryPlaceholder")}
               optionFilterProp="children"
               style={{ width: "100%" }}
             >
@@ -271,7 +263,7 @@ const FormPersonal = () => {
                     size={20}
                     style={{ marginRight: 8 }}
                   />
-                  {country.name}
+                  {countryNames.of(country.code)}
                 </Option>
               ))}
             </Select>
@@ -284,17 +276,17 @@ const FormPersonal = () => {
           lg={{ flex: "50%" }}
           xl={{ flex: "50%" }}
         >
-          <Form.Item label="Genero" name="gender" rules={[]}>
+          <Form.Item label={t("profile.gender")} name="gender" rules={[]}>
             <Select
               showSearch
-              placeholder="Genero"
+              placeholder={t("profile.gender")}
               optionFilterProp="children"
               style={{ width: "100%" }}
             >
               {genders.map((gender) => (
                 <Option key={gender.code} value={gender.code}>
                   {gender.icon}
-                  {gender.name}
+                  {t(gender.name)}
                 </Option>
               ))}
             </Select>
@@ -314,7 +306,7 @@ const FormPersonal = () => {
             }}
             disabled={isTestUser}
           >
-            Eliminar cuenta
+            {t("profile.deleteAccount")}
           </Button>
         </Col>
         <Space size="middle" />
@@ -327,7 +319,7 @@ const FormPersonal = () => {
             onClick={() => setIsModalOpen(true)}
             disabled={isTestUser}
           >
-            Cambiar contraseña
+            {t("profile.changePassword")}
           </Button>
         </Col>
         <Col xs={{ flex: "100%" }} sm={{ flex: "20%" }}>
@@ -338,7 +330,7 @@ const FormPersonal = () => {
               style={{ marginTop: 10, width: "100%" }}
               htmlType="submit"
             >
-              Guardar
+              {t("common.save")}
             </Button>
           </Form.Item>
         </Col>

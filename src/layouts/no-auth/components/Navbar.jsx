@@ -2,20 +2,21 @@ import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const items = [
     {
       key: "/",
-      label: `Mis hábitos`,
+      label: t("nav.myHabits"),
     },
     {
       key: "/login",
-      label: `Iniciar Sesión`,
+      label: t("nav.login"),
     },
     {
       key: "/register",
-      label: `Registrarse`,
+      label: t("nav.register"),
     },
   ];
 

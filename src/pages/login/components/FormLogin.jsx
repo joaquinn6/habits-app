@@ -6,6 +6,7 @@ import awakeStore from "@/stores/awake.store";
 import { DEMO_USER } from "@/globalVars.js";
 import { useNotificationContext } from "@/context/NotificationContext";
 const FormLogin = () => {
+  const { t } = useTranslation();
   const { logged, loading, error, login } = authStore();
   const { sleeping } = awakeStore();
   const { openNotification } = useNotificationContext();
@@ -28,14 +29,14 @@ const FormLogin = () => {
 
   useEffect(() => {
     if (error) {
-      openNotification("error", "Error", error);
+      openNotification("error", t("common.error"), error);
     }
   }, [error]);
 
   return (
     <Spin
       spinning={sleeping}
-      tip="Despertando el servidor, puede tardar unos segundos..."
+      tip={t("awake.loading")}
       wrapperClassName="full-width"
     >
       <Form
@@ -56,38 +57,44 @@ const FormLogin = () => {
           rules={[
             {
               required: true,
-              message: "¡Email es requerido!",
+              message: t("fields.emailRequired"),
             },
-            { type: "email", message: "Ingrese un correo válido" },
+            { type: "email", message: t("fields.emailInvalid") },
           ]}
         >
-          <Input prefix={<UserOutlined />} placeholder="Email" />
+          <Input
+            prefix={<UserOutlined />}
+            placeholder={t("fields.emailPlaceholder")}
+          />
         </Form.Item>
         <Form.Item
           name="password"
           rules={[
             {
               required: true,
-              message: "¡Contraseña es requerida!",
+              message: t("fields.passwordRequired"),
             },
           ]}
         >
-          <Input.Password prefix={<LockOutlined />} placeholder="Contraseña" />
+          <Input.Password
+            prefix={<LockOutlined />}
+            placeholder={t("fields.password")}
+          />
         </Form.Item>
         <Form.Item>
           <Flex justify="space-between" align="center">
             <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Recuérdate</Checkbox>
+              <Checkbox>{t("login.remember")}</Checkbox>
             </Form.Item>
           </Flex>
         </Form.Item>
 
         <Form.Item>
           <Button block type="primary" htmlType="submit">
-            Aceptar
+            {t("common.accept")}
           </Button>
           <Button block onClick={onClickDemo} style={{ marginTop: 8 }}>
-            Probar con usuario de prueba
+            {t("landing.demo")}
           </Button>
           <Flex justify="center" align="center">
             <Button
@@ -96,7 +103,7 @@ const FormLogin = () => {
               variant="link"
               shape="round"
             >
-              Regístrate ahora
+              {t("login.registerNow")}
             </Button>
           </Flex>
         </Form.Item>

@@ -4,24 +4,21 @@ import PropTypes from "prop-types";
 import { useNotificationContext } from "@/context/NotificationContext";
 
 const ModalChangePassword = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { password, loading, error, putPassword } = userStore();
   const { openNotification } = useNotificationContext();
 
   useEffect(() => {
     if (password) {
-      openNotification(
-        "success",
-        "Correcto",
-        "Usuario actualizado correctamente"
-      );
+      openNotification("success", t("common.success"), t("profile.updated"));
       onClose();
     }
   }, [password, openNotification, onClose]);
 
   useEffect(() => {
     if (error) {
-      openNotification("error", "Error", error);
+      openNotification("error", t("common.error"), error);
     }
   }, [error, openNotification]);
 
@@ -35,12 +32,12 @@ const ModalChangePassword = ({ isOpen, onClose }) => {
 
   return (
     <Modal
-      title="Cambiar Contraseña"
+      title={t("profile.changePassword")}
       open={isOpen}
       onCancel={onClose}
       footer={[
         <Button key="cancel" onClick={onClose} disabled={loading}>
-          Cancelar
+          {t("common.cancel")}
         </Button>,
         <Button
           key="submit"
@@ -48,46 +45,51 @@ const ModalChangePassword = ({ isOpen, onClose }) => {
           loading={loading}
           onClick={onFinish}
         >
-          Guardar
+          {t("common.save")}
         </Button>,
       ]}
     >
       <Form form={form} layout="vertical">
         <Form.Item
-          label="Contraseña actual"
+          label={t("profile.currentPassword")}
           name="old_password"
-          rules={[{ required: true, message: "Ingrese su contraseña actual" }]}
+          rules={[
+            { required: true, message: t("profile.currentPasswordRequired") },
+          ]}
         >
-          <Input.Password placeholder="Contraseña actual" />
+          <Input.Password placeholder={t("profile.currentPassword")} />
         </Form.Item>
 
         <Form.Item
-          label="Nueva contraseña"
+          label={t("profile.newPassword")}
           name="new_password"
-          rules={[{ required: true, message: "Ingrese su nueva contraseña" }]}
+          rules={[
+            { required: true, message: t("profile.newPasswordRequired") },
+          ]}
         >
-          <Input.Password placeholder="Nueva contraseña" />
+          <Input.Password placeholder={t("profile.newPassword")} />
         </Form.Item>
 
         <Form.Item
-          label="Confirmar nueva contraseña"
+          label={t("profile.confirmNewPassword")}
           name="confirmPassword"
           dependencies={["new_password"]}
           rules={[
-            { required: true, message: "Confirme su nueva contraseña" },
+            {
+              required: true,
+              message: t("profile.confirmNewPasswordRequired"),
+            },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("new_password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(
-                  new Error("Las contraseñas no coinciden")
-                );
+                return Promise.reject(new Error(t("fields.passwordsMismatch")));
               },
             }),
           ]}
         >
-          <Input.Password placeholder="Confirmar nueva contraseña" />
+          <Input.Password placeholder={t("profile.confirmNewPassword")} />
         </Form.Item>
       </Form>
     </Modal>

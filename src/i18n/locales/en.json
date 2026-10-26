@@ -1,0 +1,163 @@
+{
+  "common": {
+    "accept": "Submit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "yes": "Yes",
+    "no": "No",
+    "success": "Success",
+    "error": "Error",
+    "times_one": "{{count}} time",
+    "times_other": "{{count}} times"
+  },
+  "language": {
+    "label": "ES",
+    "switch": "Cambiar a español"
+  },
+  "api": {
+    "connectionError": "Could not reach the API services"
+  },
+  "awake": {
+    "loading": "Waking up the server, this may take a few seconds...",
+    "errorTitle": "Server unavailable",
+    "errorDescription": "Could not connect to the server, please try again later."
+  },
+  "nav": {
+    "myHabits": "My habits",
+    "login": "Log in",
+    "register": "Sign up",
+    "calendar": "Calendar",
+    "profile": "Profile"
+  },
+  "footer": {
+    "createdBy": "Created by joaquin_n6",
+    "contact": "Contact me"
+  },
+  "fields": {
+    "firstName": "First name",
+    "firstNameRequired": "First name is required",
+    "lastName": "Last name",
+    "birthDate": "Date of birth",
+    "birthDateRequired": "Date of birth is required",
+    "dateInvalid": "Enter a valid date",
+    "dateFormat": "MM-DD-YYYY",
+    "email": "Email",
+    "emailPlaceholder": "Email",
+    "emailRequired": "Email is required!",
+    "emailInvalid": "Enter a valid email",
+    "password": "Password",
+    "passwordRequired": "Password is required!",
+    "confirmPassword": "Confirm password",
+    "passwordsMismatch": "Passwords do not match"
+  },
+  "landing": {
+    "title": "Track your habits and improve every day",
+    "intro": "This app is designed to help you keep a detailed record of your habits, both good and bad, so you can see how you evolve over time. You can also set your own goals to motivate yourself to grow as a person, with a tracking system that lets you evaluate your progress. With this tool, you will get a clear view of your daily behaviors and patterns, making it easier to become a more balanced and mindful version of yourself.",
+    "projectTitle": "A project with purpose and learning",
+    "project": "This project was born from the curiosity of a full-stack developer experienced in Vue, who decided to dive into React to explore its differences and similarities with Vue. Beyond the technical learning, the app aims to bring value to anyone who wants to improve their daily life through self-awareness and consistency. Feel free to try it: if you just want to explore it, you can log in with the <highlight>test user</highlight> to see its features. And if you like it, sign up and start transforming your habits!",
+    "trackTitle": "Track your habits",
+    "trackDescription": "Keep track of your daily habits",
+    "progressTitle": "See your progress",
+    "progressDescription": "Check statistics to see how you evolve over time.",
+    "goalsTitle": "Reach your goals",
+    "goalsDescription": "Set personal goals and measure your progress towards them.",
+    "start": "Get started!",
+    "demo": "Try with test user"
+  },
+  "login": {
+    "title": "Log in",
+    "remember": "Remember me",
+    "registerNow": "Sign up now"
+  },
+  "register": {
+    "title": "Create account"
+  },
+  "habits": {
+    "new": "New",
+    "noDescription": "No description",
+    "deleteTitle": "Are you sure you want to delete this habit?",
+    "deleteDescription": "Deleting it will clear the whole calendar for this habit"
+  },
+  "habit": {
+    "newTitle": "New habit",
+    "editTitle": "Edit habit",
+    "name": "Name",
+    "nameRequired": "Name is required",
+    "description": "Description",
+    "type": "Type",
+    "typeRequired": "Type is required",
+    "good": "Positive",
+    "bad": "Negative",
+    "emoji": "Emoji",
+    "color": "Color",
+    "withGoals": "With goals",
+    "goal": "Goal",
+    "goalsRequired": "Goals are required",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "created": "Habit created successfully",
+    "updated": "Habit updated successfully"
+  },
+  "calendar": {
+    "title": "Calendar",
+    "titleOf": "{{name}} calendar",
+    "habitTimes_one": "{{name}}: {{count}} time",
+    "habitTimes_other": "{{name}}: {{count}} times",
+    "tourCreateTitle": "Create a mark",
+    "tourCreateDescription": "Click/tap a day to create a new mark, or add one if it already exists.",
+    "tourEditTitle": "Edit or delete",
+    "tourEditDescription": "On your phone, press and hold to edit the day's marks and add a description; on a computer, use right click.",
+    "markTitle": "Mark",
+    "note": "Note"
+  },
+  "stats": {
+    "titleOf": "{{name}} statistics",
+    "empty": "There are no marks for this habit yet",
+    "thisWeek": "This week",
+    "thisMonth": "This month",
+    "thisYear": "This year",
+    "totalYear": "Total this year",
+    "bestMonth": "Best month",
+    "worstMonth": "Worst month",
+    "bestWeek": "Best week",
+    "worstWeek": "Worst week",
+    "bestDay": "Best day",
+    "worstDay": "Worst day",
+    "inMonth": "{{times}} in {{month}}",
+    "inWeek": "{{times}} from {{start}} to {{end}}",
+    "onDay": "{{times}} on {{date}}",
+    "dayFormat": "dddd, MMMM D",
+    "shortDateFormat": "MM/DD/YY"
+  },
+  "profile": {
+    "title": "My profile",
+    "logout": "Log out",
+    "country": "Country",
+    "countryPlaceholder": "Select a country",
+    "gender": "Gender",
+    "female": "Female",
+    "male": "Male",
+    "deleteAccount": "Delete account",
+    "deleteConfirmTitle": "Are you sure you want to delete your account?",
+    "deleteConfirmContent": "Deleting your account will remove your habits and every mark of each habit. This cannot be undone.",
+    "changePassword": "Change password",
+    "updated": "User updated successfully",
+    "deleted": "User deleted successfully",
+    "currentPassword": "Current password",
+    "currentPasswordRequired": "Enter your current password",
+    "newPassword": "New password",
+    "newPasswordRequired": "Enter your new password",
+    "confirmNewPassword": "Confirm new password",
+    "confirmNewPasswordRequired": "Confirm your new password"
+  },
+  "notFound": {
+    "subtitle": "Sorry, the page you are looking for does not exist.",
+    "back": "Back to home"
+  },
+  "about": {
+    "title": "About",
+    "text": "This is the About us page."
+  }
+}

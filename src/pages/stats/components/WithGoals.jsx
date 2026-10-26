@@ -16,6 +16,7 @@ const colorsBad = {
 };
 
 const WithGoals = () => {
+  const { t } = useTranslation();
   const { entity } = statsStore();
   const storeHabit = habitStore();
   const [graphics, setGraphics] = useState([]);
@@ -36,7 +37,7 @@ const WithGoals = () => {
     );
     const times = thisWeek ? thisWeek.total_times : 0;
     const percent = parseInt((times * 100) / storeHabit.entity.goals.per_week);
-    return { percent, nameCard: "Esta semana" };
+    return { percent, nameCard: "stats.thisWeek" };
   };
 
   const makeGraphicMonth = () => {
@@ -46,13 +47,13 @@ const WithGoals = () => {
     );
     const times = thisMonth ? thisMonth.total_times : 0;
     const percent = parseInt((times * 100) / storeHabit.entity.goals.per_month);
-    return { percent, nameCard: "Este mes" };
+    return { percent, nameCard: "stats.thisMonth" };
   };
 
   const makeGraphicYear = () => {
     const times = entity.totalByYear[0].total_times;
     const percent = parseInt((times * 100) / storeHabit.entity.goals.per_year);
-    return { percent, nameCard: "Este año" };
+    return { percent, nameCard: "stats.thisYear" };
   };
 
   const makeGraphics = () => {
@@ -74,7 +75,7 @@ const WithGoals = () => {
           xl={{ flex: "20%" }}
           style={{ marginTop: 30 }}
         >
-          <Card title={graphic.nameCard}>
+          <Card title={t(graphic.nameCard)}>
             <Row justify="center">
               <Progress
                 type="dashboard"

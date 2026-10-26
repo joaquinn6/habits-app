@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import habitStore from "@/stores/habit.store";
 
 const HabitCell = forwardRef(({ date, mark = {}, openModal }, ref) => {
+  const { t } = useTranslation();
   const { entity } = habitStore();
   const { createMark, updateMark } = markStore();
   const holdTimer = useRef(null);
@@ -32,7 +33,7 @@ const HabitCell = forwardRef(({ date, mark = {}, openModal }, ref) => {
   const tooltip = () => {
     return (
       <>
-        {mark.times} {mark.times > 1 ? "veces" : "vez"}
+        {t("common.times", { count: mark.times })}
         <br />
         {mark.note ?? ""}
       </>

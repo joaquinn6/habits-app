@@ -7,6 +7,7 @@ import { runes } from "runes2";
 import dayjs from "dayjs";
 
 const FormRegister = () => {
+  const { t } = useTranslation();
   const { create, loading, error, createUser } = userStore();
   const { sleeping } = awakeStore();
   const { openNotification } = useNotificationContext();
@@ -34,14 +35,14 @@ const FormRegister = () => {
 
   useEffect(() => {
     if (error) {
-      openNotification("error", "Error", error);
+      openNotification("error", t("common.error"), error);
     }
   }, [error]);
 
   return (
     <Spin
       spinning={sleeping}
-      tip="Despertando el servidor, puede tardar unos segundos..."
+      tip={t("awake.loading")}
       wrapperClassName="full-width"
     >
       <Form
@@ -55,17 +56,17 @@ const FormRegister = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          label="Nombres"
+          label={t("fields.firstName")}
           name="first_name"
           rules={[
             {
               required: true,
-              message: "Nombre es requerido",
+              message: t("fields.firstNameRequired"),
             },
           ]}
         >
           <Input
-            placeholder="Nombres"
+            placeholder={t("fields.firstName")}
             count={{
               show: false,
               max: 40,
@@ -75,9 +76,9 @@ const FormRegister = () => {
             }}
           />
         </Form.Item>
-        <Form.Item label="Apellidos" name="last_name">
+        <Form.Item label={t("fields.lastName")} name="last_name">
           <Input
-            placeholder="Apellidos"
+            placeholder={t("fields.lastName")}
             count={{
               show: false,
               max: 40,
@@ -88,36 +89,36 @@ const FormRegister = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Fecha de nacimiento"
+          label={t("fields.birthDate")}
           name="birth_date"
           rules={[
             {
               required: true,
-              message: "Fecha de nacimiento es requerida",
+              message: t("fields.birthDateRequired"),
             },
-            { type: "date", message: "Ingrese una fecha válida" },
+            { type: "date", message: t("fields.dateInvalid") },
           ]}
         >
           <DatePicker
             style={{ width: "100%" }}
-            format="DD-MM-YYYY"
+            format={t("fields.dateFormat")}
             allowClear={false}
-            placeholder="Fecha de nacimiento"
+            placeholder={t("fields.birthDate")}
           />
         </Form.Item>
         <Form.Item
-          label="Correo electrónico"
+          label={t("fields.email")}
           name="email"
           rules={[
             {
               required: true,
-              message: "¡Email es requerido!",
+              message: t("fields.emailRequired"),
             },
-            { type: "email", message: "Ingrese un correo válido" },
+            { type: "email", message: t("fields.emailInvalid") },
           ]}
         >
           <Input
-            placeholder="Email"
+            placeholder={t("fields.emailPlaceholder")}
             count={{
               show: false,
               max: 80,
@@ -128,46 +129,47 @@ const FormRegister = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Contraseña"
+          label={t("fields.password")}
           name="password"
           rules={[
             {
               required: true,
-              message: "¡Contraseña es requerida!",
+              message: t("fields.passwordRequired"),
             },
           ]}
           count={{
             show: false,
             max: 30,
             strategy: (txt) => runes(txt).length,
-            exceedFormatter: (txt, { max }) => runes(txt).slice(0, max).join(""),
+            exceedFormatter: (txt, { max }) =>
+              runes(txt).slice(0, max).join(""),
           }}
         >
-          <Input.Password placeholder="Contraseña" />
+          <Input.Password placeholder={t("fields.password")} />
         </Form.Item>
         <Form.Item
-          label="Confirmar contraseña"
+          label={t("fields.confirmPassword")}
           name="confirmPassword"
           rules={[
             {
               required: true,
-              message: "¡Contraseña es requerida!",
+              message: t("fields.passwordRequired"),
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("Las contraseñas no coinciden"));
+                return Promise.reject(new Error(t("fields.passwordsMismatch")));
               },
             }),
           ]}
         >
-          <Input.Password placeholder="Confirmar contraseña" />
+          <Input.Password placeholder={t("fields.confirmPassword")} />
         </Form.Item>
         <Form.Item>
           <Button block type="primary" htmlType="submit">
-            Aceptar
+            {t("common.accept")}
           </Button>
           <Flex justify="center" align="center">
             <Button
@@ -176,7 +178,7 @@ const FormRegister = () => {
               variant="link"
               shape="round"
             >
-              Iniciar sesión
+              {t("nav.login")}
             </Button>
           </Flex>
         </Form.Item>

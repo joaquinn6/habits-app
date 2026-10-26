@@ -7,6 +7,7 @@ import { useNotificationContext } from "@/context/NotificationContext";
 const { Header, Footer, Content } = Layout;
 
 const AuthLayout = () => {
+  const { t } = useTranslation();
   const { error, wakeUp } = awakeStore();
   const { openNotification } = useNotificationContext();
 
@@ -18,8 +19,8 @@ const AuthLayout = () => {
     if (error) {
       openNotification(
         "error",
-        "Servidor no disponible",
-        "No se pudo conectar con el servidor, intenta de nuevo más tarde."
+        t("awake.errorTitle"),
+        t("awake.errorDescription")
       );
     }
   }, [error]);

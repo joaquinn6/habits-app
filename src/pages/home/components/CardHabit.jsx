@@ -11,6 +11,7 @@ import habitStore from "@/stores/habit.store";
 import userStore from "@/stores/user.store";
 
 const CardHabit = ({ habit, onChange }) => {
+  const { t } = useTranslation();
   const { deleted, deleteHabit } = habitStore();
   const [localValue, setLocalValue] = useState([]);
   const { isTestUser } = userStore();
@@ -48,15 +49,15 @@ const CardHabit = ({ habit, onChange }) => {
         localValue.emoji
           ? `${localValue.emoji}`
           : localValue.type == "GOOD"
-          ? "🟢"
-          : "🔴"
+            ? "🟢"
+            : "🔴"
       }
       color={
         localValue.color
           ? localValue.color
           : localValue.type == "GOOD"
-          ? "green"
-          : "red"
+            ? "green"
+            : "red"
       }
       style={{ fontSize: "20px" }}
     >
@@ -68,10 +69,10 @@ const CardHabit = ({ habit, onChange }) => {
           <EditOutlined key="edit" onClick={onEditHabit} />,
           <Popconfirm
             placement="top"
-            title="¿Seguro que desea eliminar el hábito?"
-            description="Al eliminar se vaciara todo el calendario con este hábito"
-            okText="Si"
-            cancelText="No"
+            title={t("habits.deleteTitle")}
+            description={t("habits.deleteDescription")}
+            okText={t("common.yes")}
+            cancelText={t("common.no")}
             onConfirm={onDeleteHabit}
             disabled={isTestUser}
           >
@@ -87,7 +88,7 @@ const CardHabit = ({ habit, onChange }) => {
             ) : (
               <p>
                 {" "}
-                <i>Sin descripción</i>{" "}
+                <i>{t("habits.noDescription")}</i>{" "}
               </p>
             )
           }

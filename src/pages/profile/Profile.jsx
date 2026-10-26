@@ -5,6 +5,7 @@ import { LogoutOutlined } from "@icons";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const { t } = useTranslation();
   const { getUser } = userStore();
   const navigate = useNavigate();
 
@@ -28,10 +29,10 @@ const Profile = () => {
         xl={{ flex: "60%" }}
       >
         <Card
-          title="Mi perfil"
+          title={t("profile.title")}
           variant="borderless"
           extra={
-            <Tooltip Tooltip title="Cerrar sesión">
+            <Tooltip title={t("profile.logout")}>
               <Button
                 color="danger"
                 variant="outlined"

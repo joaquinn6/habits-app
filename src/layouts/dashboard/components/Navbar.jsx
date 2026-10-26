@@ -3,22 +3,23 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { CalendarOutlined, UserOutlined, HomeOutlined } from "@icons";
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const items = [
     {
       key: "/home-page",
-      label: `Mis hábitos`,
+      label: t("nav.myHabits"),
       icon: <HomeOutlined />,
     },
     {
       key: "/calendar",
-      label: `Calendario`,
+      label: t("nav.calendar"),
       icon: <CalendarOutlined />,
     },
     {
       key: "/profile",
-      label: `Perfil`,
+      label: t("nav.profile"),
       icon: <UserOutlined />,
     },
   ];

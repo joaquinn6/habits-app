@@ -1,0 +1,163 @@
+{
+  "common": {
+    "accept": "Aceptar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "yes": "Sí",
+    "no": "No",
+    "success": "Correcto",
+    "error": "Error",
+    "times_one": "{{count}} vez",
+    "times_other": "{{count}} veces"
+  },
+  "language": {
+    "label": "EN",
+    "switch": "Switch to English"
+  },
+  "api": {
+    "connectionError": "Error al acceder a los servicios API"
+  },
+  "awake": {
+    "loading": "Despertando el servidor, puede tardar unos segundos...",
+    "errorTitle": "Servidor no disponible",
+    "errorDescription": "No se pudo conectar con el servidor, intenta de nuevo más tarde."
+  },
+  "nav": {
+    "myHabits": "Mis hábitos",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "calendar": "Calendario",
+    "profile": "Perfil"
+  },
+  "footer": {
+    "createdBy": "Creado por joaquin_n6",
+    "contact": "Contáctame"
+  },
+  "fields": {
+    "firstName": "Nombres",
+    "firstNameRequired": "Nombre es requerido",
+    "lastName": "Apellidos",
+    "birthDate": "Fecha de nacimiento",
+    "birthDateRequired": "Fecha de nacimiento es requerida",
+    "dateInvalid": "Ingrese una fecha válida",
+    "dateFormat": "DD-MM-YYYY",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Email",
+    "emailRequired": "¡Email es requerido!",
+    "emailInvalid": "Ingrese un correo válido",
+    "password": "Contraseña",
+    "passwordRequired": "¡Contraseña es requerida!",
+    "confirmPassword": "Confirmar contraseña",
+    "passwordsMismatch": "Las contraseñas no coinciden"
+  },
+  "landing": {
+    "title": "Controla tus hábitos y mejora cada día",
+    "intro": "Esta aplicación está diseñada para ayudarte a llevar un registro detallado de tus hábitos, tanto buenos como malos, permitiéndote visualizar tu evolución a lo largo del tiempo. Además, puedes establecer metas autoimpuestas para motivarte a mejorar como persona, con un sistema de seguimiento que te permite evaluar tus progresos. Con esta herramienta, tendrás una visión clara de tus comportamientos y patrones diarios, facilitando el camino hacia una versión más equilibrada y consciente de ti mismo.",
+    "projectTitle": "Un proyecto con propósito y aprendizaje",
+    "project": "Este proyecto nació de la curiosidad de un desarrollador fullstack con experiencia en Vue, quien decidió adentrarse en React para explorar sus diferencias y similitudes con Vue. Más allá del aprendizaje técnico, la aplicación busca aportar valor a quienes deseen mejorar su día a día a través del autoconocimiento y la constancia. Te invito a probarla: si solo quieres explorarla, puedes entrar con el <highlight>usuario de prueba</highlight> para conocer sus funciones. Y si te gusta ¡Regístrate y comienza a transformar tus hábitos!",
+    "trackTitle": "Registra tus hábitos",
+    "trackDescription": "Lleva un control de tus hábitos diarios",
+    "progressTitle": "Visualiza tu progreso",
+    "progressDescription": "Consulta estadísticas para ver cómo evolucionas con el tiempo.",
+    "goalsTitle": "Alcanza tus metas",
+    "goalsDescription": "Fija objetivos personales y mide tu progreso hacia ellos.",
+    "start": "¡Empieza ahora!",
+    "demo": "Probar con usuario de prueba"
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "remember": "Recuérdame",
+    "registerNow": "Regístrate ahora"
+  },
+  "register": {
+    "title": "Crear cuenta"
+  },
+  "habits": {
+    "new": "Nuevo",
+    "noDescription": "Sin descripción",
+    "deleteTitle": "¿Seguro que desea eliminar el hábito?",
+    "deleteDescription": "Al eliminar se vaciará todo el calendario con este hábito"
+  },
+  "habit": {
+    "newTitle": "Nuevo hábito",
+    "editTitle": "Editar hábito",
+    "name": "Nombre",
+    "nameRequired": "Nombre es requerido",
+    "description": "Descripción",
+    "type": "Tipo",
+    "typeRequired": "Tipo es requerido",
+    "good": "Positivo",
+    "bad": "Negativo",
+    "emoji": "Emoji",
+    "color": "Color",
+    "withGoals": "Con objetivos",
+    "goal": "Objetivo",
+    "goalsRequired": "Objetivos son requeridos",
+    "week": "Semana",
+    "month": "Mes",
+    "year": "Año",
+    "created": "Hábito creado correctamente",
+    "updated": "Hábito actualizado correctamente"
+  },
+  "calendar": {
+    "title": "Calendario",
+    "titleOf": "Calendario de {{name}}",
+    "habitTimes_one": "{{count}} vez {{name}}",
+    "habitTimes_other": "{{count}} veces {{name}}",
+    "tourCreateTitle": "Crea una marca",
+    "tourCreateDescription": "Al hacer click/tap en el día, se creará una marca nueva o se sumará una si ya existe.",
+    "tourEditTitle": "Editar o eliminar",
+    "tourEditDescription": "Si estás en tu celular, al mantener apretado puedes editar las marcas del día y agregar una descripción; si estás desde un ordenador, lo haces con click derecho.",
+    "markTitle": "Marcador",
+    "note": "Nota"
+  },
+  "stats": {
+    "titleOf": "Estadísticas de {{name}}",
+    "empty": "Aún no hay marcas en este hábito",
+    "thisWeek": "Esta semana",
+    "thisMonth": "Este mes",
+    "thisYear": "Este año",
+    "totalYear": "Cantidad total este año",
+    "bestMonth": "Mejor mes",
+    "worstMonth": "Peor mes",
+    "bestWeek": "Mejor semana",
+    "worstWeek": "Peor semana",
+    "bestDay": "Mejor día",
+    "worstDay": "Peor día",
+    "inMonth": "{{times}} en {{month}}",
+    "inWeek": "{{times}} de {{start}} al {{end}}",
+    "onDay": "{{times}} el {{date}}",
+    "dayFormat": "dddd D [de] MMMM",
+    "shortDateFormat": "DD/MM/YY"
+  },
+  "profile": {
+    "title": "Mi perfil",
+    "logout": "Cerrar sesión",
+    "country": "País",
+    "countryPlaceholder": "Selecciona un país",
+    "gender": "Género",
+    "female": "Femenino",
+    "male": "Masculino",
+    "deleteAccount": "Eliminar cuenta",
+    "deleteConfirmTitle": "¿Estás seguro de eliminar tu cuenta?",
+    "deleteConfirmContent": "Al eliminar tu cuenta se perderán tus hábitos y las marcas de cada hábito. No hay forma de revertirlo.",
+    "changePassword": "Cambiar contraseña",
+    "updated": "Usuario actualizado correctamente",
+    "deleted": "Usuario eliminado correctamente",
+    "currentPassword": "Contraseña actual",
+    "currentPasswordRequired": "Ingrese su contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "newPasswordRequired": "Ingrese su nueva contraseña",
+    "confirmNewPassword": "Confirmar nueva contraseña",
+    "confirmNewPasswordRequired": "Confirme su nueva contraseña"
+  },
+  "notFound": {
+    "subtitle": "Lo sentimos, la página que buscas no existe.",
+    "back": "Volver al inicio"
+  },
+  "about": {
+    "title": "Acerca de",
+    "text": "Esta es la página Acerca de nosotros."
+  }
+}

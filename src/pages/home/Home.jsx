@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import habitStore from "@/stores/habit.store";
 import CardHabit from "./components/CardHabit";
 const Home = () => {
+  const { t } = useTranslation();
   const { getHabits, list } = habitStore();
   const navigate = useNavigate();
   const onNewHabit = () => {
@@ -24,7 +25,7 @@ const Home = () => {
           xl={{ flex: "60%" }}
         >
           <Button type="primary" block onClick={onNewHabit}>
-            Nuevo
+            {t("habits.new")}
           </Button>
         </Col>
       </Row>

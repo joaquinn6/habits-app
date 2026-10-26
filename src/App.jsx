@@ -3,6 +3,7 @@ import { NotificationProvider } from "./context/NotificationContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthLayout from "./layouts/no-auth/NoAuth";
 import SwitchTheme from "./components/SwitchTheme";
+import SwitchLanguage from "./components/SwitchLanguage";
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import DashboardLayout from "./layouts/dashboard/Dashboard";
@@ -49,6 +50,7 @@ const App = () => {
           </Routes>
         </Router>
         <SwitchTheme />
+        <SwitchLanguage />
       </NotificationProvider>
     </ThemeProvider>
   );
