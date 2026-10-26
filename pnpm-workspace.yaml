@@ -1,0 +1,23 @@
+# Solo estos paquetes pueden ejecutar scripts de instalación.
+# Cualquier otro queda bloqueado y la instalación falla (strictDepBuilds, activo por defecto).
+allowBuilds:
+  # Vite lo usa para compilar; su postinstall valida el binario de la plataforma.
+  esbuild: true
+  # Dependencia opcional de sass (solo para `sass --watch`); el binario precompilado
+  # llega por dependencias opcionales, así que no necesita compilar nada.
+  '@parcel/watcher': false
+
+# No instalar versiones publicadas hace menos de 1 día (en minutos).
+# Al fijarlo explícitamente se activa el modo estricto: si ninguna versión
+# del rango cumple la antigüedad, la instalación falla en vez de saltárselo.
+minimumReleaseAge: 1440
+
+# Falla si una versión nueva de un paquete tiene menos garantías de origen
+# (provenance / trusted publishing) que las anteriores: señal típica de cuenta comprometida.
+trustPolicy: no-downgrade
+# Falsos positivos revisados (versión exacta, para que cualquier versión nueva se vuelva a revisar):
+trustPolicyExclude:
+  # Backport de seguridad de la rama 6, publicado sin provenance después de que la 7 ya la tuviera.
+  - semver@6.3.1
+  # Dependencia oficial de workbox-build@7.4.1 (vía vite-plugin-pwa); la 2.5.0 sí tenía provenance.
+  - '@trickfilm400/rollup-plugin-off-main-thread@3.0.0-pre1'
