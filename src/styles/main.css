@@ -69,3 +69,7 @@
 #home-page button:hover {
   background: #45a049;
 }
+
+.full-width {
+  width: 100%;
+}
